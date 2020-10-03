@@ -2,31 +2,31 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Home on Yutong Wang</title>
-    <link>/~yutongw/</link>
+    <link>/</link>
     <description>Recent content in Home on Yutong Wang</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Fri, 02 Oct 2020 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="/~yutongw/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>A non-exhaustive list of SVM solvers</title>
-      <link>/~yutongw/post/2020/10/02/svm-solvers/</link>
+      <link>/post/2020/10/02/svm-solvers/</link>
       <pubDate>Fri, 02 Oct 2020 00:00:00 +0000</pubDate>
       
-      <guid>/~yutongw/post/2020/10/02/svm-solvers/</guid>
+      <guid>/post/2020/10/02/svm-solvers/</guid>
       <description>LIBSVM
 liquidSVM</description>
     </item>
     
     <item>
       <title>Publications</title>
-      <link>/~yutongw/publications/</link>
+      <link>/publications/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/~yutongw/publications/</guid>
+      <guid>/publications/</guid>
       <description>  Weston-Watkins Hinge Loss and Ordered Partitions Yutong Wang and Clayton Scott Accepted to NeurIPS 2020 [arxiv] Hybrid Stem Cell States: Insights Into the Relationship Between Mammary Development and Breast Cancer Using Single-Cell Transcriptomics Tasha Thong, Yutong Wang, Michael D. Brooks, Christopher T. Lee, Clayton Scott, Laura Balzano, Max S. Wicha, Justin A. Colacino,  Frontiers in Cell and Developmental Biology, vol. 8, article 288, 2000. [Paper] [Supporting technical report]  Technical reports  Correct Convergence of Min-Sum Loopy Belief Propagation in a Block Interpolation Problem  Yutong Wang, Matthew Reyes and David Neuhoff  [arxiv]  </description>
     </item>
     

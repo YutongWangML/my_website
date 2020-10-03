@@ -5,15 +5,24 @@ title: Home
 <img src="me.jpg" style="border-radius:50%;max-width:25%;min-width:40px;float:right;margin:25px" alt="Github repo" />
 
 # Yutong Wang
+#### PhD Candidate |  University of Michigan | <A HREF="mailto: &#121;&#117;&#116;&#111;&#110;&#103;&#119;&#064;&#117;&#109;&#105;&#099;&#104;&#046;&#101;&#100;&#117;" > &#121;&#117;&#116;&#111;&#110;&#103;&#119;&#064;&#117;&#109;&#105;&#099;&#104;&#046;&#101;&#100;&#117; </a>
 
-#### PhD Candidate |  University of Michigan | Email: <span><img src="email.png" style="width:120px" alt="email" /></span>
-Hi! I am a fifth year PhD student in [EECS](https://eecs.engin.umich.edu/) studying machine learning.
+<!-- <span><img src="email.png" style="width:120px" alt="email" /></span>
+-->
+
+Hi! I am a fifth year PhD candidate in [EECS](https://eecs.engin.umich.edu/). 
+My research is in machine learning. 
 I am co-advised by [Clay Scott](http://web.eecs.umich.edu/~cscott/) and [Laura Balzano](http://web.eecs.umich.edu/~girasole/). 
-I am also a trainee in the [Michigan Center for Single-Cell Genomic Data Analytics](https://midas.umich.edu/research/health-old/single-cell/).
+As a trainee in the [Michigan Center for Single-Cell Genomic Data Analytics](https://midas.umich.edu/research/health-old/single-cell/), I have enjoyed having the opportunity to collaborate with biologists and biostatisticians.
+
+---
 
 ## Research interests
-I am interested in statistical learning.
 
+I am interested in the various aspects of *multiclass* classification. More specifically, I enjoy thinking about
+
+- Multiclass loss functions and their properties,
+- Multiclass generalizations of popular algorithms such as support vector machines and boosting.
 
 ---
 ## Publications

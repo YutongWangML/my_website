@@ -1,5 +1,11 @@
-# during development, use  baseurl = "/"
-baseurl = "~yutongw/"
+### during development, uncomment the following
+baseurl = "/"
+### during deployment, comment the following
+# baseurl = "~yutongw/"
+
+
+
+
 languageCode = "en-us"
 title = "Yutong Wang"
 theme = "hugo-xmin"
