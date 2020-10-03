@@ -1,4 +1,5 @@
-baseurl = "/"
+# during development, use  baseurl = "/"
+baseurl = "~yutongw/"
 languageCode = "en-us"
 title = "Yutong Wang"
 theme = "hugo-xmin"
