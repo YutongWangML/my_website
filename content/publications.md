@@ -4,10 +4,10 @@ title: Publications
 
 - **Weston-Watkins Hinge Loss and Ordered Partitions**</br>
 *Yutong Wang and Clayton Scott*</br> 
-Accepted to NeurIPS 2020</br> [[arxiv](https://arxiv.org/abs/2006.07346)]
+Accepted to NeurIPS 2020.</br> [[arxiv](https://arxiv.org/abs/2006.07346)]
 - **Hybrid Stem Cell States: Insights Into the Relationship Between Mammary Development and Breast Cancer Using Single-Cell Transcriptomics**</br>
-*Tasha Thong, Yutong Wang, Michael D. Brooks, Christopher T. Lee, Clayton Scott, Laura Balzano, Max S. Wicha, Justin A. Colacino,* </br>
-Frontiers in Cell and Developmental Biology, vol. 8, article 288, 2000.</br>
+*Tasha Thong, Yutong Wang, Michael D. Brooks, Christopher T. Lee, Clayton Scott, Laura Balzano, Max S. Wicha, and Justin A. Colacino* </br>
+Frontiers in Cell and Developmental Biology.</br>
 [[Paper](https://www.frontiersin.org/articles/10.3389/fcell.2020.00288/full)]
 [[Supporting technical report](https://www.biorxiv.org/content/10.1101/637488v1?rss=1)]
 
