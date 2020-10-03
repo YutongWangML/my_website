@@ -1,0 +1,13 @@
+---
+title: A non-exhaustive list of SVM solvers
+author: Yutong Wang
+date: '2020-10-02'
+slug: svm-solvers
+categories: []
+tags: []
+---
+
+
+[LIBSVM](https://www.csie.ntu.edu.tw/~cjlin/papers/libsvm.pdf)
+
+[liquidSVM](https://arxiv.org/abs/1702.06899)

@@ -1,0 +1,34 @@
+---
+title: Home
+---
+
+<img src="me.jpg" style="border-radius:50%;max-width:25%;min-width:40px;float:right;margin:25px" alt="Github repo" />
+
+# Yutong Wang
+
+#### PhD Candidate |  University of Michigan | Email: <span><img src="email.png" style="width:120px" alt="email" /></span>
+Hi! I am a fifth year PhD student in [EECS](https://eecs.engin.umich.edu/) studying machine learning.
+I am co-advised by [Clay Scott](http://web.eecs.umich.edu/~cscott/) and [Laura Balzano](http://web.eecs.umich.edu/~girasole/). 
+I am also a trainee in the [Michigan Center for Single-Cell Genomic Data Analytics](https://midas.umich.edu/research/health-old/single-cell/).
+
+## Research interests
+I am interested in statistical learning.
+
+
+---
+## Publications
+
+- **Weston-Watkins Hinge Loss and Ordered Partitions**</br>
+*Yutong Wang and Clayton Scott*</br> 
+Accepted to NeurIPS 2020</br> [[arxiv](https://arxiv.org/abs/2006.07346)]
+- **Hybrid Stem Cell States: Insights Into the Relationship Between Mammary Development and Breast Cancer Using Single-Cell Transcriptomics**</br>
+*Tasha Thong, Yutong Wang, Michael D. Brooks, Christopher T. Lee, Clayton Scott, Laura Balzano, Max S. Wicha, Justin A. Colacino,* </br>
+Frontiers in Cell and Developmental Biology, vol. 8, article 288, 2000.</br>
+[[Paper](https://www.frontiersin.org/articles/10.3389/fcell.2020.00288/full)]
+[[Supporting technical report](https://www.biorxiv.org/content/10.1101/637488v1?rss=1)]
+
+
+
+
+---
+## Blog posts
