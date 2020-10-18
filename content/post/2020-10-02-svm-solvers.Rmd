@@ -5,9 +5,197 @@ date: '2020-10-02'
 slug: svm-solvers
 categories: []
 tags: []
+output:
+  blogdown::html_page:
+    toc: true
 ---
 
+Disclaimers:
 
-[LIBSVM](https://www.csie.ntu.edu.tw/~cjlin/papers/libsvm.pdf)
+- Please email me if there is any mistake or a solver should be added here.
+- Some solvers belong to multiple categories. In such cases I simply assign a category based on my opinion.
+- The ordering does not reflect my preference of the solvers. They are ordered in a way so that it is easier for me to keep track of information.
+- This is a continously updated post.
 
-[liquidSVM](https://arxiv.org/abs/1702.06899)
+--- 
+
+# Libraries
+
+Generic ML libraries which include SVMs solvers
+
+
+## Shark
+
+- [paper](https://jmlr.org/papers/v9/igel08a.html)
+- [multiclass paper](https://dl.acm.org/doi/10.5555/2946645.2946690)
+- [multiclass linear SVM solver code](https://www.shark-ml.org/doxygen_pages/html/classshark_1_1_qp_mc_linear.html)
+
+## Shogun
+
+- [website](https://www.shogun-toolbox.org/)
+- [LaRank code](https://www.shogun-toolbox.org/api/latest/LaRank_8cpp_source.html)
+- the only solver that I'm aware of which features [LaRank](#LaRank), the multiclass extension of [LASVM](#LASVM).
+
+
+
+---
+
+# Exact SVM solvers
+This section lists solvers that asymptotically solve the SVM optimization (primal or dual) to optimality.
+
+## LIBSVM
+[paper](https://www.csie.ntu.edu.tw/~cjlin/papers/libsvm.pdf)
+
+> LIBSVM implements the “one-against-one” approach (Knerr et al., 1990) for multiclass classification. Some early works of applying this strategy to SVM include, for
+example, Kressel (1998). If $k$ is the number of classes, then $k(k − 1)/2$ classifiers are
+constructed and each one trains data from two classes. 
+
+## LIBLINEAR
+[paper](https://www.csie.ntu.edu.tw/~cjlin/papers/liblinear.pdf)
+
+> For multi-class problems, we implement the one-vs-the-rest strategy
+and a method by Crammer and Singer. Details are in Keerthi et al. (2008).
+
+> Note that LIBLINEAR does not use the bias term b by default. 
+
+Though covered by Keerthi et al. (2008), the Weston-Watkins linear SVM is not implemented by LIBLINEAR.
+BSVM does implement the Weston-Watkins *kernel* SVM.
+
+## liquidSVM
+
+[paper](https://arxiv.org/abs/1702.06899)
+
+> All currently available solvers are based on the design principles for the hinge loss solver
+described by [Steinwart et al. (2011)](https://www.jmlr.org/papers/volume12/steinwart11a/steinwart11a.pdf).
+
+> For our implementations [of multiclass classificaiton] we used
+[one-versus-all] with the least-squares solver and no cell splitting.
+
+
+## Pegasos
+
+[paper](https://link.springer.com/article/10.1007/s10107-010-0420-4)
+
+
+
+
+## LASVM
+
+[paper](https://www.jmlr.org/papers/volume6/bordes05a/bordes05a.pdf)
+[website](https://leon.bottou.org/projects/lasvm)
+
+
+> LASVM is an approximate SVM solver that uses online approximation. It reaches accuracies similar to that of a real SVM after performing a single sequential pass through the training examples. Further benefits can be achieved using selective sampling techniques to choose which example should be considered next.
+
+> As show in the graph, LASVM requires considerably less memory than a regular SVM solver. This becomes a considerable speed advantage for large training sets. In fact LASVM has been used to train a 10 class SVM classifier with 8 million examples on a single processor.
+
+
+
+## SVMLight
+
+[website](http://svmlight.joachims.org/)
+
+---
+
+# Hierarchical solvers
+
+## ThunderSVM
+[paper](https://www.jmlr.org/papers/v19/17-740.html)
+
+
+## cuML SVM
+
+[article](https://medium.com/rapids-ai/fast-support-vector-classification-with-rapids-cuml-6e49f4a7d89e) 
+
+> cuML’s single GPU SVM package is 50x faster than ThunderSVM-CPU on 40 CPU cores. The reason is that the GPUs excel at the time-consuming kernel function calculation. The middle figure zooms onto the curves that show GPU training time for cuML and ThunderSVM. The training time with cuML is 22% faster than ThunderSVM-GPU for this dataset.
+
+
+>The prediction speedup of cuML SVM is even more impressive than its training speedup. It is more than 4x faster than ThunderSVM on GPU. Compared to ThunderSVM CPU it is 88x faster and compared to scikit-learn using 100k samples, it is 1000x faster.
+
+> The cuML SVM package is still in development and it does not yet offer as wide a range of functionality as LIBSVM or ThunderSVM.
+
+## LPSVM
+
+[arXiv](https://arxiv.org/abs/1808.06394)
+
+---
+
+# Approximate SVM solvers
+
+## DC-SVM
+
+Divide-and-conquer solver for kernel SVMs
+
+[paper](http://proceedings.mlr.press/v32/hsieha14.pdf)
+
+## EnsembleSVM
+
+[paper](https://jmlr.org/papers/v15/claesen14a.html)
+
+
+## BudgetedSVM
+
+[paper](https://www.jmlr.org/papers/v14/djuric13a.html)
+
+> We present BudgetedSVM, an open-source C++ toolbox comprising highly-optimized implementations of recently proposed algorithms for scalable training of Support Vector Machine (SVM) approximators: Adaptive Multi-hyperplane Machines, Low-rank Linearization SVM, and Budgeted Stochastic Gradient Descent. BudgetedSVM trains models with accuracy comparable to LibSVM in time comparable to LibLinear, solving non-linear problems with millions of high-dimensional examples within minutes on a regular computer. We provide command-line and Matlab interfaces to BudgetedSVM, an efficient API for handling large-scale, high-dimensional data sets, as well as detailed documentation to help developers use and further extend the toolbox.
+
+
+
+---
+
+# GPU
+
+Solvers designed specifically for SVM on GPU architecture.
+
+## GTSVM
+
+[website](https://ttic.uchicago.edu/~cotter/projects/gtsvm/)
+
+## OHD-SVM
+[paper](https://ieeexplore.ieee.org/document/7990554)
+
+---
+
+# Multiclass
+
+Solvers for single-machine multiclass SVMs, e.g., Crammer-Singer and Weston-Watkins SVMs.
+
+## MSVMpack
+
+[website](https://homepages.loria.fr/FLauer/MSVMpack/MSVMpack.html)
+[paper 1](https://jmlr.csail.mit.edu/papers/volume12/lauer11a/lauer11a.pdf)
+[paper 2](https://link.springer.com/chapter/10.1007/978-3-319-18167-7_3)
+
+implements the Weston-Watkins and the Crammer-Singer SVMs.
+
+## BSVM
+
+
+[website](https://www.csie.ntu.edu.tw/~cjlin/bsvm/)
+[paper](https://www.csie.ntu.edu.tw/~cjlin/papers/multisvm.pdf)
+
+implements the Weston-Watkins SVM (Section 3 of paper) and Crammer-Singer SVM (section 4 of paper).
+
+
+
+## LaRank
+[paper](https://dl.acm.org/doi/abs/10.1145/1273496.1273508)
+
+> The related LaSVM algorithm (Bordes et al., 2005) alternates steps exploiting a fresh random training example and steps exploiting current support vectors selected using the gradient. We now extend this idea to the multiclass formulation.
+
+> Experiments were carried out on four datasets briefly
+described in table 1. The LETTER and USPS datasets
+are available from the UCI repository. The MNIST
+dataset
+is a well known handwritten digit recognition
+benchmark. The INEX dataset contains scientific articles from 18 journals and proceedings of the IEEE.
+
+![](/post/2020-10-02-svm-solvers_files/Screen Shot 2020-10-09 at 2.24.26 PM.png)
+
+## GaLa: Improved Working Set Selection for LaRank
+
+
+[paper](https://link.springer.com/chapter/10.1007/978-3-642-23672-3_40)
+
+
+

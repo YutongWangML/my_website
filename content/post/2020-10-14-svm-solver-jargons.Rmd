@@ -1,0 +1,31 @@
+---
+title: SVM solver jargons
+author: Yutong Wang
+date: '2020-10-14'
+slug: svm-solver-jargons
+categories: []
+tags: []
+---
+
+The dual of the SVM without offset:
+$$ \max_{\alpha_1,\dots, \alpha_n} \sum_{i=1}^n \alpha_i  - \frac{1}{2}\sum_{i,j=1}^n \alpha_i \alpha_j k(x_i,x_j) \quad \mbox{s.t.}\quad  0 \le \alpha_i \le C,\, \forall i=1,\dots,n \quad \quad \quad (QP)$$
+
+# Decomposition
+Optimizing $(QP)$ one $\alpha_i$, or a few $\alpha_i$s, at a time.
+
+
+# Working set selection
+
+The set $I \subseteq \{1,\dots, n\}$ of dual variables that the decomposition optimization algorithm consider at a given time.
+
+
+
+# Shrinking
+
+During optimization using decomposition method, a dual variable may converges to $\alpha_i = 0$ or $\alpha_i = C$ and stays there.
+Such a dual variable can be taken out of the optimization.
+
+
+From [Cross Validated: What Are Shrinking Heuristics?](https://stats.stackexchange.com/questions/329200/what-are-shrinking-heuristics)
+
+See section 5.1 of the [official documentation of LIBSVM](https://www.csie.ntu.edu.tw/~cjlin/papers/libsvm.pdf).
