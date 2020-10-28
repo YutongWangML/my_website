@@ -27,8 +27,9 @@ Generic ML libraries which include SVMs solvers
 ## Shark
 
 - [paper](https://jmlr.org/papers/v9/igel08a.html)
-- [multiclass paper](https://dl.acm.org/doi/10.5555/2946645.2946690)
-- [multiclass linear SVM solver code](https://www.shark-ml.org/doxygen_pages/html/classshark_1_1_qp_mc_linear.html)
+- [supporting theory for solver](http://proceedings.mlr.press/v29/Glasmachers13.html) with Adaptive Coordinate Frequencies (ACF) 
+- [supporting theory for multiclass SVMs](https://dl.acm.org/doi/10.5555/2946645.2946690)
+- [code for multiclass linear SVM solver](https://www.shark-ml.org/doxygen_pages/html/classshark_1_1_qp_mc_linear.html)
 
 ## Shogun
 
@@ -58,8 +59,9 @@ and a method by Crammer and Singer. Details are in Keerthi et al. (2008).
 
 > Note that LIBLINEAR does not use the bias term b by default. 
 
-Though covered by Keerthi et al. (2008), the Weston-Watkins linear SVM is not implemented by LIBLINEAR.
-BSVM does implement the Weston-Watkins *kernel* SVM.
+- Though covered by Keerthi et al. (2008), the Weston-Watkins linear SVM is not implemented by LIBLINEAR.
+- BSVM implements the Weston-Watkins *kernel* SVM. See section on BSVM.
+- Shark implements the Weston-Watkins *linear* SVM. See [code](https://github.com/Shark-ML/Shark/blob/d0b28e623ec2d3cf4bcb5f0a7f0739a23cc7c7aa/include/shark/Algorithms/QP/QpMcLinear.h) here.
 
 ## liquidSVM
 
@@ -179,7 +181,8 @@ implements the Weston-Watkins SVM (Section 3 of paper) and Crammer-Singer SVM (s
 
 
 ## LaRank
-[paper](https://dl.acm.org/doi/abs/10.1145/1273496.1273508)
+- [paper](https://dl.acm.org/doi/abs/10.1145/1273496.1273508)
+- [code](https://www.shogun-toolbox.org/api/latest/LaRank_8cpp_source.html)
 
 > The related LaSVM algorithm (Bordes et al., 2005) alternates steps exploiting a fresh random training example and steps exploiting current support vectors selected using the gradient. We now extend this idea to the multiclass formulation.
 
@@ -197,5 +200,9 @@ benchmark. The INEX dataset contains scientific articles from 18 journals and pr
 
 [paper](https://link.springer.com/chapter/10.1007/978-3-642-23672-3_40)
 
+## Crammer-Singer SVM
 
+[paper](https://jmlr.csail.mit.edu/papers/volume2/crammer01a/crammer01a.pdf)
+[code](https://webee.technion.ac.il/people/koby/code-index.html)
 
+The original Crammer-Singer SVM paper.

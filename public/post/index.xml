@@ -29,7 +29,7 @@ Decomposition Optimizing \((QP)\) one \(\alpha_i\), or a few \(\alpha_i\)s, at a
       <pubDate>Fri, 02 Oct 2020 00:00:00 +0000</pubDate>
       
       <guid>/~yutongw/post/2020/10/02/svm-solvers/</guid>
-      <description>Libraries Shark Shogun  Exact SVM solvers LIBSVM LIBLINEAR liquidSVM Pegasos LASVM SVMLight  Hierarchical solvers ThunderSVM cuML SVM LPSVM  Approximate SVM solvers DC-SVM EnsembleSVM BudgetedSVM  GPU GTSVM OHD-SVM  Multiclass MSVMpack BSVM LaRank GaLa: Improved Working Set Selection for LaRank    Disclaimers:
+      <description>Libraries Shark Shogun  Exact SVM solvers LIBSVM LIBLINEAR liquidSVM Pegasos LASVM SVMLight  Hierarchical solvers ThunderSVM cuML SVM LPSVM  Approximate SVM solvers DC-SVM EnsembleSVM BudgetedSVM  GPU GTSVM OHD-SVM  Multiclass MSVMpack BSVM LaRank GaLa: Improved Working Set Selection for LaRank Crammer-Singer SVM    Disclaimers:
  Please email me if there is any mistake or a solver should be added here. Some solvers belong to multiple categories.</description>
     </item>
     
