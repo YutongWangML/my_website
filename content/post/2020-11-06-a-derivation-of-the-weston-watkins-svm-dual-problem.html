@@ -6,9 +6,23 @@ slug: a-derivation-of-the-weston-watkins-svm-dual-problem
 categories: []
 tags: []
 bibliography: references.bib  
+output:
+  blogdown::html_page:
+    toc: true
 ---
 
 
+<div id="TOC">
+<ul>
+<li><a href="#set-up-and-notations">Set-up and notations</a></li>
+<li><a href="#primal-problem">Primal problem</a></li>
+<li><a href="#dual-problem">Dual problem</a><ul>
+<li><a href="#expression-for-the-dual-problem">Expression for the dual problem</a></li>
+</ul></li>
+<li><a href="#derivatives">Derivatives</a></li>
+<li><a href="#coordinate-descent">Coordinate descent</a></li>
+</ul>
+</div>
 
 <p>In this blog post, we derive the dual problem for the Weston-Watkins support vector machine (SVM).
 The dual optimization for the Weston-Watkins SVM can be found in the literature, e.g.,
@@ -238,6 +252,8 @@ L(\alpha)
 \sum_{j \in [k]: j \ne y_i}
 \alpha_{ij}
 \]</span></p>
+<div id="expression-for-the-dual-problem" class="section level2">
+<h2>Expression for the dual problem</h2>
 <p>Thus, the dual problem is</p>
 <p><span class="math display">\[
 \mathrm{minimize}_{\alpha}
@@ -263,6 +279,7 @@ subject to
 \]</span></p>
 <p>This is the same as equation (16) of <span class="citation">Keerthi et al. (2008)</span>. Actually, there is a typo in (16) where the <span class="math inline">\(\alpha_{ij}\)</span>s should have a negative sign in front.
 Later, <span class="citation">Keerthi et al. (2008)</span> computes the derivative of <span class="math inline">\(f\)</span> with the correct sign.</p>
+</div>
 </div>
 <div id="derivatives" class="section level1">
 <h1>Derivatives</h1>

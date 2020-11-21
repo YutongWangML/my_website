@@ -17,9 +17,8 @@
       <pubDate>Fri, 06 Nov 2020 00:00:00 +0000</pubDate>
       
       <guid>/~yutongw/post/2020/11/06/a-derivation-of-the-weston-watkins-svm-dual-problem/</guid>
-      <description>In this blog post, we derive the dual problem for the Weston-Watkins support vector machine (SVM). The dual optimization for the Weston-Watkins SVM can be found in the literature, e.g., Keerthi et al. (2008) and Weston and Watkins (1999). However, they often omit the tedious derivation.
-Set-up and notations Let \(k \ge 2\) be an integer representing the number of classes and \([k] = \{1,\dots, k\}\).
-Let \(n\) be the size of the training data.</description>
+      <description>Set-up and notations Primal problem Dual problem Expression for the dual problem  Derivatives Coordinate descent   In this blog post, we derive the dual problem for the Weston-Watkins support vector machine (SVM). The dual optimization for the Weston-Watkins SVM can be found in the literature, e.g., Keerthi et al. (2008) and Weston and Watkins (1999). However, they often omit the tedious derivation.
+Set-up and notations Let \(k \ge 2\) be an integer representing the number of classes and \([k] = \{1,\dots, k\}\).</description>
     </item>
     
     <item>

@@ -6,6 +6,9 @@ slug: a-derivation-of-the-weston-watkins-svm-dual-problem
 categories: []
 tags: []
 bibliography: references.bib  
+output:
+  blogdown::html_page:
+    toc: true
 ---
 
 In this blog post, we derive the dual problem for the Weston-Watkins support vector machine (SVM).
@@ -287,6 +290,7 @@ L(\alpha)
 \alpha_{ij}
 $$
 
+## Expression for the dual problem
 
 Thus, the dual problem is
 
