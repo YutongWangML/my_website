@@ -6,10 +6,21 @@
     <description>Recent content in Posts on Yutong Wang</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 14 Oct 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 06 Nov 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/~yutongw/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>The Weston-Watkins SVM dual problem</title>
+      <link>/~yutongw/post/2020/11/06/a-derivation-of-the-weston-watkins-svm-dual-problem/</link>
+      <pubDate>Fri, 06 Nov 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/~yutongw/post/2020/11/06/a-derivation-of-the-weston-watkins-svm-dual-problem/</guid>
+      <description>In this blog post, we derive the dual problem for the Weston-Watkins support vector machine (SVM). The dual optimization for the Weston-Watkins SVM can be found in the literature, e.g., Keerthi et al. (2008) and Weston and Watkins (1999). However, they often omit the tedious derivation.
+Set-up and notations Let \(k \ge 2\) be an integer representing the number of classes and \([k] = \{1,\dots, k\}\).
+Let \(n\) be the size of the training data.</description>
+    </item>
     
     <item>
       <title>SVM solver jargons</title>
