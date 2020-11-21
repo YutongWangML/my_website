@@ -29,7 +29,9 @@ I am interested in the various aspects of *multiclass* classification. More spec
 
 - **Weston-Watkins Hinge Loss and Ordered Partitions**</br>
 *Yutong Wang and Clayton Scott*</br> 
-Accepted to NeurIPS 2020.</br> [[arXiv](https://arxiv.org/abs/2006.07346)]
+NeurIPS 2020.</br> 
+[[Paper](https://papers.nips.cc/paper/2020/hash/e5e6851e7f7ffd3530e7389e183aa468-Abstract.html)]
+[[arXiv](https://arxiv.org/abs/2006.07346)]
 - **Hybrid Stem Cell States: Insights Into the Relationship Between Mammary Development and Breast Cancer Using Single-Cell Transcriptomics**</br>
 *Tasha Thong, Yutong Wang, Michael D. Brooks, Christopher T. Lee, Clayton Scott, Laura Balzano, Max S. Wicha, and Justin A. Colacino* </br>
 Frontiers in Cell and Developmental Biology.</br>
