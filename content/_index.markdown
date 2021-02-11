@@ -27,6 +27,11 @@ I am interested in the various aspects of *multiclass* classification. More spec
 ---
 ## Publications
 
+- **An exact solver for the Weston-Watkins SVM subproblem**</br>
+*Yutong Wang and Clayton Scott*</br> 
+<!--[[Paper](https://papers.nips.cc/paper/2020/hash/e5e6851e7f7ffd3530e7389e183aa468-Abstract.html)]-->
+[[arXiv](https://arxiv.org/abs/2102.05640)]
+[[code](https://github.com/YutongWangUMich/liblinear/)]
 - **Weston-Watkins Hinge Loss and Ordered Partitions**</br>
 *Yutong Wang and Clayton Scott*</br> 
 NeurIPS 2020.</br> 

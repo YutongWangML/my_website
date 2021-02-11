@@ -1,0 +1,106 @@
+---
+title: Kernel multiclass support vector machine solvers
+author: Yutong Wang
+date: '2020-12-30'
+slug: kernel-multiclass-support-vector-machine-solvers
+categories: []
+tags: []
+bibliography: "references.bib"
+biblio-style: "apalike"
+link-citations: true
+---
+
+In this [previous post](/2020/10/02/svm-solvers/), we listed solvers for SVMs.
+The focus of this post is specialized to solvers for the Crammer-Singer and Weston-Watkins **kernel** SVMs.
+
+# Shark
+
+Solves **both**
+
+## Relevant papers
+
+@igel2008shark is the paper that introduced the Shark package.
+([link to paper](https://jmlr.org/papers/v9/igel08a.html))
+
+ @dogan2011fast  introduces S2DO. 
+ ([link to paper](https://christian-igel.github.io/paper/DoganGlasmachersIgelTR.pdf))
+ 
+@glasmachers2013accelerated introduces ACF.
+[link to paper](http://proceedings.mlr.press/v29/Glasmachers13.html)
+
+@dogan2016unified performs empirical studies of several SVM variants
+[link to paper](https://dl.acm.org/doi/10.5555/2946645.2946690)
+
+
+## Guide to the code
+
+The header file with the ``train`` functions is [here](https://github.com/Shark-ML/Shark/blob/7a182c7923e94cf6a8d65b6c92a162bafad8314c/include/shark/Algorithms/Trainers/CSvmTrainer.h#L134)
+
+
+The CS-SVM uses the ``solveMcSimplex`` solver (see [here](https://github.com/Shark-ML/Shark/blob/7a182c7923e94cf6a8d65b6c92a162bafad8314c/include/shark/Algorithms/Trainers/CSvmTrainer.h#L230)).
+
+The WW-SVM uses the ``solveMcBox`` solver. We discuss this solver in greater detail in the following subsection.
+
+## Shark's WW-SVM solver
+
+This subsection is a *map* to help you navigate Shark's implementation of a WW-SVM solver.
+
+1. The [``train``](https://github.com/Shark-ML/Shark/blob/7a182c7923e94cf6a8d65b6c92a162bafad8314c/include/shark/Algorithms/Trainers/CSvmTrainer.h#L134) function [calls](https://github.com/Shark-ML/Shark/blob/7a182c7923e94cf6a8d65b6c92a162bafad8314c/include/shark/Algorithms/Trainers/CSvmTrainer.h#L232) the 
+[``solveMcBox``](https://github.com/Shark-ML/Shark/blob/7a182c7923e94cf6a8d65b6c92a162bafad8314c/include/shark/Algorithms/Trainers/CSvmTrainer.h#L331) function.
+2. ``solveMcBox`` [creates](https://github.com/Shark-ML/Shark/blob/7a182c7923e94cf6a8d65b6c92a162bafad8314c/include/shark/Algorithms/Trainers/CSvmTrainer.h#L353) a 
+[``QpSolver``](https://github.com/Shark-ML/Shark/blob/7a182c7923e94cf6a8d65b6c92a162bafad8314c/include/shark/Algorithms/QP/QpSolver.h#L403)``<``[``QpMcBoxDecomp``](https://github.com/Shark-ML/Shark/blob/7a182c7923e94cf6a8d65b6c92a162bafad8314c/include/shark/Algorithms/QP/QpMcBoxDecomp.h#L50)``<PrecomputedMatrixType>>``
+ object ``solver``.
+3. ``solveMcBox`` [calls](https://github.com/Shark-ML/Shark/blob/7a182c7923e94cf6a8d65b6c92a162bafad8314c/include/shark/Algorithms/Trainers/CSvmTrainer.h#L354)
+the [``solver.solve``](https://github.com/Shark-ML/Shark/blob/7a182c7923e94cf6a8d65b6c92a162bafad8314c/include/shark/Algorithms/QP/QpSolver.h#L415) function
+4. ``solver.solve`` [creates](https://github.com/Shark-ML/Shark/blob/7a182c7923e94cf6a8d65b6c92a162bafad8314c/include/shark/Algorithms/QP/QpSolver.h#L423)
+the [``SelectionStrategy``](https://github.com/Shark-ML/Shark/blob/7a182c7923e94cf6a8d65b6c92a162bafad8314c/include/shark/Algorithms/QP/QpMcBoxDecomp.h#L58) object ``workingSet``
+which [wraps](https://github.com/Shark-ML/Shark/blob/7a182c7923e94cf6a8d65b6c92a162bafad8314c/include/shark/Algorithms/QP/QpMcBoxDecomp.h#L62) around the [``selectWorkingSet``](https://github.com/Shark-ML/Shark/blob/7a182c7923e94cf6a8d65b6c92a162bafad8314c/include/shark/Algorithms/QP/QpMcBoxDecomp.h#L390) function.
+
+The core of the ``solver.solve`` function is the *decomposition loop*:
+
+1. [Calls](https://github.com/Shark-ML/Shark/blob/7a182c7923e94cf6a8d65b6c92a162bafad8314c/include/shark/Algorithms/QP/QpSolver.h#L443) ``workingSet`` which modifies ``i`` and ``j``. Note that the actual function invoked is [``selectWorkingSet``](https://github.com/Shark-ML/Shark/blob/7a182c7923e94cf6a8d65b6c92a162bafad8314c/include/shark/Algorithms/QP/QpMcBoxDecomp.h#L390).
+The working set strategy is called *sequential two-dimensional optimization* (S2DO), whose theory is developed in the companion paper [Fast Training of Multi-Class Support Vector Machines](https://christian-igel.github.io/paper/DoganGlasmachersIgelTR.pdf).
+2. [Calls](https://github.com/Shark-ML/Shark/blob/7a182c7923e94cf6a8d65b6c92a162bafad8314c/include/shark/Algorithms/QP/QpSolver.h#L456) [``updateSMO``](https://github.com/Shark-ML/Shark/blob/7a182c7923e94cf6a8d65b6c92a162bafad8314c/include/shark/Algorithms/QP/QpMcBoxDecomp.h#L210)
+which further [calls](https://github.com/Shark-ML/Shark/blob/7a182c7923e94cf6a8d65b6c92a162bafad8314c/include/shark/Algorithms/QP/QpMcBoxDecomp.h#L258) 
+the function [``detail::solveQuadratic2DBox``](https://github.com/Shark-ML/Shark/blob/7a182c7923e94cf6a8d65b6c92a162bafad8314c/include/shark/Algorithms/QP/Impl/AnalyticProblems.h#L62)
+
+
+
+# BSVM
+
+Solves **both**
+
+
+[software website](https://www.csie.ntu.edu.tw/~cjlin/bsvm/)
+|
+[theory paper 1](https://link.springer.com/article/10.1023/A:1012427100071)
+|
+[theory paper 2](https://www.csie.ntu.edu.tw/~cjlin/papers/multisvm.pdf)
+
+
+# MSVMpack
+
+Solves **both**
+
+[package paper (JMLR)](https://jmlr.csail.mit.edu/papers/volume12/lauer11a/lauer11a.pdf)
+|
+[theory paper (publisher's link)](https://www.inderscienceonline.com/doi/abs/10.1504/IJIIDS.2012.050094)
+|
+[theory paper (author's link)](https://members.loria.fr/YGuermeur/GuermeurFinalVersion.pdf)
+
+
+
+# MCSVM
+
+Solves **CS-SVM**
+
+
+
+# SpiderSVM
+
+[website](https://people.kyb.tuebingen.mpg.de/spider/)
+
+[help page for the WW-SVM solver](https://people.kyb.tuebingen.mpg.de/spider/help_mc_svm.html)
+
+
+---

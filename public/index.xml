@@ -6,10 +6,24 @@
     <description>Recent content in Home on Yutong Wang</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 06 Nov 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 30 Dec 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/~yutongw/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Kernel multiclass support vector machine solvers</title>
+      <link>/~yutongw/post/2020/12/30/kernel-multiclass-support-vector-machine-solvers/</link>
+      <pubDate>Wed, 30 Dec 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/~yutongw/post/2020/12/30/kernel-multiclass-support-vector-machine-solvers/</guid>
+      <description>In this previous post, we listed solvers for SVMs. The focus of this post is specialized to solvers for the Crammer-Singer and Weston-Watkins kernel SVMs.
+Shark Solves both
+Relevant papers Igel, Heidrich-Meisner, and Glasmachers (2008) is the paper that introduced the Shark package. (link to paper)
+Dogan, Glasmachers, and Igel (2011) introduces S2DO. (link to paper)
+Glasmachers and Dogan (2013) introduces ACF. link to paper
+Doǧan, Glasmachers, and Igel (2016) performs empirical studies of several SVM variants link to paper</description>
+    </item>
     
     <item>
       <title>The Weston-Watkins SVM dual problem</title>
@@ -17,8 +31,7 @@
       <pubDate>Fri, 06 Nov 2020 00:00:00 +0000</pubDate>
       
       <guid>/~yutongw/post/2020/11/06/a-derivation-of-the-weston-watkins-svm-dual-problem/</guid>
-      <description>Set-up and notations Primal problem Dual problem Expression for the dual problem  Derivatives Coordinate descent   In this blog post, we derive the dual problem for the Weston-Watkins support vector machine (SVM). The dual optimization for the Weston-Watkins SVM can be found in the literature, e.g., Keerthi et al. (2008) and Weston and Watkins (1999). However, they often omit the tedious derivation.
-Set-up and notations Let \(k \ge 2\) be an integer representing the number of classes and \([k] = \{1,\dots, k\}\).</description>
+      <description>Set-up and notations Primal problem Dual problem Expression for the dual problem  Derivatives Coordinate descent in Shark Update of a single block dual variable Computing the step vector Greedy step size    In this blog post, we derive the dual problem for the Weston-Watkins support vector machine (SVM). The dual optimization for the Weston-Watkins SVM can be found in the literature, e.g., Keerthi et al. (2008) and Weston and Watkins (1999).</description>
     </item>
     
     <item>

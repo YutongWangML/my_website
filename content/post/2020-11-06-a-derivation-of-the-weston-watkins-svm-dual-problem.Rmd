@@ -31,13 +31,18 @@ Let $W = [w_1,\dots, w_k] \in \mathbb{R}^{d\times k}$ where $w_j$ is the $j$-th 
 
 Let $e_i \in \mathbb{R}^k$ be the $i$-th elementary basis (column) vector.
 
+Let $M \in \mathbb{R}_{>0}$ be a number. We are only interested when $M \in \{1, 1/2\}$.
+
 # Primal problem
 
 The Weston-Watkins SVM minimizes over $W$ the following regularized empirical risk:
 
 $$
-\frac{1}{2}\|W\|_F^2 + C \sum_{i=1}^n \sum_{j \in [k]: j \ne y_i} \max \{0, 1- (w_{y_i}' x_i - w_j'x_i)\}.
+\frac{1}{2}\|W\|_F^2 + C \sum_{i=1}^n \sum_{j \in [k]: j \ne y_i} \max \{0, 1 - M(w_{y_i}' x_i - w_j'x_i)\}.
 $$
+
+When $M = 1$, then 
+When $M = 1/2$, we get the formulation of @dogan2016unified.
 
 If $\widetilde W = [\widetilde w_1,\dots, \widetilde w_k]$ is the optimizer, then the classifier is
 $$
@@ -51,7 +56,7 @@ Now, for each $j, l \in [k]$, let $\Delta_{j,l} = e_j - e_l$.
 Then we can rewrite the regularized empirical risk as
 
 $$
-\frac{1}{2}\|W\|_F^2 + C \sum_{i=1}^n \sum_{j \in [k]: j \ne y_i} \max \{0, 1- \Delta_{y_i, j}' W' x_i\}
+\frac{1}{2}\|W\|_F^2 + C \sum_{i=1}^n \sum_{j \in [k]: j \ne y_i} \max \{0, 1 - M \Delta_{y_i, j}' W' x_i\}.
 $$
 
 
@@ -69,7 +74,7 @@ subject to
 $$
 \begin{cases}
  \xi_{ij} \ge 0 \\
-\xi_{ij} \ge 1 - \Delta_{y_i, j}' W' x_i
+\xi_{ij} \ge 1 - M\Delta_{y_i, j}' W' x_i
 \end{cases}
 $$
 
@@ -80,7 +85,7 @@ or, equivalently, subject to
 
 $$
 \begin{cases}
-0 \ge 1 - \mathrm{tr}( W' x_i\Delta_{y_i, j}') - \xi_{ij}\\
+0 \ge 1 - M\mathrm{tr}( W' x_i\Delta_{y_i, j}') - \xi_{ij}\\
   0 \ge -\xi_{ij} 
 \end{cases}
 $$
@@ -104,7 +109,7 @@ L(W, \xi, \alpha, \beta)
 \beta_{ij}\xi_{ij}
 +
 \alpha_{ij}
-(1 - \mathrm{tr}( W' x_i\Delta_{y_i, j}') - \xi_{ij})
+(1 - M\mathrm{tr}( W' x_i\Delta_{y_i, j}') - \xi_{ij})
 $$
 
 Rearranging, we get
@@ -122,7 +127,7 @@ L(W, \xi, \alpha, \beta)
 -\alpha_{ij})
 +
 \alpha_{ij}
-(1 - \mathrm{tr}( W' x_i\Delta_{y_i, j}'))
+(1 - M\mathrm{tr}( W' x_i\Delta_{y_i, j}'))
 $$
 
 
@@ -133,6 +138,7 @@ $$
 =
 W
 - 
+M
   \sum_{i=1}^n \sum_{j \in [k]: j \ne y_i} 
 \alpha_{ij}
  x_i\Delta_{y_i, j}'
@@ -143,6 +149,7 @@ Equivalently,
 $$
 W
 = 
+M
   \sum_{i=1}^n \sum_{j \in [k]: j \ne y_i} 
 \alpha_{ij}
  x_i\Delta_{y_i, j}'
@@ -168,7 +175,7 @@ L(W, \alpha)
 \frac{1}{2}\|W\|_F^2 
 + \sum_{i=1}^n \sum_{j \in [k]: j \ne y_i} 
 \alpha_{ij}
-(1 - \mathrm{tr}( W' x_i\Delta_{y_i, j}'))
+(1 - M\mathrm{tr}( W' x_i\Delta_{y_i, j}'))
 $$
 
 Now,
@@ -183,8 +190,10 @@ W'
 \alpha_{ij}
  x_i\Delta_{y_i, j}'\right)
 =
+\frac{1}{M}
 \mathrm{tr}(W'W)
 =
+\frac{1}{M}
 \|W\|_F^2.
 $$
 
@@ -195,13 +204,14 @@ $$
 L(W, \alpha)
 =
 -\frac{1}{2}\|W\|_F^2 
-+ \sum_{i=1}^n \sum_{j \in [k]: j \ne y_i} 
++  \sum_{i=1}^n \sum_{j \in [k]: j \ne y_i} 
 \alpha_{ij}
 $$
 
 
 Now, let $\alpha_{iy_i} = -\sum_{j\in[n]: j \ne y_i} \alpha_i$.  Using the definition of $\Delta_{y_i, j} = e_{y_i} - e_j$, we get
 $$
+\frac{1}{M}
 W
 = 
   \sum_{i=1}^n \sum_{j \in [k]: j \ne y_i} 
@@ -247,6 +257,7 @@ Then we have
 $$
 W = 
 -
+M
 \sum_{i = 1}^n 
 x_i \alpha_i'
 $$
@@ -254,8 +265,10 @@ where we observe that $x_i \alpha_i' \in \mathbb{R}^{d \times k}$.
 
 Now,
 $$
+\frac{1}{M^2}
 \|W\|_F^2
 =
+\frac{1}{M^2}
 \mathrm{tr}
 (W'W)
 =
@@ -280,7 +293,7 @@ This eliminates the dependencies in the Lagrangian on $W$ and so
 $$
 L(\alpha)
 =
--\frac{1}{2} 
+-\frac{M^2}{2} 
 \sum_{i, s\in [n]}
  x_s' x_i \alpha_i'
 \alpha_s
@@ -298,7 +311,7 @@ $$
 \mathrm{minimize}_{\alpha}
 \quad
 f(\alpha) :=
-\frac{1}{2} 
+\frac{M^2}{2} 
 \sum_{i, s\in [n]}
  x_s' x_i \alpha_i'
 \alpha_s
@@ -317,7 +330,7 @@ $$
 \end{cases}
 $$
 
-This is the same as equation (16) of @keerthi2008sequential. Actually, there is a typo in (16) where the $\alpha_{ij}$s should have a negative sign in front.
+When $M = 1$, the above is the same as equation (16) of @keerthi2008sequential. Actually, there is a typo in (16) where the $\alpha_{ij}$s should have a negative sign in front.
 Later, @keerthi2008sequential computes the derivative of $f$ with the correct sign.
 
 # Derivatives
@@ -337,7 +350,7 @@ x_s' x_i (\alpha_{ij} \alpha_{sj}
 \mathrm{constant}
 )
 $$
-where $\mathrm{constant}$ are terms that do not depend on $\alpha_{ij}$.
+where $\mathrm{constant}$ collects terms that do not depend on $\alpha_{ij}$.
 
 Taking derivative of $x_s' x_i \alpha_i'\alpha_s$ with respect to $\alpha_{ij}$, we get 
 
@@ -361,6 +374,7 @@ $$
 =
 -1
 +
+M^2
 \sum_{s \in [n]} x_i' x_s (\alpha_{sj} - \alpha_{s y_i})
 $$
 
@@ -378,6 +392,7 @@ Recall from earlier that
 $$
 W = 
 -
+M
 \sum_{i = 1}^n 
 x_i \alpha_i'
 $$
@@ -388,12 +403,14 @@ w_j
 =
 We_j = 
 -
+M
 \sum_{i = 1}^n 
 \alpha_{ij}x_i
 \quad \mbox{and} \quad
 w_{y_i}=
 We_{y_i} = 
 -
+M
 \sum_{i = 1}^n 
 \alpha_{iy_i}x_{i}.
 $$
@@ -401,9 +418,9 @@ $$
 
 Thus, we get
 $$
-x_i '
+Mx_i '
 \left(\sum_{s \in [n]} \alpha_{sj} x_s  -\alpha_{s y_i} x_s\right)
-=
+= 
 w_{y_i}' x_i 
 - w_{j} ' x_i.
 $$
@@ -413,7 +430,7 @@ From this, we conclude that
 $$
 \frac{\partial f}{\partial \alpha_{ij}} (\alpha)
 =
-w_{y_i}' x_i - w_{j}'x_i
+M(w_{y_i}' x_i - w_{j}'x_i)
 -1.
 $$
 Since we are minimizing, it is more convenient to consider the negative gradient: 
@@ -421,20 +438,26 @@ $$
 -\frac{\partial f}{\partial \alpha_{ij}} (\alpha)
 =
 1-
+M
 (w_{y_i}' x_i - w_{j}'x_i).
 $$
-Note that this equivalent to equation (17) from @keerthi2008sequential.
+Again, when $M = 1$, note that this equivalent to equation (17) from @keerthi2008sequential.
 
-# Coordinate descent
+When $M = 1/2$, this is equivalent to [Shark's `calcGradient` function](https://github.com/Shark-ML/Shark/blob/7a182c7923e94cf6a8d65b6c92a162bafad8314c/include/shark/Algorithms/QP/QpMcLinear.h#L404), where the negative gradient is computed on [line 415](https://github.com/Shark-ML/Shark/blob/7a182c7923e94cf6a8d65b6c92a162bafad8314c/include/shark/Algorithms/QP/QpMcLinear.h#L415).
 
-In this section, we again fix $i \in [n]$ and $j \in [k]$ such that $j \ne y_i$.
+
+
+# Coordinate descent in Shark
+ 
+ 
+In this section, we fix $i \in [n]$.
 We will explain how [Shark](https://github.com/Shark-ML/Shark/blob/7a182c7923e94cf6a8d65b6c92a162bafad8314c/include/shark/Algorithms/QP/QpMcLinear.h#L387) (@igel2008shark) solves the subproblem:
 
 $$
 \mathrm{minimize}_{\alpha_{i1},\dots, \alpha_{ik}}
 \quad
 f(\alpha) :=
-\frac{1}{2} 
+\frac{M^2}{2} 
 \sum_{i, s\in [n]}
  x_s' x_i \alpha_i'
 \alpha_s
@@ -453,15 +476,125 @@ $$
 \end{cases}
 $$
 
-Note that $\alpha_{st}$ is fixed for all $s \ne i$ and all $j \in [k]$. By cycling through the $i\in [n]$ and solving the above subproblem, we get a form of coordinate descent.
+Note that $\alpha_{st}$ is fixed for all $s \ne i$ and all $j \in [k]$. By cycling through the $i\in [n]$ and (approximately) solving the above subproblem, we get a form of coordinate descent.
+
+
+Let $\widehat{\alpha}$ be the next iterate of $\alpha$ where 
+
+$$
+\widehat{\alpha}_s = \alpha_s,\quad \forall s \ne i.
+$$
+
+Then we have
+
+$$
+f(\widehat{\alpha})
+=
+\frac{M^2}{2}\|x_i\|^2 \|\widehat\alpha_i\|^2
++
+M^2
+x_i'
+\left(
+\sum_{s \in [n]: s \ne i}
+x_s
+\alpha_s'
+\right)
+\widehat \alpha_i
+-
+\sum_{j \in [n]: j \ne y_i}
+\widehat{\alpha}_{ij}
++C_i
+$$
+where $C_i \in \mathbb{R}$ does not depend on $\widehat{\alpha}_{i}$.
+
+Now, observe that
+
+$$
+x_i'
+\left(
+\sum_{s \in [n]: s \ne i}
+x_s
+\alpha_s'
+\right)
+\widehat \alpha_i
+=
+x_i'
+\left(
+\sum_{s \in [n]}
+x_s
+\alpha_s'
+\right)
+\widehat \alpha_i
+-
+x'_ix_i \alpha_i' \widehat\alpha_i
+=
+-
+x_i'
+W
+\widehat \alpha_i
+-
+\|x_i\|^2 \alpha_i' \widehat\alpha_i
+$$
+
+Thus
+$$
+f(\widehat{\alpha})
+=
+\frac{M^2}{2}\|x_i\|^2 \|\widehat\alpha_i\|^2
+-M^2 x_i' W\widehat{\alpha}_i
+-M^2\|x_i\|^2\alpha_i \widehat{\alpha}_i
+-
+\sum_{j \in [n]: j \ne y_i}
+\widehat{\alpha}_{ij}
++C_i.
+$$
+
+Let $\mathbb{1}_{\neg y_i} \in \mathbb{R}^k$ be the vector whose entries are all ones except the $y_i$-th entry, which is zero.
+The above can be written succinctly as
+
+$$
+f(\widehat{\alpha})
+=
+\frac{M^2}{2}\|x_i\|^2 \|\widehat\alpha_i\|^2
+- \widehat{\alpha}_i'
+(
+M^2 W' x_i
++
+M^2\|x_i\|^2 \alpha_i
++ \mathbb{1}_{\neg y_i}
+)
++C_i.
+$$
 
 
 
-We consider the updates 
+## Update of a single block dual variable
+Shark considers updates of the following form:
+
+$$
+\widehat{\alpha}_s = 
+\begin{cases}
+\alpha_s &: s \ne i\\
+\alpha_i + \mu &: s = i
+\end{cases}
+$$
+where $\mu \in \mathbb{R}^k$ is a *step* vector satisfying
+
+$$
+\mu_{y_i} = -\sum_{t \in [k]: t \ne y_i} \mu_t.
+$$
+The above constraint is to ensure that $\widehat{\alpha}$ remains (dual) feasible.
+The update step is implemented in
+the [`updateWeightVectors`](https://github.com/Shark-ML/Shark/blob/7a182c7923e94cf6a8d65b6c92a162bafad8314c/include/shark/Algorithms/QP/QpMcLinear.h#L425) function assuming that $\mu$ is given. In the next section, we discuss how Shark computes the $\mu$ vector.
+
+## Computing the step vector
+
+Let $m$ be arbitrary such that $\alpha_{ij} + m \in [0,C]$. We consider the updates 
 $$
 \begin{cases}
-\hat{\alpha}_{st} = \alpha_{st} &: s \ne i \mbox{ or } t \ne j \\
-\hat{\alpha}_{ij} = \alpha_{ij} + m & \mbox{otherwise.}
+\hat{\alpha}_{it} = \alpha_{it} &: t \not\in \{j,y_i\} \\
+\hat{\alpha}_{it} = \alpha_{it} + m &: t =j \\
+\hat{\alpha}_{it} = \alpha_{it} - m &: t =y_i \\
 \end{cases}
 $$
 
@@ -470,6 +603,8 @@ Similarly, define
 $$
 \widehat W = [\hat w_1, \cdots \hat w_k]
 =
+-
+M
 \sum_{i = 1}^n 
 x_i \hat \alpha_i'.
 $$
@@ -481,8 +616,8 @@ $$
 =
 \begin{cases}
 w_t &: t \not \in \{j, y_i\}\\
-w_j - mx_i &: t = j \\
-w_{y_i} + mx_i &: t = y_i.
+w_j - Mmx_i &: t = j \\
+w_{y_i} + Mmx_i &: t = y_i.
 \end{cases}
 $$
 
@@ -490,25 +625,91 @@ Thus, we have
 $$
 -\frac{\partial f}{\partial \alpha_{it}}( \hat \alpha)
 = 
-1 - (\hat w_{y_i} ' x_i - \hat w_t' x_i)
+1 - M(\hat w_{y_i} ' x_i - \hat w_t' x_i)
 =
 \begin{cases}
-1 - (w_{y_i} ' x_i - w_j' x_i) - 2 m \|x_i\|^2 &: t = j \\
-1 - (w_{y_i} ' x_i - w_t' x_i) - 1 m \|x_i\|^2 &: t \ne j \\
+1 - M(w_{y_i} ' x_i - w_j' x_i) - 2 M^2m \|x_i\|^2 &: t = j \\
+1 - M(w_{y_i} ' x_i - w_t' x_i) - 1 M^2m \|x_i\|^2 &: t \ne j \\
 \end{cases}
 $$
 
-In other words, we have
+Thus,
+$$
+-\frac{\partial f}{\partial \alpha_{it}}( \hat \alpha)
+=
+\begin{cases}
+-\frac{\partial f}{\partial \alpha_{it}}( \alpha) - 2 M^2m \|x_i\|^2 &: t = j \\
+-\frac{\partial f}{\partial \alpha_{it}}( \alpha) - 1 M^2m \|x_i\|^2 &: t \ne j \\
+\end{cases}
+$$
+
+In Shark, we have $M = 1/2$ and so the gradient update is
+
 
 $$
 -\frac{\partial f}{\partial \alpha_{it}}( \hat \alpha)
 =
 \begin{cases}
--\frac{\partial f}{\partial \alpha_{ij}}( \alpha) - 2 m \|x_i\|^2 &: t = j \\
--\frac{\partial f}{\partial \alpha_{it}}( \alpha) - 1 m \|x_i\|^2 &: t \ne j. \\
+-\frac{\partial f}{\partial \alpha_{it}}( \alpha) -  m \frac{\|x_i\|^2}{2} &: t = j, \\
+-\frac{\partial f}{\partial \alpha_{it}}( \alpha) - 0.5 m \frac{\|x_i\|^2}{2} &: t \ne j.
 \end{cases}
 $$
+
 This is the mathematical justification behind this [code snippet](https://github.com/Shark-ML/Shark/blob/7a182c7923e94cf6a8d65b6c92a162bafad8314c/include/shark/Algorithms/QP/QpMcLinear.h#L480) from Shark.
+
+
+## Greedy step size
+
+Consider a function
+$$
+\Phi(x) = ax^2 + bx+c.
+$$
+The derivative at $x$ is 
+$$
+\Phi'(x) = 2ax + b.
+$$
+Setting this to zero, we have
+$$
+-\frac{b}{2a} =x= x + (-\frac{b}{2a}-x) = x + m
+$$
+
+Next, observe that
+$$
+m=
+-\frac{b}{2a}-x
+=
+-\frac{1}{2a}
+(2ax+b)
+=
+-\frac{1}{2a}
+\Phi'(x)
+$$
+
+
+Applying this principle to the problem above, where we have $x = \alpha_{ij}$,
+$\Phi'(x) = \frac{\partial f}{\partial \alpha_{ij}} (\alpha)$ and $a =M^2\|x_i\|^2$.
+Plugging everything in, we have
+
+$$
+m
+=
+\frac{1}{2(M\|x_i\|)^2}
+\left(- \frac{\partial f}{\partial \alpha_{ij}} (\alpha)\right)
+=
+- \frac{\partial f}{\partial \alpha_{ij}} (\alpha)
+\left(\frac{1}{2(M\|x_i\|)^2}\right).
+$$
+
+Since $M = 1/2$, we have
+
+$$
+m
+=
+- \frac{\partial f}{\partial \alpha_{ij}} (\alpha)
+\frac{2}{\|x_i\|^2}.
+$$
+
+This is the update at [line 464](https://github.com/Shark-ML/Shark/blob/7a182c7923e94cf6a8d65b6c92a162bafad8314c/include/shark/Algorithms/QP/QpMcLinear.h#L464).
 
 
 ---

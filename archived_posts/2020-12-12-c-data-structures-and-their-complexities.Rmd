@@ -1,0 +1,62 @@
+---
+title: C++ data structures and their complexities
+author: Yutong Wang
+date: '2020-12-12'
+slug: c-data-structures-and-their-complexities
+categories: []
+tags: []
+output:
+  blogdown::html_page:
+    toc: true
+---
+
+This is just a collection of various data structures in the C++ STL.
+
+
+# vector
+
+# map
+
+> Maps are typically implemented as binary search trees.
+
+[reference](http://www.cplusplus.com/reference/map/map/)
+```
+template < class Key,                                     // map::key_type
+           class T,                                       // map::mapped_type
+           class Compare = less<Key>,                     // map::key_compare
+           class Alloc = allocator<pair<const Key,T> >    // map::allocator_type
+           > class map;
+```
+
+The [lower_bound](https://www.cplusplus.com/reference/map/map/lower_bound/) function does **binary search** for you!
+
+
+
+
+# unordered_map
+[reference](http://www.cplusplus.com/reference/unordered_map/unordered_map/)
+```
+template < class Key,                                    // unordered_map::key_type
+           class T,                                      // unordered_map::mapped_type
+           class Hash = hash<Key>,                       // unordered_map::hasher
+           class Pred = equal_to<Key>,                   // unordered_map::key_equal
+           class Alloc = allocator< pair<const Key,T> >  // unordered_map::allocator_type
+           > class unordered_map;
+```
+
+
+> implemented using Hash Table
+>
+> search, insert and delete operations are O(1) 
+
+[source](https://www.geeksforgeeks.org/unordered_map-in-cpp-stl/#:~:text=Map%20is%20implemented%20as%20balanced,O(1)%20on%20average.&text=A%20lot%20of%20function%20are%20available%20which%20work%20on%20unordered_map.)
+
+
+[How to create an unordered_map of pairs in C++?](https://www.geeksforgeeks.org/how-to-create-an-unordered_map-of-pairs-in-c/)
+
+
+
+
+# set
+
+# unordered_set

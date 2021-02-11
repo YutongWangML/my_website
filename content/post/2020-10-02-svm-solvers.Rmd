@@ -16,6 +16,7 @@ Disclaimers:
 - Some solvers belong to multiple categories. In such cases I simply assign a category based on my opinion.
 - The ordering does not reflect my preference of the solvers. They are ordered in a way so that it is easier for me to keep track of information.
 - This is a continously updated post.
+- There an earlier list [here](https://www.cs.ubc.ca/~murphyk/Software/svm.htm) compiled by Vlad Magdin and updated by Kevin Murphy.
 
 --- 
 
@@ -192,8 +193,6 @@ are available from the UCI repository. The MNIST
 dataset
 is a well known handwritten digit recognition
 benchmark. The INEX dataset contains scientific articles from 18 journals and proceedings of the IEEE.
-
-![](/post/2020-10-02-svm-solvers_files/Screen Shot 2020-10-09 at 2.24.26 PM.png)
 
 ## GaLa: Improved Working Set Selection for LaRank
 

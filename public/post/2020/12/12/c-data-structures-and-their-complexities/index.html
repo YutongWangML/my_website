@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>C&#43;&#43; data structures and their complexities | Yutong Wang</title>
+    <link rel="stylesheet" href="/~yutongw/css/style.css" />
+    <link rel="stylesheet" href="/~yutongw/css/fonts.css" />
+    
+  </head>
+
+  <body>
+    <nav>
+    <ul class="menu">
+      
+      <li><a href="/~yutongw">Home</a></li>
+      
+      <li><a href="/~yutongw/publications/">Publications</a></li>
+      
+      <li><a href="/~yutongw/post/">Blog</a></li>
+      
+      <li><a href="/~yutongw/cv.pdf">CV</a></li>
+      
+    </ul>
+    <hr/>
+    </nav>
+
+<div class="article-meta">
+<h1><span class="title">C++ data structures and their complexities</span></h1>
+<h2 class="author">Yutong Wang</h2>
+<h2 class="date">2020/12/12</h2>
+</div>
+
+<main>
+
+
+<div id="TOC">
+<ul>
+<li><a href="#vector">vector</a></li>
+<li><a href="#map">map</a></li>
+<li><a href="#unordered_map">unordered_map</a></li>
+<li><a href="#set">set</a></li>
+<li><a href="#unordered_set">unordered_set</a></li>
+</ul>
+</div>
+
+<p>This is just a collection of various data structures in the C++ STL.</p>
+<div id="vector" class="section level1">
+<h1>vector</h1>
+</div>
+<div id="map" class="section level1">
+<h1>map</h1>
+<blockquote>
+<p>Maps are typically implemented as binary search trees.</p>
+</blockquote>
+<p><a href="http://www.cplusplus.com/reference/map/map/">reference</a></p>
+<pre><code>template &lt; class Key,                                     // map::key_type
+           class T,                                       // map::mapped_type
+           class Compare = less&lt;Key&gt;,                     // map::key_compare
+           class Alloc = allocator&lt;pair&lt;const Key,T&gt; &gt;    // map::allocator_type
+           &gt; class map;</code></pre>
+<p>The <a href="https://www.cplusplus.com/reference/map/map/lower_bound/">lower_bound</a> function does <strong>binary search</strong> for you!</p>
+</div>
+<div id="unordered_map" class="section level1">
+<h1>unordered_map</h1>
+<p><a href="http://www.cplusplus.com/reference/unordered_map/unordered_map/">reference</a></p>
+<pre><code>template &lt; class Key,                                    // unordered_map::key_type
+           class T,                                      // unordered_map::mapped_type
+           class Hash = hash&lt;Key&gt;,                       // unordered_map::hasher
+           class Pred = equal_to&lt;Key&gt;,                   // unordered_map::key_equal
+           class Alloc = allocator&lt; pair&lt;const Key,T&gt; &gt;  // unordered_map::allocator_type
+           &gt; class unordered_map;</code></pre>
+<blockquote>
+<p>implemented using Hash Table</p>
+<p>search, insert and delete operations are O(1)</p>
+</blockquote>
+<p><a href="https://www.geeksforgeeks.org/unordered_map-in-cpp-stl/#:~:text=Map%20is%20implemented%20as%20balanced,O(1)%20on%20average.&amp;text=A%20lot%20of%20function%20are%20available%20which%20work%20on%20unordered_map.">source</a></p>
+<p><a href="https://www.geeksforgeeks.org/how-to-create-an-unordered_map-of-pairs-in-c/">How to create an unordered_map of pairs in C++?</a></p>
+</div>
+<div id="set" class="section level1">
+<h1>set</h1>
+</div>
+<div id="unordered_set" class="section level1">
+<h1>unordered_set</h1>
+</div>
+
+</main>
+
+  <footer>
+  <script src="//yihui.name/js/math-code.js"></script>
+<script async src="//mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+<script async src="//yihui.name/js/center-img.js"></script>
+
+  
+  </footer>
+  </body>
+</html>
+
