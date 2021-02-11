@@ -10,7 +10,7 @@ biblio-style: "apalike"
 link-citations: true
 ---
 
-In this [previous post](/2020/10/02/svm-solvers/), we listed solvers for SVMs.
+In this [previous post](/~yutongw/post/2020/10/02/svm-solvers/), we listed solvers for SVMs.
 The focus of this post is specialized to solvers for the Crammer-Singer and Weston-Watkins **kernel** SVMs.
 
 # Shark
