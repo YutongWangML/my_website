@@ -12,7 +12,7 @@ title: Home
 
 Hi! I am a fifth year PhD candidate in [EECS](https://eecs.engin.umich.edu/). 
 My research is in machine learning. 
-I am co-advised by [Clay Scott](http://web.eecs.umich.edu/~cscott/) and [Laura Balzano](http://web.eecs.umich.edu/~girasole/). 
+I am advised by [Clay Scott](http://web.eecs.umich.edu/~cscott/). 
 As a trainee in the [Michigan Center for Single-Cell Genomic Data Analytics](https://midas.umich.edu/research/health-old/single-cell/), I have enjoyed having the opportunity to collaborate with biologists and biostatisticians.
 
 ---
