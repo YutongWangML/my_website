@@ -1,0 +1,7 @@
+{ "class": "GraphLinksModel",
+  "nodeDataArray": [ 
+{"location":"-179.70748423615987 17.908902891774915", "text":"soudry2018implicit\nSoudry, Daniel\nHoffer, Elad\nNacson, Mor Shpigel\nGunasekar, Suriya\nSrebro, Nathan\n2018\nThe implicit bias of \ngradient descent on separable data", "color":"lightyellow", "key":-1},
+{"location":"-242.65611362105108 -408.87856965924647", "text":"ji2020gradient\nJi, Ziwei\nDud\\'ik, Miroslav\nSchapire, Robert E\nTelgarsky, Matus\n2020\nGradient descent follows \nthe regularization path for general losses", "color":"lightyellow", "key":-2},
+{"location":"-437.7445173868746 -722.0956527824248", "text":"shamir2020gradient\nShamir, Ohad\n2020\nGradient methods \nnever overfit on separable data", "color":"lightyellow", "key":-3}
+ ],
+  "linkDataArray": []}

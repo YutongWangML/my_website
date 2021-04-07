@@ -1,0 +1,28 @@
+html, 
+body {
+    height: 100%;
+}
+
+#myDiagramDiv{
+  float: right;
+  border: solid 1px black;
+  width:80%;
+  height:95%;
+  /* width:800px; */
+  /* height:400px; */
+}
+
+.draggable{
+  padding:4px;
+  margin:1px;
+  border: solid 1px black;
+  overflow: hidden;
+  max-height: 3em;
+  line-height: 1em;
+}
+
+.boundingBox{
+  border: solid 2px black;
+  padding: 8px;
+  margin:2px;
+}

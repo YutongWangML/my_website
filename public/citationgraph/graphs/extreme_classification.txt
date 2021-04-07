@@ -1,0 +1,32 @@
+{ "class": "GraphLinksModel",
+  "nodeDataArray": [ 
+{"location":"-279.3536218906253 -593.800750015625", "text":"thrampoulidis2020theoretical\nThrampoulidis, Christos\nOymak, Samet\nSoltanolkotabi, Mahdi\n2020\nTheoretical Insights Into Multiclass Classification: \nA High-dimensional Asymptotic View", "color":"lightyellow", "key":-1, "scale":1},
+{"text":"Algorithms for extreme multiclass problems", "color":"white", "key":-2, "location":"-38.96304580436674 -338.80140957956837"},
+{"location":"-1129.6177435569048 -43.28030752456732", "text":"rawat2019sampled\nRawat, Ankit Singh\nChen, Jiecao\nYu, Felix\nSuresh, Ananda Theertha\nKumar, Sanjiv\n2019\nSampled softmax with random fourier features", "color":"lightyellow", "key":-3},
+{"location":"-158.02232740547402 -53.143008322852666", "text":"kuznetsov2015rademacher\nKuznetsov, Vitaly\n2015\nRademacher complexity margin bounds \nfor learning with a large number of classes", "color":"lightyellow", "key":-4},
+{"location":"493.736041695312 -10.613725984374923", "text":"yen2016pd\nYen, Ian En-Hsu\nHuang, Xiangru\nRavikumar, Pradeep\nZhong, Kai\nDhillon, Inderjit\n2016\nPd-sparse: A primal and dual sparse approach \nto extreme multiclass and multilabel classification", "color":"lightyellow", "key":-5},
+{"location":"-1432.5551525742735 -672.5921156992652", "text":"wang2020generalizing\nWang, Yaqing\nYao, Quanming\nKwok, James T\nNi, Lionel M\n2020\nGeneralizing from a few examples: \nA survey on few-shot learning", "color":"lightyellow", "key":-6},
+{"text":"provide a unifying\nformulation for few-shot learning methods, \nand clearly outline the key challenge in few-shot learning\nthrough a PAC argument, \nbut do not introduce any new theoretical results.", "color":"white", "key":-7, "location":"-1438.8549603441306 -967.7735051708811"},
+{"text":"Few-Shot\nLearning", "color":"white", "key":-8, "location":"-2018.9553981234062 -1024.0337341279755", "scale":4},
+{"location":"-1412.382817262676 -1223.2457047116661", "text":"cao2019theoretical\nCao, Tianshi\nLaw, Marc\nFidler, Sanja\n2020\nA theoretical analysis of \nthe number of shots in few-shot learning", "color":"lightyellow", "key":-9},
+{"text":"extreme classification datasets", "color":"white", "key":-10, "location":"-1458.0502857459292 260.82179323212586"},
+{"location":"1453.6953494428644 763.1276741164138", "text":"crammer2001algorithmic\nCrammer, Koby\nSinger, Yoram\n2001\nOn the algorithmic implementation of multiclass kernel-based vector machines", "color":"lightyellow", "key":-11},
+{"text":"separation ranking loss", "color":"white", "key":-12, "location":"922.8637346788087 403.21328281289016"},
+{"text":" treebased methods", "color":"white", "key":-13, "location":"330.0233518309942 408.1975480274226"},
+{"location":"35.0513472888008 667.0265978655677", "text":"choromanska2014logarithmic\nChoromanska, Anna\nLangford, John\n2015\nLogarithmic time \nonline multiclass prediction", "color":"lightyellow", "key":-14},
+{"location":"468.4693847254071 704.7597592293392", "text":"prabhu2014fastxml\nPrabhu, Yashoteja\nVarma, Manik\n2014\nFastXML: A fast, accurate and \nstable tree-classifier for \nextreme multi-label learning", "color":"lightyellow", "key":-15}
+ ],
+  "linkDataArray": [ 
+{"from":-1, "to":-2},
+{"from":-2, "to":-3},
+{"from":-2, "to":-4},
+{"from":-2, "to":-5},
+{"from":-7, "to":-6},
+{"from":-9, "to":-7},
+{"from":-3, "to":-10},
+{"from":-5, "to":-12},
+{"from":-12, "to":-11},
+{"from":-5, "to":-13},
+{"from":-13, "to":-14},
+{"from":-13, "to":-15}
+ ]}
