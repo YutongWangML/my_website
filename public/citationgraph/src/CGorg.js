@@ -93,6 +93,14 @@ function download_graphs(){
   a.click();
 }
 
+function show_bibfile_upload(){
+  var x = document.getElementById("bibfileUploadContainer");
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+}
 function show_diagram_code(){
   var x = document.getElementById("mySavedModelContainer");
   if (x.style.display === "none") {

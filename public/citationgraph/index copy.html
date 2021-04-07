@@ -1,0 +1,102 @@
+<!DOCTYPE html>  
+<html>
+  <head>
+    <!-- <script src="src/go.js"></script> -->
+    <script src="https://gojs.net/latest/release/go.js"></script>
+    <script src="src/CGOrg.js"></script>
+    <link rel="stylesheet" href="src/styles.css">
+
+    </head>
+<body onload="init()">
+
+  
+<!-- UPLOAD BIB FILE -->
+
+<div style = "float: left">
+    <fieldset>
+      <legend>
+    Upload .bib file
+      </legend>
+    <button onclick="show_bibfile_upload()">Show/hide</button>
+    <br>
+    <div id ="bibfileUploadContainer">
+     <input type="file" name="file" id="bibfile" onmouseup = "this.value = ''"> 
+    <br>
+    <textarea id="bibkeys" rows="5" cols="25"> </textarea>
+    </div>
+    </fieldset>
+
+    <br>
+
+    <fieldset>
+      <legend>
+        Bibkey Palette
+      </legend>
+  <input type="text" id="myInput" onkeyup="filterkeys()" placeholder="Search bibkeys" title="Type in a name"> 
+    <div id="paletteZone" style="width: 160px; margin-right: 2px;  padding: 10px;">
+      <div class="draggable" draggable="true" id = "drag1">Draggable</div>
+      <div class="draggable" draggable="true" id = "drag2">bibkeys will</div>
+      <div class="draggable" draggable="true" id = "drag3">show up here</div>
+      <div class="draggable" draggable="true" id = "drag4">as you type in</div>
+      <div class="draggable" draggable="true" id = "drag5">the search box.</div>
+    </div>
+    </fieldset>
+
+    <br>
+  <fieldset>
+    <legend>Current diagram</legend>
+    <input type="text" id="diagramName" value="unnamed" title="Type in a name"> 
+    <br />
+    <input type="checkbox" id="autosave" value="Autosave" checked><label for="autosave">Autosave</label><br>
+    <button onclick="save_diagram()">Save</button>
+    <button onclick="get_diagram_svg()">SVG</button>
+    <button onclick="delete_diagram()">Delete</button>
+    <br />
+    <button id="showDiagramCode" onclick="show_diagram_code()">Show/hide diagram code</button>
+    <br />
+    <div id="mySavedModelContainer" style = "display:none">
+  <textarea id="mySavedModel" rows="5" cols="25" >{ "class": "GraphLinksModel", "nodeDataArray": [], "linkDataArray": []}</textarea>
+  <br />
+    <button onclick="load_diagram_from_code()">Load from code</button>
+    </div>
+  </fieldset>
+
+  <br>
+  <!-- SAVE STUFF -->
+  <fieldset>
+    <legend>Saved diagrams</legend>
+<select id="saved_diagrams" onchange="update_diagram_name()"></select>
+<br />
+<br />
+    <button onclick="download_graphs()">Download</button>
+    <button onclick="upload_graphs()">Upload</button>
+    <div id = "uploadContainer" style="display:none">
+      <fieldset>
+        <legend>Upload diagrams</legend>
+        <span style="color:red">Warning: saved diagrams</br> will be erased after upload.</span><br />
+       <input type="file" name="file" id="CGjsonfile" onmouseup = "this.value = ''">
+      </fieldset>
+    </div>
+  </fieldset>
+
+  <!-- SAVE STUFF -->
+  </div>
+
+
+
+  <div id="myDiagramDiv"></div>
+
+
+
+
+
+  
+
+
+
+
+
+
+
+    </body>
+  </html>
