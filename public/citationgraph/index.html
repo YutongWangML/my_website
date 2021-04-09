@@ -12,6 +12,13 @@ var titles = {};
 var authors = {};
 var years = {};
 
+function reset_bibdata(){
+  bibkeys = [];
+  titles = {};
+  authors = {};
+  years = {};
+}
+
 
 function filterkeys() {
   var input;
@@ -155,6 +162,7 @@ function refresh_saved_diagram_dropdown(){
 }
 
 function updatebibkeys(bibfile){
+  reset_bibdata();
   var lines = bibfile.split('\n');
   var lastbibkey;
   for(var line = 0; line < lines.length; line++){
