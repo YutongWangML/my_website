@@ -728,6 +728,12 @@ myDiagram.commandHandler.doKeyDown = function() {
     if(myDiagram.selection.first()!=null){
       toggleColor();
     }
+  }else if (e.key === "L") {
+    var bibfile_URL = document.getElementById("bibfileURL").value;
+    localStorage.setItem("last_bibfile_URL", bibfile_URL);
+    fetch(bibfile_URL).
+            then(x => x.text()).
+            then(x => updatebibkeys(x));
   }else{
     // call base method with no arguments
     go.CommandHandler.prototype.doKeyDown.call(cmd);
