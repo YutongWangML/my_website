@@ -5,7 +5,7 @@ title: Home
 <img src="me.jpg" style="border-radius:50%;max-width:25%;min-width:40px;float:right;margin:25px" alt="Github repo" />
 
 # Yutong Wang
-#### PhD Candidate |  University of Michigan | <A HREF="mailto: &#121;&#117;&#116;&#111;&#110;&#103;&#119;&#064;&#117;&#109;&#105;&#099;&#104;&#046;&#101;&#100;&#117;" > &#121;&#117;&#116;&#111;&#110;&#103;&#119;&#064;&#117;&#109;&#105;&#099;&#104;&#046;&#101;&#100;&#117; </a>
+#### PhD Candidate |  University of Michigan | <A HREF="mailto: yutongw@umich.edu" > yutongw@umich.edu </A>
 
 <!-- <span><img src="email.png" style="width:120px" alt="email" /></span>
 -->
@@ -30,7 +30,6 @@ I am interested in the various aspects of *multiclass* classification. More spec
 
 - **An exact solver for the Weston-Watkins SVM subproblem**</br>
 *Yutong Wang and Clayton Scott*</br> 
-<!--[[Paper](https://papers.nips.cc/paper/2020/hash/e5e6851e7f7ffd3530e7389e183aa468-Abstract.html)]-->
 [[arXiv](https://arxiv.org/abs/2102.05640)]
 [[Code](https://github.com/YutongWangUMich/liblinear/)]
 - **Weston-Watkins Hinge Loss and Ordered Partitions**</br>
