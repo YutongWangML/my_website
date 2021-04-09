@@ -154,7 +154,59 @@ function refresh_saved_diagram_dropdown(){
   }
 }
 
-var test_stuff;
+function updatebibkeys(bibfile){
+  var lines = bibfile.split('\n');
+  var lastbibkey;
+  for(var line = 0; line < lines.length; line++){
+    var str = lines[line]
+    var bibkeyRegExp = new RegExp(/@\w*{\w*,/i); // find the citekey of the form '@ARTICLE{citekey,....'
+    var titleRegExp = new RegExp(/\btitle = {\b.*/i);
+    var authorRegExp = new RegExp(/\bauthor = {\b.*/i);
+    var yearRegExp = new RegExp(/\byear = {\b.*/i);
+
+    if(bibkeyRegExp.test(str)){
+      str = str.match(bibkeyRegExp)[0]
+      var bibkey = str.replace(/@\w*{/,'').replace(/,/,'');
+      bibkeys.push(bibkey);
+      lastbibkey = bibkey;
+    }
+
+    if(titleRegExp.test(str)){
+      str = str.match(titleRegExp)[0].replace(/\btitle = {\b/,'').replace(/},/,'');
+      titles[lastbibkey] = str;
+    }
+
+    if(authorRegExp.test(str)){
+      str = str.match(authorRegExp)[0].replace(/\bauthor = {\b/,'').replace(/},/,'');
+      // console.log(str);
+      str = str.replace(/\b and \b/g,"\n");
+      authors[lastbibkey] = str;
+    }
+
+    if(yearRegExp.test(str)){
+      str = str.match(yearRegExp)[0].match(/\d+/)[0] // "3"
+        // .replace(/\byear = {\b/,'').replace(/},/,'');
+      years[lastbibkey] = str;
+    }
+  }
+  bibkeys.sort();
+  var ta = document.getElementById("bibkeys"); // TextArea
+  ta.value = "";
+  for(var i = 0; i < bibkeys.length;i++){
+    ta.value += bibkeys[i] + "\n";
+  }
+}
+
+function get_bibfile_from_URL(){
+  var bibfile_URL = document.getElementById("bibfileURL").value;
+  localStorage.setItem("last_bibfile_URL", bibfile_URL);
+  fetch(bibfile_URL).
+          then(x => x.text()).
+          then(x => updatebibkeys(x));
+}
+
+
+
 function init() {
 
   // Check if diagrams have been initialized, if not, add the default one
@@ -165,6 +217,14 @@ function init() {
     localStorage.getItem("diagrams")
   );
   refresh_saved_diagram_dropdown();
+
+  if(localStorage.getItem("last_bibfile_URL") != null){
+    var last_bibfile_URL = localStorage.getItem("last_bibfile_URL");
+    fetch(last_bibfile_URL).
+            then(x => x.text()).
+            then(x => updatebibkeys(x));
+    document.getElementById("bibfileURL").value = last_bibfile_URL;
+  }
   
 
   document.getElementById('CGjsonfile').onchange = function(){
@@ -174,7 +234,6 @@ function init() {
     var fr = new FileReader();
     fr.onload = function(e) {
       var new_diagrams = JSON.parse(e.target.result);
-      test_stuff = new_diagrams;
       var diagram_names = Object.keys(new_diagrams);
       localStorage.setItem("diagrams", JSON.stringify(diagram_names));
       for(var i = 0; i < diagram_names.length; i++){
@@ -190,6 +249,9 @@ function init() {
     x.style.display = "none";
   }
 
+
+
+
   // Parse the bibfile upload for the bibkeys
   document.getElementById('bibfile').onchange = function(){
     var file = this.files[0];
@@ -197,46 +259,7 @@ function init() {
     var reader = new FileReader();
 
     reader.onload = function(progressEvent){
-      var lines = this.result.split('\n');
-      var lastbibkey;
-      for(var line = 0; line < lines.length; line++){
-        var str = lines[line]
-        var bibkeyRegExp = new RegExp(/@\w*{\w*,/i); // find the citekey of the form '@ARTICLE{citekey,....'
-        var titleRegExp = new RegExp(/\btitle = {\b.*/i);
-        var authorRegExp = new RegExp(/\bauthor = {\b.*/i);
-        var yearRegExp = new RegExp(/\byear = {\b.*/i);
-    
-        if(bibkeyRegExp.test(str)){
-          str = str.match(bibkeyRegExp)[0]
-          var bibkey = str.replace(/@\w*{/,'').replace(/,/,'');
-          bibkeys.push(bibkey);
-          lastbibkey = bibkey;
-        }
-
-        if(titleRegExp.test(str)){
-          str = str.match(titleRegExp)[0].replace(/\btitle = {\b/,'').replace(/},/,'');
-          titles[lastbibkey] = str;
-        }
-
-        if(authorRegExp.test(str)){
-          str = str.match(authorRegExp)[0].replace(/\bauthor = {\b/,'').replace(/},/,'');
-          // console.log(str);
-          str = str.replace(/\b and \b/g,"\n");
-          authors[lastbibkey] = str;
-        }
-
-        if(yearRegExp.test(str)){
-          str = str.match(yearRegExp)[0].match(/\d+/)[0] // "3"
-            // .replace(/\byear = {\b/,'').replace(/},/,'');
-          years[lastbibkey] = str;
-        }
-      }
-      bibkeys.sort();
-      var ta = document.getElementById("bibkeys"); // TextArea
-      ta.value = "";
-      for(var i = 0; i < bibkeys.length;i++){
-        ta.value += bibkeys[i] + "\n";
-      }
+      updatebibkeys(this.result);
     }; // closes the "reader.onload = function(progressEvent){"
     reader.readAsText(file);
   }; //closes the "document.getElementById('bibfile').onchange = function(){"
@@ -745,14 +768,23 @@ myDiagram.commandHandler.doKeyDown = function() {
 <div style = "float: left">
     <fieldset>
       <legend>
-    Upload .bib file
+    .bib file
       </legend>
     <button onclick="show_bibfile_upload()">Show/hide</button>
+    <div id ="bibfileUploadContainer" style ="display:none">
     <br>
-    <div id ="bibfileUploadContainer">
+      From computer:
      <input type="file" name="file" id="bibfile" onmouseup = "this.value = ''"> 
     <br>
+    <br>
+      From URL:<br>
+  <input type="text" id="bibfileURL" placeholder="bibfile URL" title="Type in a name"> 
+    <button onclick="get_bibfile_from_URL()">Fetch from URL</button>
+    <br>
+    <br>
+    Bibkeys:<br>
     <textarea id="bibkeys" rows="5" cols="25"> </textarea>
+    <br>
     </div>
     </fieldset>
 
