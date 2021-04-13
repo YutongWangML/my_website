@@ -219,11 +219,12 @@ function init() {
 
   // Check if diagrams have been initialized, if not, add the default one
   if(localStorage.getItem("diagrams") == null){
-    localStorage.setItem("diagrams", JSON.stringify(["unnamed"]));
+    localStorage.setItem("diagrams", JSON.stringify(["_unnamed"]));
   }
   diagram_list = JSON.parse(
     localStorage.getItem("diagrams")
   );
+  diagram_list.sort((a, b) => a.localeCompare(b, undefined, {sensitivity: 'base'}));
   refresh_saved_diagram_dropdown();
 
   if(localStorage.getItem("last_bibfile_URL") != null){
