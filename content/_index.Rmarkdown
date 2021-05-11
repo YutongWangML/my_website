@@ -30,6 +30,7 @@ I am interested in the various aspects of *multiclass* classification. More spec
 
 - **An exact solver for the Weston-Watkins SVM subproblem**</br>
 *Yutong Wang and Clayton Scott*</br> 
+Accepted to ICML 2021.</br> 
 [[arXiv](https://arxiv.org/abs/2102.05640)]
 [[Code](https://github.com/YutongWangUMich/liblinear/)]
 - **Weston-Watkins Hinge Loss and Ordered Partitions**</br>
