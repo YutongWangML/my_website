@@ -1,7 +1,7 @@
 ### during development, uncomment the following
 # baseurl = "/"
 ### during deployment, comment the following
-baseurl = "~yutongw/"
+baseurl = "https://web.eecs.umich.edu/~yutongw/"
 
 languageCode = "en-us"
 title = "Yutong Wang"
