@@ -1,7 +1,8 @@
 ### during development, uncomment the following
 # baseurl = "/"
 ### during deployment, comment the following
-baseurl = "https://web.eecs.umich.edu/~yutongw/"
+baseurl = "https://web.eecs.umich.edu/~yutongw"
+
 
 languageCode = "en-us"
 title = "Yutong Wang"
@@ -17,19 +18,19 @@ footnotereturnlinkcontents = "↩"
 
 [[menu.main]]
     name = "Home"
-    url = "/"
+    url = ""
     weight = 1
 [[menu.main]]
     name = "Publications"
-    url = "/publications/"
+    url = "publications/"
     weight = 2
 [[menu.main]]
     name = "Blog"
-    url = "/post/"
+    url = "post/"
     weight = 3
 [[menu.main]]
     name = "CV"
-    url = "/cv.pdf"
+    url = "cv.pdf"
     weight = 4
 
 [params]
