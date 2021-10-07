@@ -1,0 +1,41 @@
+---
+title: 'Neural nets lit review: Approximation'
+author: Yutong Wang
+date: '2021-06-30'
+slug: neural-nets-lit-review-approximation
+categories: []
+tags: []
+bibliography: "approximation.bib"
+link-citations: true
+output:
+  blogdown::html_page:
+    toc: true
+---
+
+Function-approximation theory of neural networks. This is a reading list.
+
+# Real-domain, real-range
+
+## @yarotsky2017error
+
+## @yarotsky2018optimal
+
+## @bolcskei2019optimal
+
+## @petersen2018optimal
+
+Answers the question of: 
+
+> How many layers and weights are required for a neural network to represent a function (from a nice family)?
+
+
+> a curse of dimension can be avoided. More precisely, if the function f can be factored as $f = g \circ \tau$  with a smooth feature map $\tau: \mathbb{R}^d → \mathbb{R}^k$, and a piecewise constant (or piecewise smooth) classifier function $g$, then one can approximate $f$ up to L2-error $\epsilon$ using a ReLU network $\phi$ with $O(\epsilon^{−2(k−1)/\beta} )$ weights. Therefore, the approximation rate only depends on the dimension $k$ of the feature space, instead of the input space dimension $d$.
+
+# Boolean-domain, boolean-range
+
+## @baldi2019capacity
+
+
+---
+
+# References

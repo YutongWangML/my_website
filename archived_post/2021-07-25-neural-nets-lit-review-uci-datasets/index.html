@@ -1,0 +1,151 @@
+<script src="index_files/header-attrs-2.7/header-attrs.js"></script>
+
+<div id="TOC">
+<ul>
+<li><a href="#fernandez2014we"><span class="citation"><span>Fernández-Delgado et al.</span> (<span>2014</span>)</span></a></li>
+<li><a href="#wainberg2016random"><span class="citation"><span>Wainberg, Alipanahi, and Frey</span> (<span>2016</span>)</span></a></li>
+<li><a href="#klambauer2017self"><span class="citation"><span>Klambauer et al.</span> (<span>2017</span>)</span></a></li>
+<li><a href="#wu2018improved"><span class="citation"><span>Wu et al.</span> (<span>2018</span>)</span></a></li>
+<li><a href="#olson2018modern"><span class="citation"><span>Olson, Wyner, and Berk</span> (<span>2018</span>)</span></a></li>
+<li><a href="#arora2019harnessing"><span class="citation"><span>Arora et al.</span> (<span>2019</span>)</span></a></li>
+<li><a href="#shankar2020neural"><span class="citation"><span>Shankar et al.</span> (<span>2020</span>)</span></a></li>
+<li><a href="#han2021random"><span class="citation"><span>Han et al.</span> (<span>2021</span>)</span></a></li>
+<li><a href="#references">References</a></li>
+</ul>
+</div>
+
+<p>My favorite curating of the UCI datasets are provided by <span class="citation"><a href="#ref-klambauer2017self" role="doc-biblioref">Klambauer et al.</a> (<a href="#ref-klambauer2017self" role="doc-biblioref">2017</a>)</span> downloadable from their <a href="https://github.com/bioinf-jku/SNNs">Github: bioinf-jku/SNNs</a>.
+I wrote some <a href="https://github.com/YutongWangUMich/UCI_classification">helper code</a> for downloading and loading the datasets with an interface similar to sklearn.</p>
+<p>Given the success of neural networks (NN) on large-scale vision and speech data, it is of interest how NNs perform on small-scale, non-vision and non-speech datasets.
+In this blog posts, we review some of the recent works in this direction.</p>
+<div id="fernandez2014we" class="section level1">
+<h1><span class="citation"><a href="#ref-fernandez2014we" role="doc-biblioref">Fernández-Delgado et al.</a> (<a href="#ref-fernandez2014we" role="doc-biblioref">2014</a>)</span></h1>
+<p>This article is a meta-analysis about <em>all</em> popular classifiers (at the time the paper was written), including neural networks. We include this article here because of its comprehensive scale and influence on subsequent works. We quote the following exercept from the article’s abstract:</p>
+<blockquote>
+<p>We use <strong>121 data sets</strong>, which represent <strong>the whole UCI</strong> data base (excluding the large-scale problems) and other own real problems, in order to achieve significant conclusions about the classifier behavior, not dependent on the data set collection. <strong>The classifiers most likely to be the bests are the random forest</strong> (RF) versions…</p>
+</blockquote>
+<p>Emphases are by the original authors. Immediately following the above, the authors further state that</p>
+<blockquote>
+<p>However, the difference is not statistically significant with the second best, the SVM with Gaussian kernel implemented in C using LibSVM…</p>
+</blockquote>
+<p>While the spirit of this study is very valuable and much needed, the work’s experimental setup does have flaws which was discussed at length in <span class="citation"><a href="#ref-wainberg2016random" role="doc-biblioref">Wainberg, Alipanahi, and Frey</a> (<a href="#ref-wainberg2016random" role="doc-biblioref">2016</a>)</span>.</p>
+<p>One other issue that is often raised is the lack of <em>gradient boosted machine</em>, or GBM, in the set of tested classifiers. This was discussed in this <a href="http://fastml.com/what-is-better-gradient-boosted-trees-or-random-forest/">blog post</a> and in this <a href="https://github.com/zygmuntz/misc/tree/master/gbm_vs_rf">github</a>.</p>
+</div>
+<div id="wainberg2016random" class="section level1">
+<h1><span class="citation"><a href="#ref-wainberg2016random" role="doc-biblioref">Wainberg, Alipanahi, and Frey</a> (<a href="#ref-wainberg2016random" role="doc-biblioref">2016</a>)</span></h1>
+<p>This is response article points out a flaw in the methodology of the meta-analysis of <span class="citation"><a href="#ref-fernandez2014we" role="doc-biblioref">Fernández-Delgado et al.</a> (<a href="#ref-fernandez2014we" role="doc-biblioref">2014</a>)</span>. Here is a direct quote from the abstract of <span class="citation"><a href="#ref-wainberg2016random" role="doc-biblioref">Wainberg, Alipanahi, and Frey</a> (<a href="#ref-wainberg2016random" role="doc-biblioref">2016</a>)</span>:</p>
+<blockquote>
+<p>…we show that <code>[</code>the results of <span class="citation"><a href="#ref-fernandez2014we" role="doc-biblioref">Fernández-Delgado et al.</a> (<a href="#ref-fernandez2014we" role="doc-biblioref">2014</a>)</span><code>]</code> are biased by the lack of a held-out test set and the exclusion of trials with errors.</p>
+</blockquote>
+</div>
+<div id="klambauer2017self" class="section level1">
+<h1><span class="citation"><a href="#ref-klambauer2017self" role="doc-biblioref">Klambauer et al.</a> (<a href="#ref-klambauer2017self" role="doc-biblioref">2017</a>)</span></h1>
+<p><a href="https://arxiv.org/abs/1706.02515">arXiv</a> | <a href="https://github.com/bioinf-jku/SNNs">Github: bioinf-jku/SNNs</a></p>
+<p><span class="citation"><a href="#ref-klambauer2017self" role="doc-biblioref">Klambauer et al.</a> (<a href="#ref-klambauer2017self" role="doc-biblioref">2017</a>)</span> introduced the notion of self-normalizing neural networks which outperformed standard feed-forward neural networks. Quoting from the article:</p>
+<blockquote>
+<p>On 75 small datasets with less than 1000 data points, random forests and SVMs outperform SNNs and other FNNs. On 46 larger datasets with at least 1000 data points, SNNs show the highest performance followed by SVMs and random forests.</p>
+</blockquote>
+<p>Another merit of <span class="citation"><a href="#ref-klambauer2017self" role="doc-biblioref">Klambauer et al.</a> (<a href="#ref-klambauer2017self" role="doc-biblioref">2017</a>)</span> is that the authors avoided the issue in <span class="citation"><a href="#ref-fernandez2014we" role="doc-biblioref">Fernández-Delgado et al.</a> (<a href="#ref-fernandez2014we" role="doc-biblioref">2014</a>)</span> raised by <span class="citation"><a href="#ref-wainberg2016random" role="doc-biblioref">Wainberg, Alipanahi, and Frey</a> (<a href="#ref-wainberg2016random" role="doc-biblioref">2016</a>)</span>. We quote from the article:</p>
+<blockquote>
+<p>In <span class="citation"><a href="#ref-fernandez2014we" role="doc-biblioref">Fernández-Delgado et al.</a> (<a href="#ref-fernandez2014we" role="doc-biblioref">2014</a>)</span>, there were methodological mistakes <code>[</code><span class="citation"><a href="#ref-wainberg2016random" role="doc-biblioref">Wainberg, Alipanahi, and Frey</a> (<a href="#ref-wainberg2016random" role="doc-biblioref">2016</a>)</span><code>]</code> which we avoided here. Each compared FNN method was optimized with respect to its architecture and hyperparameters on a validation set that was then removed from the subsequent analysis. The selected hyperparameters served to evaluate the methods in terms of accuracy on the pre-defined test sets</p>
+</blockquote>
+</div>
+<div id="wu2018improved" class="section level1">
+<h1><span class="citation"><a href="#ref-wu2018improved" role="doc-biblioref">Wu et al.</a> (<a href="#ref-wu2018improved" role="doc-biblioref">2018</a>)</span></h1>
+<p><a href="https://papers.nips.cc/paper/2018/hash/e32c51ad39723ee92b285b362c916ca7-Abstract.html">Paper</a> | <a href="https://github.com/xiangwenliu/DENN">Github: xiangwenliu/DENN</a></p>
+<p>Introduced the notion of <em>dendritic neural networks</em>.</p>
+<p>Accuracy of the proposed algorithm DENN is tabulated in Table A1 in the Supplemental materials.</p>
+</div>
+<div id="olson2018modern" class="section level1">
+<h1><span class="citation"><a href="#ref-olson2018modern" role="doc-biblioref">Olson, Wyner, and Berk</a> (<a href="#ref-olson2018modern" role="doc-biblioref">2018</a>)</span></h1>
+<p>On my reading list.</p>
+</div>
+<div id="arora2019harnessing" class="section level1">
+<h1><span class="citation"><a href="#ref-arora2019harnessing" role="doc-biblioref">Arora et al.</a> (<a href="#ref-arora2019harnessing" role="doc-biblioref">2019</a>)</span></h1>
+<p>Title: <strong>Harnessing the Power of Infinitely Wide Deep Nets on Small-data Tasks</strong></p>
+<p><a href="https://arxiv.org/abs/1910.01663">Paper</a> | <a href="https://github.com/LeoYu/neural-tangent-kernel-UCI">Github: LeoYu/neural-tangent-kernel-UCI</a></p>
+<p>One set of experiments in <span class="citation"><a href="#ref-arora2019harnessing" role="doc-biblioref">Arora et al.</a> (<a href="#ref-arora2019harnessing" role="doc-biblioref">2019</a>)</span> considers the <em>neural tangent kernel</em> (NTK) on the small-scale UCI datasets. We quote from their article:</p>
+<blockquote>
+<p>On a standard testbed of classification/regression tasks from the UCI database, NTK SVM beats the previous gold standard, Random Forests (RF), and also the corresponding finite nets.</p>
+</blockquote>
+<p>Evidently, the lack of a separate test-set is acknowledged, albeit without referring to <span class="citation"><a href="#ref-wainberg2016random" role="doc-biblioref">Wainberg, Alipanahi, and Frey</a> (<a href="#ref-wainberg2016random" role="doc-biblioref">2016</a>)</span>.</p>
+<blockquote>
+<p>We follow the comparison setup in <span class="citation"><a href="#ref-fernandez2014we" role="doc-biblioref">Fernández-Delgado et al.</a> (<a href="#ref-fernandez2014we" role="doc-biblioref">2014</a>)</span> that we report 4-fold cross-validation. For hyperparameters, we tune them with the same validation methodology in <span class="citation"><a href="#ref-fernandez2014we" role="doc-biblioref">Fernández-Delgado et al.</a> (<a href="#ref-fernandez2014we" role="doc-biblioref">2014</a>)</span>: all available training samples are randomly split into one training and one test set, while imposing that each class has the same number of training and test samples. Then the parameter with best validation accuracy is selected. It is possible to give confidence bounds for this parameter tuning scheme, but they are worse than standard ones for separated training/validation/testing data.</p>
+</blockquote>
+<p>Also, unfortunately, no details are given regarding “confidence bounds for this parameter tuning scheme.”</p>
+</div>
+<div id="shankar2020neural" class="section level1">
+<h1><span class="citation"><a href="#ref-shankar2020neural" role="doc-biblioref">Shankar et al.</a> (<a href="#ref-shankar2020neural" role="doc-biblioref">2020</a>)</span></h1>
+<p>Title: <strong>Neural Kernels Without Tangents</strong>
+<a href="https://arxiv.org/abs/2003.02237">arXiv</a> | <a href="http://proceedings.mlr.press/v119/shankar20a.html">Paper</a> | <a href="https://github.com/modestyachts/neural_kernels_code">Github: modestyachts/neural_kernels_code</a></p>
+<p>Accuracy of SVM + Gaussian kernel and SVM + NTK are tabulated in Table 2 in the Supplemental materials.</p>
+<p><strong>Training details</strong></p>
+<p>Appendix F of the Supplemental materials contains all the information regarding the SVM hyperparameters. The code is in <a href="https://github.com/modestyachts/neural_kernels_code/blob/master/UCI/UCI.py">UCI.py</a> from the linked github.</p>
+<p>Gaussian kernel bandwidth <span class="math inline">\(\gamma \in \nu \ast \{2^{-19},\dots, 2^{20}\}\)</span> where <span class="math inline">\(\nu\)</span> is the median of the <span class="math inline">\(\ell_2\)</span> distance between the data points, and the SVM parameter <span class="math inline">\(C \in \{2^{-19},\dots, 2^{20}\}\)</span>. See <a href="https://github.com/modestyachts/neural_kernels_code/blob/0202718ce8da87f7c1682a6fd87f0caeeaba0859/UCI/UCI.py#L83">UCI.py Line 83-84</a>.</p>
+<p>The best parameters <span class="math inline">\(\gamma, C\)</span> are chosen by selecting those achieving the best validation accuracy (averaged over 11 runs over randomly generated train/validation splits). See
+<a href="https://github.com/modestyachts/neural_kernels_code/blob/0202718ce8da87f7c1682a6fd87f0caeeaba0859/UCI/UCI.py#L86">UCI.py Line 86-111</a>.</p>
+<p>The final accuracy reported in the paper is computed by computing the 4-fold cross-validating over four predefined validation sets originally created by <span class="citation"><a href="#ref-fernandez2014we" role="doc-biblioref">Fernández-Delgado et al.</a> (<a href="#ref-fernandez2014we" role="doc-biblioref">2014</a>)</span> from the <code>conxuntos_kfold.dat</code> file. See <a href="https://github.com/modestyachts/neural_kernels_code/blob/0202718ce8da87f7c1682a6fd87f0caeeaba0859/UCI/UCI.py#L172">UCI.py Line 172-178</a>.</p>
+<p>Regarding the small UCI datasets, their main result is that</p>
+<blockquote>
+<p><code>[</code>…<code>]</code> we find that
+simple, properly tuned Gaussian kernels perform, on aggregate, slightly better than NTKs.</p>
+</blockquote>
+<p>For the most part, they following the same protocol as in <span class="citation"><a href="#ref-arora2019harnessing" role="doc-biblioref">Arora et al.</a> (<a href="#ref-arora2019harnessing" role="doc-biblioref">2019</a>)</span>. See the following quotes:</p>
+<blockquote>
+<p>For experiments on the UCI datasets, we minimize the hinge loss with libSVM to appropriately compare with prior work (<span class="citation"><a href="#ref-arora2019harnessing" role="doc-biblioref">Arora et al.</a> (<a href="#ref-arora2019harnessing" role="doc-biblioref">2019</a>)</span>; <span class="citation"><a href="#ref-fernandez2014we" role="doc-biblioref">Fernández-Delgado et al.</a> (<a href="#ref-fernandez2014we" role="doc-biblioref">2014</a>)</span>).</p>
+</blockquote>
+<p>The LibSVM refers to calling the <a href="https://scikit-learn.org/stable/modules/generated/sklearn.svm.SVC.html"><code>SVC</code> function in <code>scikit-learn</code></a>. See <a href="https://github.com/modestyachts/neural_kernels_code/blob/0202718ce8da87f7c1682a6fd87f0caeeaba0859/UCI/tools.py#L18">tools.py Line 18</a>.</p>
+<p>From their <a href="http://proceedings.mlr.press/v119/shankar20a/shankar20a-supp.pdf">supplemental materials</a></p>
+<blockquote>
+<p>For the NTK we tuned the kernel exactly using the protocol from <span class="citation"><a href="#ref-arora2019harnessing" role="doc-biblioref">Arora et al.</a> (<a href="#ref-arora2019harnessing" role="doc-biblioref">2019</a>)</span>.</p>
+</blockquote>
+<p>However, they depart from the protocol in <span class="citation"><a href="#ref-arora2019harnessing" role="doc-biblioref">Arora et al.</a> (<a href="#ref-arora2019harnessing" role="doc-biblioref">2019</a>)</span> in the following way:</p>
+<blockquote>
+<p>For the tuning and evaluation procedure we make one crucial modification to the evaluation procedure posed in <span class="citation"><a href="#ref-arora2019harnessing" role="doc-biblioref">Arora et al.</a> (<a href="#ref-arora2019harnessing" role="doc-biblioref">2019</a>)</span> and <span class="citation"><a href="#ref-fernandez2014we" role="doc-biblioref">Fernández-Delgado et al.</a> (<a href="#ref-fernandez2014we" role="doc-biblioref">2014</a>)</span>. We compute the optimal hyperparameters for each
+dataset (for both NTK and Gaussian kernel) by averaging performance over four cross-validation
+folds, while both <span class="citation"><a href="#ref-arora2019harnessing" role="doc-biblioref">Arora et al.</a> (<a href="#ref-arora2019harnessing" role="doc-biblioref">2019</a>)</span> and <span class="citation"><a href="#ref-fernandez2014we" role="doc-biblioref">Fernández-Delgado et al.</a> (<a href="#ref-fernandez2014we" role="doc-biblioref">2014</a>)</span> choose optimal hyper parameters
+on a single cross validation fold. Using a single cross validation fold can lead to high variance in
+final performance, especially when evaluation is done purely on small datasets. A single fold was
+used in the original experimental setup of <span class="citation"><a href="#ref-fernandez2014we" role="doc-biblioref">Fernández-Delgado et al.</a> (<a href="#ref-fernandez2014we" role="doc-biblioref">2014</a>)</span> for purely computational
+reasons, and the authors point out the issue of high variance hyperparameter optimization. <code>[</code>…<code>]</code>
+Compared to results in <span class="citation"><a href="#ref-arora2019harnessing" role="doc-biblioref">Arora et al.</a> (<a href="#ref-arora2019harnessing" role="doc-biblioref">2019</a>)</span>, the modified evaluation protocol increases the performance
+of both methods, and the gap between the NTK and Gaussian kernel disappears.</p>
+</blockquote>
+</div>
+<div id="han2021random" class="section level1">
+<h1><span class="citation"><a href="#ref-han2021random" role="doc-biblioref">Han et al.</a> (<a href="#ref-han2021random" role="doc-biblioref">2021</a>)</span></h1>
+<p>I haven’t read this paper carefully yet, but their experiments follow the protocol of <span class="citation"><a href="#ref-fernandez2014we" role="doc-biblioref">Fernández-Delgado et al.</a> (<a href="#ref-fernandez2014we" role="doc-biblioref">2014</a>)</span> (and, by extension, <span class="citation"><a href="#ref-arora2019harnessing" role="doc-biblioref">Arora et al.</a> (<a href="#ref-arora2019harnessing" role="doc-biblioref">2019</a>)</span>).</p>
+<blockquote>
+<p>We choose hyperparameters using validation data and evaluate the test accuracy using 4-fold cross-validation provided in <span class="citation"><a href="#ref-fernandez2014we" role="doc-biblioref">Fernández-Delgado et al.</a> (<a href="#ref-fernandez2014we" role="doc-biblioref">2014</a>)</span>.</p>
+</blockquote>
+<hr />
+</div>
+<div id="references" class="section level1 unnumbered">
+<h1>References</h1>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-arora2019harnessing" class="csl-entry">
+Arora, Sanjeev, Simon S Du, Zhiyuan Li, Ruslan Salakhutdinov, Ruosong Wang, and Dingli Yu. 2019. <span>“Harnessing the Power of Infinitely Wide Deep Nets on Small-Data Tasks.”</span> In <em>International Conference on Learning Representations</em>.
+</div>
+<div id="ref-fernandez2014we" class="csl-entry">
+Fernández-Delgado, Manuel, Eva Cernadas, Senén Barro, and Dinani Amorim. 2014. <span>“Do We Need Hundreds of Classifiers to Solve Real World Classification Problems?”</span> <em>Journal of Machine Learning Research</em> 15 (1): 3133–81.
+</div>
+<div id="ref-han2021random" class="csl-entry">
+Han, Insu, Haim Avron, Neta Shoham, Chaewon Kim, and Jinwoo Shin. 2021. <span>“Random Features for the Neural Tangent Kernel.”</span> <em>arXiv Preprint arXiv:2104.01351</em>.
+</div>
+<div id="ref-klambauer2017self" class="csl-entry">
+Klambauer, Günter, Thomas Unterthiner, Andreas Mayr, and Sepp Hochreiter. 2017. <span>“Self-Normalizing Neural Networks.”</span> In <em>Advances in Neural Information Processing Systems</em>, 971–80.
+</div>
+<div id="ref-olson2018modern" class="csl-entry">
+Olson, Matthew, Abraham J Wyner, and Richard Berk. 2018. <span>“Modern Neural Networks Generalize on Small Data Sets.”</span> In <em>Proceedings of the 32nd International Conference on Neural Information Processing Systems</em>, 3623–32.
+</div>
+<div id="ref-shankar2020neural" class="csl-entry">
+Shankar, Vaishaal, Alex Fang, Wenshuo Guo, Sara Fridovich-Keil, Jonathan Ragan-Kelley, Ludwig Schmidt, and Benjamin Recht. 2020. <span>“Neural Kernels Without Tangents.”</span> In <em>International Conference on Machine Learning</em>, 8614–23. PMLR.
+</div>
+<div id="ref-wainberg2016random" class="csl-entry">
+Wainberg, Michael, Babak Alipanahi, and Brendan J Frey. 2016. <span>“Are Random Forests Truly the Best Classifiers?”</span> <em>The Journal of Machine Learning Research</em> 17 (1): 3837–41.
+</div>
+<div id="ref-wu2018improved" class="csl-entry">
+Wu, Xundong, Xiangwen Liu, Wei Li, and Qing Wu. 2018. <span>“Improved Expressivity Through Dendritic Neural Networks.”</span> In <em>Proceedings of the 32nd International Conference on Neural Information Processing Systems</em>, 8068–79.
+</div>
+</div>
+</div>

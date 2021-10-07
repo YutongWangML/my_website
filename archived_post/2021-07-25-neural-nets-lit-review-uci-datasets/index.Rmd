@@ -1,0 +1,153 @@
+---
+title: 'Neural nets lit review: UCI datasets'
+author: R package build
+date: '2021-07-25'
+slug: neural-nets-lit-review-uci-datasets
+categories: []
+tags: []
+bibliography: "UCI90.bib"
+link-citations: true
+output:
+  blogdown::html_page:
+    toc: true
+---
+
+My favorite curating of the UCI datasets are provided by @klambauer2017self downloadable from their [Github: bioinf-jku/SNNs](https://github.com/bioinf-jku/SNNs).
+I wrote some [helper code](https://github.com/YutongWangUMich/UCI_classification) for downloading and loading the datasets with an interface similar to sklearn.
+
+
+Given the success of neural networks (NN) on large-scale vision and speech data, it is of interest how NNs perform on small-scale, non-vision and non-speech datasets.
+In this blog posts, we review some of the recent works in this direction.
+
+
+
+# @fernandez2014we
+
+This article is a meta-analysis about *all* popular classifiers (at the time the paper was written), including neural networks. We include this article here because of its comprehensive scale and influence on subsequent works. We quote the following exercept from the article's abstract:
+
+> We use **121 data sets**, which represent **the whole UCI** data base (excluding the large-scale problems) and other own real problems, in order to achieve significant conclusions about the classifier behavior, not dependent on the data set collection. **The classifiers most likely to be the bests are the random forest** (RF) versions...
+
+Emphases are by the original authors. Immediately following the above, the authors further state that
+
+> However, the difference is not statistically significant with the second best, the SVM with Gaussian kernel implemented in C using LibSVM...
+
+While the spirit of this study is very valuable and much needed, the work's experimental setup does have flaws which was discussed at length in @wainberg2016random.
+
+One other issue that is often raised is the lack of *gradient boosted machine*, or GBM, in the set of tested classifiers. This was discussed in this [blog post](http://fastml.com/what-is-better-gradient-boosted-trees-or-random-forest/) and in this [github](https://github.com/zygmuntz/misc/tree/master/gbm_vs_rf).
+
+# @wainberg2016random
+
+This is response article points out a flaw in the methodology of the meta-analysis of @fernandez2014we. Here is a direct quote from the abstract of @wainberg2016random:
+
+> ...we show that `[`the results of @fernandez2014we`]` are biased by the lack of a held-out test set and the exclusion of trials with errors.
+
+# @klambauer2017self
+
+[arXiv](https://arxiv.org/abs/1706.02515) | [Github: bioinf-jku/SNNs](https://github.com/bioinf-jku/SNNs)
+
+@klambauer2017self introduced the notion of self-normalizing neural networks which outperformed standard feed-forward neural networks. Quoting from the article:
+
+> On 75 small datasets with less than 1000 data points, random forests and SVMs outperform SNNs and other FNNs. On 46 larger datasets with at least 1000 data points, SNNs show the highest performance followed by SVMs and random forests. 
+
+Another merit of @klambauer2017self is that the authors avoided the issue in  @fernandez2014we raised by @wainberg2016random. We quote from the article:
+
+> In @fernandez2014we, there were methodological mistakes `[`@wainberg2016random`]` which we avoided here. Each compared FNN method was optimized with respect to its architecture and hyperparameters on a validation set that was then removed from the subsequent analysis. The selected hyperparameters served to evaluate the methods in terms of accuracy on the pre-defined test sets
+
+# @wu2018improved
+
+[Paper](https://papers.nips.cc/paper/2018/hash/e32c51ad39723ee92b285b362c916ca7-Abstract.html) | [Github: xiangwenliu/DENN](https://github.com/xiangwenliu/DENN)
+
+
+Introduced the notion of *dendritic neural networks*.
+
+
+Accuracy of the proposed algorithm DENN is tabulated in Table A1 in the Supplemental materials.
+
+
+
+
+# @olson2018modern
+
+On my reading list.
+
+# @arora2019harnessing
+
+Title: **Harnessing the Power of Infinitely Wide Deep Nets on Small-data Tasks**
+
+[Paper](https://arxiv.org/abs/1910.01663) |  [Github: LeoYu/neural-tangent-kernel-UCI](https://github.com/LeoYu/neural-tangent-kernel-UCI)
+
+One set of experiments in @arora2019harnessing considers the *neural tangent kernel* (NTK) on the small-scale UCI datasets. We quote from their article:
+
+> On a standard testbed of classification/regression tasks from the UCI database, NTK SVM beats the previous gold standard, Random Forests (RF), and also the corresponding finite nets.
+
+Evidently, the lack of a separate test-set is acknowledged, albeit without referring to @wainberg2016random. 
+
+> We follow the comparison setup in @fernandez2014we that we report 4-fold cross-validation. For hyperparameters, we tune them with the same validation methodology in @fernandez2014we: all available training samples are randomly split into one training and one test set, while imposing that each class has the same number of training and test samples. Then the parameter with best validation accuracy is selected. It is possible to give confidence bounds for this parameter tuning scheme, but they are worse than standard ones for separated training/validation/testing data.
+
+Also, unfortunately, no details are given regarding "confidence bounds for this parameter tuning scheme".
+
+
+# @shankar2020neural
+
+Title: **Neural Kernels Without Tangents**
+[arXiv](https://arxiv.org/abs/2003.02237) | [Paper](http://proceedings.mlr.press/v119/shankar20a.html) | [Github: modestyachts/neural_kernels_code](https://github.com/modestyachts/neural_kernels_code)
+
+
+
+Accuracy of SVM + Gaussian kernel and SVM + NTK are tabulated in Table 2 in the Supplemental materials.
+
+**Training details**
+
+Appendix F of the Supplemental materials contains all the information regarding the SVM hyperparameters. The code is in [UCI.py](https://github.com/modestyachts/neural_kernels_code/blob/master/UCI/UCI.py) from the linked github. 
+
+Gaussian kernel bandwidth $\gamma \in \nu \ast \{2^{-19},\dots, 2^{20}\}$ where $\nu$ is the median of the $\ell_2$ distance between the data points, and the SVM parameter $C \in \{2^{-19},\dots, 2^{20}\}$. See [UCI.py Line 83-84](https://github.com/modestyachts/neural_kernels_code/blob/0202718ce8da87f7c1682a6fd87f0caeeaba0859/UCI/UCI.py#L83).
+
+The best parameters $\gamma, C$ are chosen by selecting those achieving the best validation accuracy (averaged over 11 runs over randomly generated train/validation splits). See
+[UCI.py Line 86-111](https://github.com/modestyachts/neural_kernels_code/blob/0202718ce8da87f7c1682a6fd87f0caeeaba0859/UCI/UCI.py#L86).
+
+The final accuracy reported in the paper is computed by computing the 4-fold cross-validating over four predefined validation sets originally created by @fernandez2014we from the `conxuntos_kfold.dat` file. See [UCI.py Line 172-178](https://github.com/modestyachts/neural_kernels_code/blob/0202718ce8da87f7c1682a6fd87f0caeeaba0859/UCI/UCI.py#L172).
+
+
+Regarding the small UCI datasets, their main result is that 
+
+> `[`...`]` we find that
+simple, properly tuned Gaussian kernels perform, on aggregate, slightly better than NTKs.
+
+For the most part, they following the same protocol as in @arora2019harnessing. See the following quotes:
+
+> For experiments on the UCI datasets, we minimize the hinge loss with libSVM to appropriately compare with prior work (@arora2019harnessing; @fernandez2014we).
+
+The LibSVM refers to calling the [`SVC` function in `scikit-learn`](https://scikit-learn.org/stable/modules/generated/sklearn.svm.SVC.html). See [tools.py Line 18](https://github.com/modestyachts/neural_kernels_code/blob/0202718ce8da87f7c1682a6fd87f0caeeaba0859/UCI/tools.py#L18).
+
+From their [supplemental materials](http://proceedings.mlr.press/v119/shankar20a/shankar20a-supp.pdf)
+
+> For the NTK we tuned the kernel exactly using the protocol from @arora2019harnessing.
+
+However, they depart from the protocol in @arora2019harnessing in the following way:
+
+> For the tuning and evaluation procedure we make one crucial modification to the evaluation procedure posed in @arora2019harnessing and @fernandez2014we. We compute the optimal hyperparameters for each
+dataset (for both NTK and Gaussian kernel) by averaging performance over four cross-validation
+folds, while both @arora2019harnessing and @fernandez2014we choose optimal hyper parameters
+on a single cross validation fold. Using a single cross validation fold can lead to high variance in
+final performance, especially when evaluation is done purely on small datasets. A single fold was
+used in the original experimental setup of @fernandez2014we for purely computational
+reasons, and the authors point out the issue of high variance hyperparameter optimization. `[`...`]`
+Compared to results in @arora2019harnessing, the modified evaluation protocol increases the performance
+of both methods, and the gap between the NTK and Gaussian kernel disappears.
+
+
+
+
+# @han2021random
+
+I haven't read this paper carefully yet, but their experiments follow the protocol of @fernandez2014we (and, by extension, @arora2019harnessing).
+
+> We choose hyperparameters using validation data and evaluate the test accuracy using 4-fold cross-validation provided in @fernandez2014we.
+
+
+
+
+
+---
+
+# References

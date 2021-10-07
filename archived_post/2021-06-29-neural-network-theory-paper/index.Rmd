@@ -1,0 +1,168 @@
+---
+title: 'Neural nets lit review: Minimax-optimality'
+author: Yutong Wang
+date: '2021-06-29'
+slug: neural-network-theory-paper
+categories: []
+bibliography: "nn_theory.bib"
+link-citations: true
+output:
+  blogdown::html_page:
+    toc: true
+---
+
+Just my personal takes on papers to help myself organized.
+
+
+# Sparse networks
+
+Papers in this section consider a specialized type of deep ReLU networks with sparsity constraints, hereinafter referred to as **sparse networks**. I'm not sure who first defined this class of networks, but its minimax theory seems to be initiated in @schmidt2020nonparametric. The two important features of  sparse networks are:
+
+- Network weights are bounded (wlog by $1$)
+- Network weights are sparse (only a limited number of weights allowed to be nonzero), the so-called **sparse networks**
+
+The bounded constraint is easier to deal with while the sparsity constraint is more controversial.
+
+
+
+Questions:
+- What is the first paper that considers this type of neural networks regarding minimax optimality? Is it @schmidt2020nonparametric?
+
+---
+
+## @schmidt2020nonparametric
+
+Title: Nonparametric Regression Using Deep Neural Networks with ReLU Activation Function
+
+This is a landmark paper that first appeared on arXiv in 2017 and published in the Annals of Statistics in 2020.
+
+Contributions:
+
+- Establishes near **minimax optimality** of deep ReLU neural networks for regression functions with smoothness assumptions (Hölder class)
+- Provide theory for the **overparametrized regime** (number of parameters $\gg$ samples)
+- Introduces the "hierarchical composition assumption on the regression function" and demonstrates minimax optimality there. Under this assumption, the **curse-of-dimensionality** in the minimax rates can be avoided.
+
+---
+
+There are "Discussion of" article @schmidt2020nonparametric. One of the most contentious topic is regarding sparsity:
+
+We quote from @ghorbani2020discussion
+
+> Is sparsity the right complexity measure in practical deep-learning methods?
+
+This question is motivated by the fact that neural networks in practice are overparametrized, e.g., the example provided by @ghorbani2020discussion. However, the theory @schmidt2020nonparametric applies only to underparametrized sparse networks.
+
+---
+
+@kohler2020discussion also discusses the sparsity constraint, but in the context that the sparsity constraint may lead to a non-fully connected topology:
+
+> One of the key features of the neural networks in the paper under discussion is that the considered neural networks are not fully connected. We would like to point out that this is not necessary required, since similar results also hold for fully connected deep neural network...
+
+The fully connected case is addressed in @kohler2020rate and @langer2021analysis using *skinny networks*. While these networks are fully-connected, they are not overparametrized and hence does not resolve the issue raised by @ghorbani2020discussion. See below for details.
+
+---
+
+Next, we discuss the point raised by @shamir2020discussion:
+
+> An alternative approach, which has received much attention in the machine learning community in recent years, focuses on parametric models where the **target function is assumed to be a neural network** or even on **distribution-free models** where the underlying data distribution can be arbitrary, and we only attempt to find a predictor whose risk is not much worse than the best neural network from a given class...
+
+(Emphases are mine).
+In other words, the teacher-student and the distribution-free settings are reasonable and have been more popular to analyze.
+Distribution-free setting immediately reminds of VC-dimension (for classification) and the pseudodimension (regression), both of which are known to track closely the number of parameters of the network \cite{bartlett2019nearly}.
+
+---
+
+## @suzuki2018adaptivity
+
+
+Contributions:
+
+- Establishes near **minimax optimality** of deep ReLU neural networks for regression functions with smoothness assumptions (Besov class)
+- "it is shown that deep learning can **avoid the curse of dimensionality** if the target function is in a mixed smooth Besov space" (emphasis added)
+- Has an excellent literature review in Table 2.
+
+
+---
+
+## @kim2021fast
+
+Title: Fast Convergence Rates of Deep Neural Networks for Classification
+
+Contributions:
+
+- Establishes **minimax optimality** of deep ReLU neural networks for classification under popular assumptions (e.g., Tsybakov noise condition @audibert2007fast)
+- Brings to attention the issue that: "Learning a DNN with a sparsity constraint has not been fully studied, although some heuristic methods have been proposed". See references within the article.
+
+
+---
+
+## @hu2020sharp
+
+Title: Sharp Rate of Convergence for Deep Neural Network Classifiers under the Teacher-Student Setting
+
+---
+
+## @chen2019nonparametric
+
+
+---
+
+## @cloninger2021deep
+
+
+
+
+
+---
+
+
+## @bauer2019deep
+
+- The term **generalized hierarchical interaction model**
+
+---
+
+
+# Non-sparse networks
+
+## @kohler2020rate
+
+> The `[`results of @schmidt2020nonparametric`]` lead to the conjecture that network sparsity is necessary in order to be
+able to derive good rates of convergence of neural network regression estimates. Our main
+result in this article is that this is not the case.
+
+## @langer2021analysis
+
+Contributions:
+
+- Has an excellent literature review of deep nonparametric regression with history going way back.
+
+
+> The networks regarded therein are only defined by its width and depth and contrary to @bauer2019deep and @schmidt2020nonparametric no further sparsity constraint is needed.
+
+
+> we show that we derive a similar rate of convergence as in [6,18,25] for simple fully connected DNNs with sigmoid activation function. In these networks the number of hidden layer is fixed, the number of neurons per layer tends to infinity for sample size tending to infinity and a bound for the weights in the network is given.
+
+---
+
+## @jiao2021deep
+
+Contributions:
+
+- Has an excellent literature review of deep nonparametric regression.
+- "Our error bounds achieve the minimax optimal rates and significantly improve over the existing ones in the sense that their prefactors depend linearly or quadratically on the dimension $d$, instead of exponentially on $d$." This is the first work I've seen regarding the dependency of the prefactor on the data dimension $d$.
+
+
+
+## @taheri2021statistical
+
+
+
+> @schmidt2020nonparametric employs another approach for deriving guarantees that is different to the fat-shatting/Rademacher and uses ideas from nonparameteric statistics to derive bounds for empirical-risk minimization over classes of sparse networks. Direct sparsity constraints, in contrast to L1-regularization, are not feasible in practice... the assumptions for the concrete results in @schmidt2020nonparametric are indeed very strict; for example, to get a rate of  from their results, we must assume that the parameters are bounded by one, the network functions are bounded, the noise is standard normal, the activation is ReLU, that the regularization is , and that the number of layers and parameters is fixed. We believe that the -rate cannot be improved in general.
+
+
+---
+
+# References
+
+

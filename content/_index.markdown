@@ -11,26 +11,31 @@ title: Home
 -->
 
 
-Hi! I am a fifth year PhD candidate in [EECS](https://eecs.engin.umich.edu/). 
+Hi! I am a sixth year PhD candidate in [Electrical Engineering and Computer Science](https://eecs.engin.umich.edu/). 
 My research is in machine learning. 
 I am advised by [Clay Scott](http://web.eecs.umich.edu/~cscott/). 
-As a trainee in the [Michigan Center for Single-Cell Genomic Data Analytics](https://midas.umich.edu/research/health-old/single-cell/), I have enjoyed having the opportunity to collaborate with biologists and biostatisticians.
+
 
 ---
 
 ## Research interests
 
-I am interested in the various aspects of *multiclass* classification. More specifically, I enjoy thinking about
-
-- Multiclass loss functions and their properties,
-- Multiclass generalizations of popular algorithms such as support vector machines and boosting.
+I'm motivated by the following questions:
+- How does **(partially) quantized neural networks** compared to their full-precision counterparts, from the point-of-view of optimization, function approximation, and generalization?
+- Can we close the gap between **multiclass** and **binary** SVMs? (In terms of theory and availability of solvers)
 
 ---
 ## Publications
 
+
+- **VC dimension of partially quantized neural networks in the overparametrized regime**</br>
+*Yutong Wang and Clayton Scott*</br> 
+[[arXiv](https://arxiv.org/abs/2110.02456)]
+[[Code](https://github.com/YutongWangUMich/HANN)]
 - **An exact solver for the Weston-Watkins SVM subproblem**</br>
 *Yutong Wang and Clayton Scott*</br> 
-Accepted to ICML 2021.</br> 
+ICML 2021.</br> 
+[[Paper](https://proceedings.mlr.press/v139/wang21u.html)]
 [[arXiv](https://arxiv.org/abs/2102.05640)]
 [[Code](https://github.com/YutongWangUMich/liblinear/)]
 - **Weston-Watkins Hinge Loss and Ordered Partitions**</br>

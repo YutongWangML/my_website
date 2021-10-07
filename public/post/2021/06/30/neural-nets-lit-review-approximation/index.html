@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Neural nets lit review: Approximation | Yutong Wang</title>
+    <link rel="stylesheet" href="/~yutongw/css/style.css" />
+    <link rel="stylesheet" href="/~yutongw/css/fonts.css" />
+    
+  </head>
+
+  <body>
+    <nav>
+    <ul class="menu">
+      
+      <li><a href="/~yutongw">Home</a></li>
+      
+      <li><a href="/~yutongw/publications/">Publications</a></li>
+      
+      <li><a href="/~yutongw/post/">Blog</a></li>
+      
+      <li><a href="/~yutongw/cv.pdf">CV</a></li>
+      
+    </ul>
+    <hr/>
+    </nav>
+
+<div class="article-meta">
+<h1><span class="title">Neural nets lit review: Approximation</span></h1>
+<h2 class="author">Yutong Wang</h2>
+<h2 class="date">2021/06/30</h2>
+</div>
+
+<main>
+
+<script src="https://web.eecs.umich.edu/~yutongw/post/2021/06/30/neural-nets-lit-review-approximation/index_files/header-attrs/header-attrs.js"></script>
+
+<div id="TOC">
+<ul>
+<li><a href="#real-domain-real-range">Real-domain, real-range</a>
+<ul>
+<li><a href="#yarotsky2017error"><span class="citation"><span>Yarotsky</span> (<span>2017</span>)</span></a></li>
+<li><a href="#yarotsky2018optimal"><span class="citation"><span>Yarotsky</span> (<span>2018</span>)</span></a></li>
+<li><a href="#bolcskei2019optimal"><span class="citation"><span>Bolcskei et al.</span> (<span>2019</span>)</span></a></li>
+<li><a href="#petersen2018optimal"><span class="citation"><span>Petersen and Voigtlaender</span> (<span>2018</span>)</span></a></li>
+</ul></li>
+<li><a href="#boolean-domain-boolean-range">Boolean-domain, boolean-range</a>
+<ul>
+<li><a href="#baldi2019capacity"><span class="citation"><span>Baldi and Vershynin</span> (<span>2019</span>)</span></a></li>
+</ul></li>
+<li><a href="#references">References</a></li>
+</ul>
+</div>
+
+<div id="real-domain-real-range" class="section level1">
+<h1>Real-domain, real-range</h1>
+<div id="yarotsky2017error" class="section level2">
+<h2><span class="citation"><a href="#ref-yarotsky2017error" role="doc-biblioref">Yarotsky</a> (<a href="#ref-yarotsky2017error" role="doc-biblioref">2017</a>)</span></h2>
+</div>
+<div id="yarotsky2018optimal" class="section level2">
+<h2><span class="citation"><a href="#ref-yarotsky2018optimal" role="doc-biblioref">Yarotsky</a> (<a href="#ref-yarotsky2018optimal" role="doc-biblioref">2018</a>)</span></h2>
+</div>
+<div id="bolcskei2019optimal" class="section level2">
+<h2><span class="citation"><a href="#ref-bolcskei2019optimal" role="doc-biblioref">Bolcskei et al.</a> (<a href="#ref-bolcskei2019optimal" role="doc-biblioref">2019</a>)</span></h2>
+</div>
+<div id="petersen2018optimal" class="section level2">
+<h2><span class="citation"><a href="#ref-petersen2018optimal" role="doc-biblioref">Petersen and Voigtlaender</a> (<a href="#ref-petersen2018optimal" role="doc-biblioref">2018</a>)</span></h2>
+<p>Answers the question of:</p>
+<blockquote>
+<p>How many layers and weights are required for a neural network to represent a function (from a nice family)?</p>
+</blockquote>
+<blockquote>
+<p>a curse of dimension can be avoided. More precisely, if the function f can be factored as <span class="math inline">\(f = g \circ \tau\)</span> with a smooth feature map <span class="math inline">\(\tau: \mathbb{R}^d → \mathbb{R}^k\)</span>, and a piecewise constant (or piecewise smooth) classifier function <span class="math inline">\(g\)</span>, then one can approximate <span class="math inline">\(f\)</span> up to L2-error <span class="math inline">\(\epsilon\)</span> using a ReLU network <span class="math inline">\(\phi\)</span> with <span class="math inline">\(O(\epsilon^{−2(k−1)/\beta} )\)</span> weights. Therefore, the approximation rate only depends on the dimension <span class="math inline">\(k\)</span> of the feature space, instead of the input space dimension <span class="math inline">\(d\)</span>.</p>
+</blockquote>
+</div>
+</div>
+<div id="boolean-domain-boolean-range" class="section level1">
+<h1>Boolean-domain, boolean-range</h1>
+<div id="baldi2019capacity" class="section level2">
+<h2><span class="citation"><a href="#ref-baldi2019capacity" role="doc-biblioref">Baldi and Vershynin</a> (<a href="#ref-baldi2019capacity" role="doc-biblioref">2019</a>)</span></h2>
+<hr />
+</div>
+</div>
+<div id="references" class="section level1 unnumbered">
+<h1>References</h1>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-baldi2019capacity" class="csl-entry">
+Baldi, Pierre, and Roman Vershynin. 2019. <span>“The Capacity of Feedforward Neural Networks.”</span> <em>Neural Networks</em> 116: 288–311.
+</div>
+<div id="ref-bolcskei2019optimal" class="csl-entry">
+Bolcskei, Helmut, Philipp Grohs, Gitta Kutyniok, and Philipp Petersen. 2019. <span>“Optimal Approximation with Sparsely Connected Deep Neural Networks.”</span> <em>SIAM Journal on Mathematics of Data Science</em> 1 (1): 8–45.
+</div>
+<div id="ref-petersen2018optimal" class="csl-entry">
+Petersen, Philipp, and Felix Voigtlaender. 2018. <span>“Optimal Approximation of Piecewise Smooth Functions Using Deep ReLU Neural Networks.”</span> <em>Neural Networks</em> 108: 296–330.
+</div>
+<div id="ref-yarotsky2017error" class="csl-entry">
+Yarotsky, Dmitry. 2017. <span>“Error Bounds for Approximations with Deep ReLU Networks.”</span> <em>Neural Networks</em> 94: 103–14.
+</div>
+<div id="ref-yarotsky2018optimal" class="csl-entry">
+———. 2018. <span>“Optimal Approximation of Continuous Functions by Very Deep ReLU Networks.”</span> In <em>Conference on Learning Theory</em>, 639–49. PMLR.
+</div>
+</div>
+</div>
+
+</main>
+
+  <footer>
+  <script src="//yihui.name/js/math-code.js"></script>
+<script async src="//mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+<script async src="//yihui.name/js/center-img.js"></script>
+
+  
+  </footer>
+  </body>
+</html>
+

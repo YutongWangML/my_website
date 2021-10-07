@@ -1,0 +1,201 @@
+<script src="index_files/header-attrs-2.7/header-attrs.js"></script>
+
+<div id="TOC">
+<ul>
+<li><a href="#sparse-networks">Sparse networks</a>
+<ul>
+<li><a href="#schmidt2020nonparametric"><span class="citation"><span>Schmidt-Hieber</span> (<span>2020</span>)</span></a></li>
+<li><a href="#suzuki2018adaptivity"><span class="citation"><span>Suzuki</span> (<span>2018</span>)</span></a></li>
+<li><a href="#kim2021fast"><span class="citation"><span>Kim, Ohn, and Kim</span> (<span>2021</span>)</span></a></li>
+<li><a href="#hu2020sharp"><span class="citation"><span>Hu, Shang, and Cheng</span> (<span>2020</span>)</span></a></li>
+<li><a href="#chen2019nonparametric"><span class="citation"><span>Chen et al.</span> (<span>2019</span>)</span></a></li>
+<li><a href="#cloninger2021deep"><span class="citation"><span>Cloninger and Klock</span> (<span>2021</span>)</span></a></li>
+<li><a href="#bauer2019deep"><span class="citation"><span>Bauer and Kohler</span> (<span>2019</span>)</span></a></li>
+</ul></li>
+<li><a href="#non-sparse-networks">Non-sparse networks</a>
+<ul>
+<li><a href="#kohler2020rate"><span class="citation"><span>Kohler and Langer</span> (<span>2020b</span>)</span></a></li>
+<li><a href="#langer2021analysis"><span class="citation"><span>Langer</span> (<span>2021</span>)</span></a></li>
+<li><a href="#jiao2021deep"><span class="citation"><span>Jiao et al.</span> (<span>2021</span>)</span></a></li>
+<li><a href="#taheri2021statistical"><span class="citation"><span>Taheri, Xie, and Lederer</span> (<span>2021</span>)</span></a></li>
+</ul></li>
+<li><a href="#references">References</a></li>
+</ul>
+</div>
+
+<p>Just my personal takes on papers to help myself organized.</p>
+<div id="sparse-networks" class="section level1">
+<h1>Sparse networks</h1>
+<p>Papers in this section consider a specialized type of deep ReLU networks with sparsity constraints, hereinafter referred to as <strong>sparse networks</strong>. I’m not sure who first defined this class of networks, but its minimax theory seems to be initiated in <span class="citation"><a href="#ref-schmidt2020nonparametric" role="doc-biblioref">Schmidt-Hieber</a> (<a href="#ref-schmidt2020nonparametric" role="doc-biblioref">2020</a>)</span>. The two important features of sparse networks are:</p>
+<ul>
+<li>Network weights are bounded (wlog by <span class="math inline">\(1\)</span>)</li>
+<li>Network weights are sparse (only a limited number of weights allowed to be nonzero), the so-called <strong>sparse networks</strong></li>
+</ul>
+<p>The bounded constraint is easier to deal with while the sparsity constraint is more controversial.</p>
+<p>Questions:
+- What is the first paper that considers this type of neural networks regarding minimax optimality? Is it <span class="citation"><a href="#ref-schmidt2020nonparametric" role="doc-biblioref">Schmidt-Hieber</a> (<a href="#ref-schmidt2020nonparametric" role="doc-biblioref">2020</a>)</span>?</p>
+<hr />
+<div id="schmidt2020nonparametric" class="section level2">
+<h2><span class="citation"><a href="#ref-schmidt2020nonparametric" role="doc-biblioref">Schmidt-Hieber</a> (<a href="#ref-schmidt2020nonparametric" role="doc-biblioref">2020</a>)</span></h2>
+<p>Title: Nonparametric Regression Using Deep Neural Networks with ReLU Activation Function</p>
+<p>This is a landmark paper that first appeared on arXiv in 2017 and published in the Annals of Statistics in 2020.</p>
+<p>Contributions:</p>
+<ul>
+<li>Establishes near <strong>minimax optimality</strong> of deep ReLU neural networks for regression functions with smoothness assumptions (Hölder class)</li>
+<li>Provide theory for the <strong>overparametrized regime</strong> (number of parameters <span class="math inline">\(\gg\)</span> samples)</li>
+<li>Introduces the “hierarchical composition assumption on the regression function” and demonstrates minimax optimality there. Under this assumption, the <strong>curse-of-dimensionality</strong> in the minimax rates can be avoided.</li>
+</ul>
+<hr />
+<p>There are “Discussion of” article <span class="citation"><a href="#ref-schmidt2020nonparametric" role="doc-biblioref">Schmidt-Hieber</a> (<a href="#ref-schmidt2020nonparametric" role="doc-biblioref">2020</a>)</span>. One of the most contentious topic is regarding sparsity:</p>
+<p>We quote from <span class="citation"><a href="#ref-ghorbani2020discussion" role="doc-biblioref">Ghorbani et al.</a> (<a href="#ref-ghorbani2020discussion" role="doc-biblioref">2020</a>)</span></p>
+<blockquote>
+<p>Is sparsity the right complexity measure in practical deep-learning methods?</p>
+</blockquote>
+<p>This question is motivated by the fact that neural networks in practice are overparametrized, e.g., the example provided by <span class="citation"><a href="#ref-ghorbani2020discussion" role="doc-biblioref">Ghorbani et al.</a> (<a href="#ref-ghorbani2020discussion" role="doc-biblioref">2020</a>)</span>. However, the theory <span class="citation"><a href="#ref-schmidt2020nonparametric" role="doc-biblioref">Schmidt-Hieber</a> (<a href="#ref-schmidt2020nonparametric" role="doc-biblioref">2020</a>)</span> applies only to underparametrized sparse networks.</p>
+<hr />
+<p><span class="citation"><a href="#ref-kohler2020discussion" role="doc-biblioref">Kohler and Langer</a> (<a href="#ref-kohler2020discussion" role="doc-biblioref">2020a</a>)</span> also discusses the sparsity constraint, but in the context that the sparsity constraint may lead to a non-fully connected topology:</p>
+<blockquote>
+<p>One of the key features of the neural networks in the paper under discussion is that the considered neural networks are not fully connected. We would like to point out that this is not necessary required, since similar results also hold for fully connected deep neural network…</p>
+</blockquote>
+<p>The fully connected case is addressed in <span class="citation"><a href="#ref-kohler2020rate" role="doc-biblioref">Kohler and Langer</a> (<a href="#ref-kohler2020rate" role="doc-biblioref">2020b</a>)</span> and <span class="citation"><a href="#ref-langer2021analysis" role="doc-biblioref">Langer</a> (<a href="#ref-langer2021analysis" role="doc-biblioref">2021</a>)</span> using <em>skinny networks</em>. While these networks are fully-connected, they are not overparametrized and hence does not resolve the issue raised by <span class="citation"><a href="#ref-ghorbani2020discussion" role="doc-biblioref">Ghorbani et al.</a> (<a href="#ref-ghorbani2020discussion" role="doc-biblioref">2020</a>)</span>. See below for details.</p>
+<hr />
+<p>Next, we discuss the point raised by <span class="citation"><a href="#ref-shamir2020discussion" role="doc-biblioref">Shamir</a> (<a href="#ref-shamir2020discussion" role="doc-biblioref">2020</a>)</span>:</p>
+<blockquote>
+<p>An alternative approach, which has received much attention in the machine learning community in recent years, focuses on parametric models where the <strong>target function is assumed to be a neural network</strong> or even on <strong>distribution-free models</strong> where the underlying data distribution can be arbitrary, and we only attempt to find a predictor whose risk is not much worse than the best neural network from a given class…</p>
+</blockquote>
+<p>(Emphases are mine).
+In other words, the teacher-student and the distribution-free settings are reasonable and have been more popular to analyze.
+Distribution-free setting immediately reminds of VC-dimension (for classification) and the pseudodimension (regression), both of which are known to track closely the number of parameters of the network .</p>
+<hr />
+</div>
+<div id="suzuki2018adaptivity" class="section level2">
+<h2><span class="citation"><a href="#ref-suzuki2018adaptivity" role="doc-biblioref">Suzuki</a> (<a href="#ref-suzuki2018adaptivity" role="doc-biblioref">2018</a>)</span></h2>
+<p>Contributions:</p>
+<ul>
+<li>Establishes near <strong>minimax optimality</strong> of deep ReLU neural networks for regression functions with smoothness assumptions (Besov class)</li>
+<li>“it is shown that deep learning can <strong>avoid the curse of dimensionality</strong> if the target function is in a mixed smooth Besov space” (emphasis added)</li>
+<li>Has an excellent literature review in Table 2.</li>
+</ul>
+<hr />
+</div>
+<div id="kim2021fast" class="section level2">
+<h2><span class="citation"><a href="#ref-kim2021fast" role="doc-biblioref">Kim, Ohn, and Kim</a> (<a href="#ref-kim2021fast" role="doc-biblioref">2021</a>)</span></h2>
+<p>Title: Fast Convergence Rates of Deep Neural Networks for Classification</p>
+<p>Contributions:</p>
+<ul>
+<li>Establishes <strong>minimax optimality</strong> of deep ReLU neural networks for classification under popular assumptions (e.g., Tsybakov noise condition <span class="citation"><a href="#ref-audibert2007fast" role="doc-biblioref">Audibert and Tsybakov</a> (<a href="#ref-audibert2007fast" role="doc-biblioref">2007</a>)</span>)</li>
+<li>Brings to attention the issue that: “Learning a DNN with a sparsity constraint has not been fully studied, although some heuristic methods have been proposed.” See references within the article.</li>
+</ul>
+<hr />
+</div>
+<div id="hu2020sharp" class="section level2">
+<h2><span class="citation"><a href="#ref-hu2020sharp" role="doc-biblioref">Hu, Shang, and Cheng</a> (<a href="#ref-hu2020sharp" role="doc-biblioref">2020</a>)</span></h2>
+<p>Title: Sharp Rate of Convergence for Deep Neural Network Classifiers under the Teacher-Student Setting</p>
+<hr />
+</div>
+<div id="chen2019nonparametric" class="section level2">
+<h2><span class="citation"><a href="#ref-chen2019nonparametric" role="doc-biblioref">Chen et al.</a> (<a href="#ref-chen2019nonparametric" role="doc-biblioref">2019</a>)</span></h2>
+<hr />
+</div>
+<div id="cloninger2021deep" class="section level2">
+<h2><span class="citation"><a href="#ref-cloninger2021deep" role="doc-biblioref">Cloninger and Klock</a> (<a href="#ref-cloninger2021deep" role="doc-biblioref">2021</a>)</span></h2>
+<hr />
+</div>
+<div id="bauer2019deep" class="section level2">
+<h2><span class="citation"><a href="#ref-bauer2019deep" role="doc-biblioref">Bauer and Kohler</a> (<a href="#ref-bauer2019deep" role="doc-biblioref">2019</a>)</span></h2>
+<ul>
+<li>The term <strong>generalized hierarchical interaction model</strong></li>
+</ul>
+<hr />
+</div>
+</div>
+<div id="non-sparse-networks" class="section level1">
+<h1>Non-sparse networks</h1>
+<div id="kohler2020rate" class="section level2">
+<h2><span class="citation"><a href="#ref-kohler2020rate" role="doc-biblioref">Kohler and Langer</a> (<a href="#ref-kohler2020rate" role="doc-biblioref">2020b</a>)</span></h2>
+<blockquote>
+<p>The <code>[</code>results of <span class="citation"><a href="#ref-schmidt2020nonparametric" role="doc-biblioref">Schmidt-Hieber</a> (<a href="#ref-schmidt2020nonparametric" role="doc-biblioref">2020</a>)</span><code>]</code> lead to the conjecture that network sparsity is necessary in order to be
+able to derive good rates of convergence of neural network regression estimates. Our main
+result in this article is that this is not the case.</p>
+</blockquote>
+</div>
+<div id="langer2021analysis" class="section level2">
+<h2><span class="citation"><a href="#ref-langer2021analysis" role="doc-biblioref">Langer</a> (<a href="#ref-langer2021analysis" role="doc-biblioref">2021</a>)</span></h2>
+<p>Contributions:</p>
+<ul>
+<li>Has an excellent literature review of deep nonparametric regression with history going way back.</li>
+</ul>
+<blockquote>
+<p>The networks regarded therein are only defined by its width and depth and contrary to <span class="citation"><a href="#ref-bauer2019deep" role="doc-biblioref">Bauer and Kohler</a> (<a href="#ref-bauer2019deep" role="doc-biblioref">2019</a>)</span> and <span class="citation"><a href="#ref-schmidt2020nonparametric" role="doc-biblioref">Schmidt-Hieber</a> (<a href="#ref-schmidt2020nonparametric" role="doc-biblioref">2020</a>)</span> no further sparsity constraint is needed.</p>
+</blockquote>
+<blockquote>
+<p>we show that we derive a similar rate of convergence as in [6,18,25] for simple fully connected DNNs with sigmoid activation function. In these networks the number of hidden layer is fixed, the number of neurons per layer tends to infinity for sample size tending to infinity and a bound for the weights in the network is given.</p>
+</blockquote>
+<hr />
+</div>
+<div id="jiao2021deep" class="section level2">
+<h2><span class="citation"><a href="#ref-jiao2021deep" role="doc-biblioref">Jiao et al.</a> (<a href="#ref-jiao2021deep" role="doc-biblioref">2021</a>)</span></h2>
+<p>Contributions:</p>
+<ul>
+<li>Has an excellent literature review of deep nonparametric regression.</li>
+<li>“Our error bounds achieve the minimax optimal rates and significantly improve over the existing ones in the sense that their prefactors depend linearly or quadratically on the dimension <span class="math inline">\(d\)</span>, instead of exponentially on <span class="math inline">\(d\)</span>.” This is the first work I’ve seen regarding the dependency of the prefactor on the data dimension <span class="math inline">\(d\)</span>.</li>
+</ul>
+</div>
+<div id="taheri2021statistical" class="section level2">
+<h2><span class="citation"><a href="#ref-taheri2021statistical" role="doc-biblioref">Taheri, Xie, and Lederer</a> (<a href="#ref-taheri2021statistical" role="doc-biblioref">2021</a>)</span></h2>
+<blockquote>
+<p><span class="citation"><a href="#ref-schmidt2020nonparametric" role="doc-biblioref">Schmidt-Hieber</a> (<a href="#ref-schmidt2020nonparametric" role="doc-biblioref">2020</a>)</span> employs another approach for deriving guarantees that is different to the fat-shatting/Rademacher and uses ideas from nonparameteric statistics to derive bounds for empirical-risk minimization over classes of sparse networks. Direct sparsity constraints, in contrast to L1-regularization, are not feasible in practice… the assumptions for the concrete results in <span class="citation"><a href="#ref-schmidt2020nonparametric" role="doc-biblioref">Schmidt-Hieber</a> (<a href="#ref-schmidt2020nonparametric" role="doc-biblioref">2020</a>)</span> are indeed very strict; for example, to get a rate of from their results, we must assume that the parameters are bounded by one, the network functions are bounded, the noise is standard normal, the activation is ReLU, that the regularization is , and that the number of layers and parameters is fixed. We believe that the -rate cannot be improved in general.</p>
+</blockquote>
+<hr />
+</div>
+</div>
+<div id="references" class="section level1 unnumbered">
+<h1>References</h1>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-audibert2007fast" class="csl-entry">
+Audibert, Jean-Yves, and Alexandre B Tsybakov. 2007. <span>“Fast Learning Rates for Plug-in Classifiers.”</span> <em>The Annals of Statistics</em> 35 (2): 608–33.
+</div>
+<div id="ref-bauer2019deep" class="csl-entry">
+Bauer, Benedikt, and Michael Kohler. 2019. <span>“On Deep Learning as a Remedy for the Curse of Dimensionality in Nonparametric Regression.”</span> <em>Annals of Statistics</em> 47 (4): 2261–85.
+</div>
+<div id="ref-chen2019nonparametric" class="csl-entry">
+Chen, Minshuo, Haoming Jiang, Wenjing Liao, and Tuo Zhao. 2019. <span>“Nonparametric Regression on Low-Dimensional Manifolds Using Deep Relu Networks.”</span> <em>arXiv Preprint arXiv:1908.01842</em>.
+</div>
+<div id="ref-cloninger2021deep" class="csl-entry">
+Cloninger, Alexander, and Timo Klock. 2021. <span>“A Deep Network Construction That Adapts to Intrinsic Dimensionality Beyond the Domain.”</span> <em>Neural Networks</em>.
+</div>
+<div id="ref-ghorbani2020discussion" class="csl-entry">
+Ghorbani, Behrooz, Song Mei, Theodor Misiakiewicz, and Andrea Montanari. 2020. <span>“Discussion of:<span>‘nonparametric Regression Using Deep Neural Networks with ReLU Activation Function’</span>.”</span> <em>The Annals of Statistics</em> 48 (4): 1898–1901.
+</div>
+<div id="ref-hu2020sharp" class="csl-entry">
+Hu, Tianyang, Zuofeng Shang, and Guang Cheng. 2020. <span>“Sharp Rate of Convergence for Deep Neural Network Classifiers Under the Teacher-Student Setting.”</span> <em>arXiv Preprint arXiv:2001.06892</em>.
+</div>
+<div id="ref-jiao2021deep" class="csl-entry">
+Jiao, Yuling, Guohao Shen, Yuanyuan Lin, and Jian Huang. 2021. <span>“Deep Nonparametric Regression on Approximately Low-Dimensional Manifolds.”</span> <em>arXiv Preprint arXiv:2104.06708</em>.
+</div>
+<div id="ref-kim2021fast" class="csl-entry">
+Kim, Yongdai, Ilsang Ohn, and Dongha Kim. 2021. <span>“Fast Convergence Rates of Deep Neural Networks for Classification.”</span> <em>Neural Networks</em> 138: 179–97.
+</div>
+<div id="ref-kohler2020discussion" class="csl-entry">
+Kohler, Michael, and Sophie Langer. 2020a. <span>“Discussion of:<span>‘nonparametric Regression Using Deep Neural Networks with ReLU Activation Function’</span>.”</span> <em>The Annals of Statistics</em> 48 (4): 1906–10.
+</div>
+<div id="ref-kohler2020rate" class="csl-entry">
+———. 2020b. <span>“On the Rate of Convergence of Fully Connected Deep Neural Network Regression Estimates.”</span> <em>arXiv Preprint arXiv:1908.11133</em>.
+</div>
+<div id="ref-langer2021analysis" class="csl-entry">
+Langer, Sophie. 2021. <span>“Analysis of the Rate of Convergence of Fully Connected Deep Neural Network Regression Estimates with Smooth Activation Function.”</span> <em>Journal of Multivariate Analysis</em> 182: 104695.
+</div>
+<div id="ref-schmidt2020nonparametric" class="csl-entry">
+Schmidt-Hieber, Johannes. 2020. <span>“Nonparametric Regression Using Deep Neural Networks with ReLU Activation Function.”</span> <em>Annals of Statistics</em> 48 (4): 1875–97.
+</div>
+<div id="ref-shamir2020discussion" class="csl-entry">
+Shamir, Ohad. 2020. <span>“Discussion of:<span>‘nonparametric Regression Using Deep Neural Networks with ReLU Activation Function’</span>.”</span> <em>The Annals of Statistics</em> 48 (4): 1911–15.
+</div>
+<div id="ref-suzuki2018adaptivity" class="csl-entry">
+Suzuki, Taiji. 2018. <span>“Adaptivity of Deep ReLU Network for Learning in Besov and Mixed Smooth Besov Spaces: Optimal Rate and Curse of Dimensionality.”</span> In <em>International Conference on Learning Representations</em>.
+</div>
+<div id="ref-taheri2021statistical" class="csl-entry">
+Taheri, Mahsa, Fang Xie, and Johannes Lederer. 2021. <span>“Statistical Guarantees for Regularized Neural Networks.”</span> <em>Neural Networks</em> 142: 148–61.
+</div>
+</div>
+</div>
