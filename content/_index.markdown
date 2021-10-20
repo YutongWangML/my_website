@@ -21,7 +21,7 @@ I am advised by [Clay Scott](http://web.eecs.umich.edu/~cscott/).
 ## Research interests
 
 I'm motivated by the following questions:
-- How does **(partially) quantized neural networks** compared to their full-precision counterparts, from the point-of-view of optimization, function approximation, and generalization?
+- How do **(partially) quantized neural networks** compare to their full-precision counterparts, from the point-of-view of optimization, function approximation, and generalization?
 - Can we close the gap between **multiclass** and **binary** SVMs? (In terms of theory and availability of solvers)
 
 ---
