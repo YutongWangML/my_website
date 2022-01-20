@@ -30,6 +30,7 @@ I'm motivated by the following questions:
 
 - **VC dimension of partially quantized neural networks in the overparametrized regime**</br>
 *Yutong Wang and Clayton Scott*</br> 
+Accepted to ICLR 2022.</br> 
 [[arXiv](https://arxiv.org/abs/2110.02456)]
 [[Code](https://github.com/YutongWangUMich/HANN)]
 - **An exact solver for the Weston-Watkins SVM subproblem**</br>
