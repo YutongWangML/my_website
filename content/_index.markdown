@@ -20,17 +20,22 @@ I am advised by [Clay Scott](http://web.eecs.umich.edu/~cscott/).
 
 ## Research interests
 
-I'm motivated by the following questions:
-- How do **(partially) quantized neural networks** compare to their full-precision counterparts, from the point-of-view of optimization, function approximation, and generalization?
-- Can we close the gap between **multiclass** and **binary** SVMs? (In terms of theory and availability of solvers)
+- Overparametrization and interpolation
+- Boosting
+- Quantized neural networks
+- Multiclass classification (SVMs in particular)
 
 ---
 ## Publications
 
+- **Learning from Label Proportions by Learning with Label Noise**</br>
+*Jianxin Zhang, Yutong Wang, and Clayton Scott*</br>
+[[arXiv](https://arxiv.org/abs/2203.02496)]
 
 - **VC dimension of partially quantized neural networks in the overparametrized regime**</br>
 *Yutong Wang and Clayton Scott*</br> 
-Accepted to ICLR 2022.</br> 
+ICLR 2022.</br> 
+[[OpenReview](https://openreview.net/forum?id=7udZAsEzd60)]
 [[arXiv](https://arxiv.org/abs/2110.02456)]
 [[Code](https://github.com/YutongWangUMich/HANN)]
 - **An exact solver for the Weston-Watkins SVM subproblem**</br>
@@ -49,8 +54,6 @@ NeurIPS 2020.</br>
 Frontiers in Cell and Developmental Biology.</br>
 [[Paper](https://www.frontiersin.org/articles/10.3389/fcell.2020.00288/full)]
 [[Supporting technical report](https://www.biorxiv.org/content/10.1101/637488v1?rss=1)]
-
-
 
 
 ---
