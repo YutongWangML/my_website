@@ -21,7 +21,7 @@ I am advised by [Clay Scott](http://web.eecs.umich.edu/~cscott/).
 ## Research interests
 
 - Overparametrization and interpolation
-- Boosting
+- Ensemble methods
 - Quantized neural networks
 - Multiclass classification (SVMs in particular)
 
