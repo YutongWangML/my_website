@@ -26,7 +26,7 @@ I am advised by [Clay Scott](http://web.eecs.umich.edu/~cscott/).
 - Multiclass classification (SVMs in particular)
 
 ---
-## Publications
+## Preprints
 
 
 - **Consistent Interpolating Ensembles via the Manifold-Hilbert Kernel**</br>
@@ -36,6 +36,10 @@ I am advised by [Clay Scott](http://web.eecs.umich.edu/~cscott/).
 - **Learning from Label Proportions by Learning with Label Noise**</br>
 *Jianxin Zhang, Yutong Wang, and Clayton Scott*</br>
 [[arXiv](https://arxiv.org/abs/2203.02496)]
+
+
+---
+## Publications
 
 - **VC dimension of partially quantized neural networks in the overparametrized regime**</br>
 *Yutong Wang and Clayton Scott*</br> 
