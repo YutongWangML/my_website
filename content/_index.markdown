@@ -20,9 +20,10 @@ I am advised by [Clay Scott](http://web.eecs.umich.edu/~cscott/).
 
 ## Research interests
 
-- Overparametrization and interpolation
+- Theory of overparametrized learning
 - Ensemble methods
 - Quantized neural networks
+- Application to high-dimensional genomic data analysis.
 - Multiclass classification (SVMs in particular)
 
 ---
