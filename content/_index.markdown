@@ -5,16 +5,24 @@ title: Home
 <img src="me.jpg" style="border-radius:50%;max-width:25%;min-width:40px;float:right;margin:25px" alt="Github repo" />
 
 # Yutong Wang
-#### PhD Candidate |  University of Michigan | <A HREF="mailto: yutongw@umich.edu" > yutongw@umich.edu </A>
+#### Postdoctoral Research Fellow |  University of Michigan | <A HREF="mailto: yutongw@umich.edu" > yutongw@umich.edu </A>
 
 <!-- <span><img src="email.png" style="width:120px" alt="email" /></span>
 -->
 
 
-Hi! I am a sixth year PhD candidate in [Electrical Engineering and Computer Science](https://eecs.engin.umich.edu/). 
+Hi! I am a Postdoctoral Research Fellow in [Electrical and Computer Engineering (ECE)](https://ece.engin.umich.edu/) at the University of Michigan. 
 My research is in machine learning. 
-I am advised by [Clay Scott](http://web.eecs.umich.edu/~cscott/). 
+I am advised by 
+[Qing Qu](https://qingqu.engin.umich.edu/)
+and
+[Wei Hu](https://weihu.me/).
 
+
+Before my postdoc, I completed my PhD in ECE advised by
+[Clay Scott](http://web.eecs.umich.edu/~cscott/), also at the University of Michigan.
+
+Prior to my PhD, I completed my masters in mathematics at [UC Davis](https://www.math.ucdavis.edu/).
 
 ---
 
