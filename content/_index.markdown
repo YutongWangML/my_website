@@ -34,21 +34,26 @@ Prior to my PhD, I completed my masters in mathematics at [UC Davis](https://www
 - Application to high-dimensional genomic data analysis.
 - Multiclass classification (SVMs in particular)
 
+<!-- 
 ---
 ## Preprints
-
-
-- **Consistent Interpolating Ensembles via the Manifold-Hilbert Kernel**</br>
-*Yutong Wang and Clayton Scott*</br> 
-[[arXiv](https://arxiv.org/abs/2205.09342)]
-
-- **Learning from Label Proportions by Learning with Label Noise**</br>
-*Jianxin Zhang, Yutong Wang, and Clayton Scott*</br>
-[[arXiv](https://arxiv.org/abs/2203.02496)]
+-->
 
 
 ---
 ## Publications
+
+
+- **Consistent Interpolating Ensembles via the Manifold-Hilbert Kernel**</br>
+*Yutong Wang and Clayton Scott*</br> 
+Accepted to NeurIPS 2022.</br> 
+[[arXiv](https://arxiv.org/abs/2205.09342)]
+
+- **Learning from Label Proportions by Learning with Label Noise**</br>
+*Jianxin Zhang, Yutong Wang, and Clayton Scott*</br>
+Accepted to NeurIPS 2022.</br> 
+[[arXiv](https://arxiv.org/abs/2203.02496)]
+
 
 - **VC dimension of partially quantized neural networks in the overparametrized regime**</br>
 *Yutong Wang and Clayton Scott*</br> 
