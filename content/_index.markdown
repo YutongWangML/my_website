@@ -11,33 +11,40 @@ title: Home
 -->
 
 
-Hi! I am a Postdoctoral Research Fellow in [Electrical and Computer Engineering (ECE)](https://ece.engin.umich.edu/) at the University of Michigan. 
-My research is in machine learning. 
-I am advised by 
-[Qing Qu](https://qingqu.engin.umich.edu/)
+I am a Postdoctoral Research Fellow in the Department of [Electrical and Computer Engineering (ECE)](https://ece.engin.umich.edu/) at the University of Michigan, Ann Arbor.
+My advisors are Professors
+[Qing Qu](https://qingqu.engin.umich.edu/), 
 and
 [Wei Hu](https://weihu.me/).
+My research interests are in theoretical machine learning.
 
+I also work on applications of machine learning to reconstructive spectroscopy systems and semiconductor devices, in collaboration with the research group of Professor [Pei-Cheng Ku](https://web.eecs.umich.edu/~peicheng/).
 
+I am grateful to be supported by the [Eric and Wendy Schmidt AI Fellowship](https://www.schmidtfutures.com/our-work/schmidt-ai-in-science-postdocs/). 
+
+<!--
 Before my postdoc, I completed my PhD in ECE advised by
 [Clay Scott](http://web.eecs.umich.edu/~cscott/), also at the University of Michigan.
 
 Prior to my PhD, I completed my masters in mathematics at [UC Davis](https://www.math.ucdavis.edu/).
+-->
 
 ---
 
 ## Research interests
 
-- Theory of overparametrized learning
-- Ensemble methods
-- Quantized neural networks
-- Application to high-dimensional genomic data analysis.
-- Multiclass classification (SVMs in particular)
+- Theory of overparametrized learning,
+- Models that interpolate -- perfectly or nearly,
+- Phenomena in multiclass learning,
+- Applications to reconstructive spectroscopy.
 
-<!-- 
+
 ---
 ## Preprints
--->
+
+- **On Classification-Calibration of Gamma-Phi Losses**</br>
+*Yutong Wang and Clayton Scott*</br> 
+[[arXiv](http://arxiv.org/abs/2302.07321)]
 
 
 ---
@@ -46,12 +53,13 @@ Prior to my PhD, I completed my masters in mathematics at [UC Davis](https://www
 
 - **Consistent Interpolating Ensembles via the Manifold-Hilbert Kernel**</br>
 *Yutong Wang and Clayton Scott*</br> 
-Accepted to NeurIPS 2022.</br> 
-[[arXiv](https://arxiv.org/abs/2205.09342)]
+NeurIPS 2022.</br> 
+[[OpenReview](https://openreview.net/forum?id=zqQKGaNI4lp)][[arXiv](https://arxiv.org/abs/2205.09342)]
 
 - **Learning from Label Proportions by Learning with Label Noise**</br>
 *Jianxin Zhang, Yutong Wang, and Clayton Scott*</br>
-Accepted to NeurIPS 2022.</br> 
+NeurIPS 2022.</br> 
+[[OpenReview](https://openreview.net/forum?id=cqyBfRwOTm1)]
 [[arXiv](https://arxiv.org/abs/2203.02496)]
 
 
