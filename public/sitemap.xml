@@ -3,12 +3,15 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://web.eecs.umich.edu/~yutongw/</loc>
-    <lastmod>2020-12-30T00:00:00+00:00</lastmod>
+    <lastmod>2023-05-27T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://web.eecs.umich.edu/~yutongw/post/2020/12/30/kernel-multiclass-support-vector-machine-solvers/</loc>
-    <lastmod>2020-12-30T00:00:00+00:00</lastmod>
+    <loc>https://web.eecs.umich.edu/~yutongw/post/2023/05/27/interesting-svm-related-pieces-not-in-a-journal-conference/</loc>
+    <lastmod>2023-05-27T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://web.eecs.umich.edu/~yutongw/post/</loc>
+    <lastmod>2023-05-27T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://web.eecs.umich.edu/~yutongw/post/2020/12/30/kernel-multiclass-support-vector-machine-solvers/</loc>
     <lastmod>2020-12-30T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://web.eecs.umich.edu/~yutongw/post/2020/11/06/a-derivation-of-the-weston-watkins-svm-dual-problem/</loc>
