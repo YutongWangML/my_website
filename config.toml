@@ -28,7 +28,11 @@ footnotereturnlinkcontents = "↩"
     name = "CV"
     url = "cv.pdf"
     weight = 3
-
+[[menu.main]]
+    name = "Google Scholar"
+    url = "https://scholar.google.com/citations?hl=en&user=GH7ryE4AAAAJ&view_op=list_works&sortby=pubdate"
+    weight = 4
+    
 [params]
     description = "Yutong Wang"
     footer = ""

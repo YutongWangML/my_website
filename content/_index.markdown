@@ -34,12 +34,15 @@ Prior to my PhD, I obtained my masters in mathematics at [UC Davis](https://www.
 - Phenomena in multiclass learning,
 - Applications to reconstructive spectroscopy.
 
-<!--
+
 
 ---
 ## Preprints
 
--->
+- **Benign Overfitting and Grokking in ReLU Networks for XOR Cluster Data** </br>
+*Zhiwei Xu, Yutong Wang, Spencer Frei, Gal Vardi, and Wei Hu*</br> 
+[[arXiv](https://arxiv.org/abs/2310.02541)] 
+
 
 ---
 ## Publications
