@@ -19,14 +19,17 @@ footnotereturnlinkcontents = "↩"
 [[menu.main]]
     name = "GitHub"
     url = "https://github.com/YutongWangUMich/"
+    pre = "fab fa-github"
     weight = 1
 [[menu.main]]
     name = "CV"
     url = "cv.pdf"
+    pre = "fa-regular fa-file"
     weight = 2
 [[menu.main]]
     name = "Google Scholar"
     url = "https://scholar.google.com/citations?hl=en&user=GH7ryE4AAAAJ&view_op=list_works&sortby=pubdate"
+    pre = "fa-solid fa-graduation-cap"
     weight = 3
     
 [params]

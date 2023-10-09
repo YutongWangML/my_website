@@ -57,7 +57,8 @@ Conference on Learning Theory, 2023.</br>
 - **Consistent Interpolating Ensembles via the Manifold-Hilbert Kernel**</br>
 *Yutong Wang and Clayton Scott*</br> 
 Neural Information Processing Systems, 2022.</br> 
-[[OpenReview](https://openreview.net/forum?id=zqQKGaNI4lp)][[arXiv](https://arxiv.org/abs/2205.09342)]
+[[OpenReview](https://openreview.net/forum?id=zqQKGaNI4lp)]
+[[arXiv](https://arxiv.org/abs/2205.09342)]
 
 - **Learning from Label Proportions by Learning with Label Noise**</br>
 *Jianxin Zhang, Yutong Wang, and Clayton Scott*</br>
