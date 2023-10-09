@@ -5,7 +5,7 @@ title: Home
 <img src="me.jpg" style="border-radius:50%;max-width:25%;min-width:40px;float:right;margin:25px" alt="Github repo" />
 
 # Yutong Wang
-#### Postdoctoral Research Fellow |  University of Michigan | <A HREF="mailto: yutongw@umich.edu" > yutongw@umich.edu </A>
+#### Eric and Wendy Schmidt AI in Science Postdoctoral Fellow </br> University of Michigan </br> <A HREF="mailto: yutongw@umich.edu" > yutongw@umich.edu </A>
 
 <!-- <span><img src="email.png" style="width:120px" alt="email" /></span>
 -->
@@ -92,3 +92,5 @@ Frontiers in Cell and Developmental Biology.</br>
 
 ---
 ## Blog posts
+
+All about SVMs:

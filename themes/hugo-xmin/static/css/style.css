@@ -56,3 +56,14 @@ thead, tfoot, tr:nth-child(even) { background: #eee; }
   text-indent:-2em;
   padding-left:2em
 }
+
+
+h1,h2,h3,h4{
+  color:#666666;
+}
+
+a {
+  text-decoration: none;
+  color: #D81B60;
+}
+
