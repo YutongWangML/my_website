@@ -22,6 +22,11 @@ hr {
   color: #ddd;
 }
 
+.menu li{
+  margin-left:5px;
+  margin-right:5px;
+}
+
 /* code */
 pre {
   border: 1px solid #ddd;
