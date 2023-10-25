@@ -29,20 +29,29 @@ Prior to my PhD, I obtained my masters in mathematics at [UC Davis](https://www.
 
 ## Research interests
 
-- Theory of overparametrized learning,
-- Models that interpolate -- perfectly or nearly,
-- Phenomena in multiclass learning,
-- Applications to reconstructive spectroscopy.
+- Theory of overparametrized learning -- models that interpolate perfectly or nearly,
+- Uniquely multiclass phenomena -- multiclass classification and multilabel learning,
+- AI & ML for science:
+  - Gene expression data harmonization,
+  - Reconstructive spectroscopy for miniaturized spectrometer devices,
+  - Biodiversity monitoring for climate change mitigation.
 
 
 
 ---
 ## Preprints
 
+- **Neural Collapse in Multi-label Learning with Pick-all-label Loss** </br>
+Pengyu Li*, Yutong Wang*, Xiao Li, and Qing Qu</br> 
+[[arXiv](https://arxiv.org/abs/2310.15903)] 
+
+
 - **Benign Overfitting and Grokking in ReLU Networks for XOR Cluster Data** </br>
 Zhiwei Xu, Yutong Wang, Spencer Frei, Gal Vardi, and Wei Hu</br> 
 [[arXiv](https://arxiv.org/abs/2310.02541)] 
 
+
+\* denotes equal contribution.
 
 ---
 ## Publications
