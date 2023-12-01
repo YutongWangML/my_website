@@ -7,7 +7,7 @@ categories: []
 tags: []
 ---
 
-This is a collection of interesting written pieces publicly accessible on the internet, but not published in any journal/conference that I know of. I hope to document interesting perspectives from the era of support vector machines.
+This is a collection of interesting written pieces publicly accessible on the internet, but not published in any journal/conference that I know of.
 
 
 [Lecture note from 2003 by Trevor Hastie, Slide 21: "SVMs are hot right now..."](https://hastie.su.domains/Papers/svmtalk.pdf)

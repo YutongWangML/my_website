@@ -13,9 +13,10 @@
       <pubDate>Sat, 27 May 2023 00:00:00 +0000</pubDate>
       
       <guid>https://web.eecs.umich.edu/~yutongw/post/2023/05/27/interesting-svm-related-pieces-not-in-a-journal-conference/</guid>
-      <description>This is a collection of interesting written pieces publicly accessible on the internet, but not published in any journal/conference that I know of. I hope to document interesting perspectives from the era of support vector machines.
+      <description>This is a collection of interesting written pieces publicly accessible on the internet, but not published in any journal/conference that I know of.
 Lecture note from 2003 by Trevor Hastie, Slide 21: &amp;ldquo;SVMs are hot right now&amp;hellip;&amp;quot;
-Lecture note by Anthony D. Rhodes, Slide 7: &amp;ldquo;Vapnik introduced SVMs in 1992, at which time they became wildly popular&amp;rdquo;</description>
+Lecture note by Anthony D. Rhodes, Slide 7: &amp;ldquo;Vapnik introduced SVMs in 1992, at which time they became wildly popular&amp;rdquo;
+Article by John Mount titled: &amp;ldquo;How sure are you that large margin implies low VC dimension?</description>
     </item>
     
     <item>

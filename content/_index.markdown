@@ -41,6 +41,11 @@ Prior to my PhD, I obtained my masters in mathematics at [UC Davis](https://www.
 ---
 ## Preprints
 
+- **Unified Binary and Multiclass Margin-Based Classification** </br>
+Yutong Wang and Clayton Scott</br> 
+[[arXiv](https://arxiv.org/abs/2311.17778)] 
+
+
 - **Neural Collapse in Multi-label Learning with Pick-all-label Loss** </br>
 Pengyu Li*, Yutong Wang*, Xiao Li, and Qing Qu</br> 
 [[arXiv](https://arxiv.org/abs/2310.15903)] 
@@ -85,14 +90,14 @@ Yutong Wang and Clayton Scott</br>
 
 - **An exact solver for the Weston-Watkins SVM subproblem**</br>
 Yutong Wang and Clayton Scott</br> 
-*International Conference on Machine Learning 2021*.</br> 
+*International Conference on Machine Learning, 2021*.</br> 
 [[Paper](https://proceedings.mlr.press/v139/wang21u.html)]
 [[arXiv](https://arxiv.org/abs/2102.05640)]
 [[Code](https://github.com/YutongWangUMich/liblinear/)]
 
 - **Weston-Watkins Hinge Loss and Ordered Partitions**</br>
 Yutong Wang and Clayton Scott</br> 
-*Neural Information Processing Systems 2020*.</br> 
+*Neural Information Processing Systems, 2020*.</br> 
 [[Paper](https://papers.nips.cc/paper/2020/hash/e5e6851e7f7ffd3530e7389e183aa468-Abstract.html)]
 [[arXiv](https://arxiv.org/abs/2006.07346)]
 
