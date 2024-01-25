@@ -51,15 +51,27 @@ Pengyu Li*, Yutong Wang*, Xiao Li, and Qing Qu</br>
 [[arXiv](https://arxiv.org/abs/2310.15903)] 
 
 
-- **Benign Overfitting and Grokking in ReLU Networks for XOR Cluster Data** </br>
-Zhiwei Xu, Yutong Wang, Spencer Frei, Gal Vardi, and Wei Hu</br> 
-[[arXiv](https://arxiv.org/abs/2310.02541)] 
 
 
 \* denotes equal contribution.
 
 ---
 ## Publications
+
+
+- **Near-Interpolators: Rapid Norm Growth and the Trade-Off between Interpolation and Generalization** </br>
+Yutong Wang, Rishi Sonthalia, Wei Hu </br>
+*Artificial Intelligence and Statistics, 2024*.</br>
+
+
+
+
+- **Benign Overfitting and Grokking in ReLU Networks for XOR Cluster Data** </br>
+Zhiwei Xu, Yutong Wang, Spencer Frei, Gal Vardi, and Wei Hu</br> 
+*International Conference on Learning Representations, 2024*.</br> 
+[[OpenReview](https://openreview.net/forum?id=BxHgpC6FNv)]
+[[arXiv](https://arxiv.org/abs/2310.02541)] 
+
 
 - **On Classification-Calibration of Gamma-Phi Losses**</br>
 Yutong Wang and Clayton Scott</br> 
