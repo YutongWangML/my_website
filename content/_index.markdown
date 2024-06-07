@@ -13,6 +13,7 @@ title: Home
 I will be joining 
 Illinois Institute of Technology as an assistant professor in the  [Department of Computer Science](https://www.iit.edu/computer-science) starting Fall 2024.
 
+---
 
 I am a Postdoctoral Research Fellow in the Department of [Electrical and Computer Engineering (ECE)](https://ece.engin.umich.edu/) at the University of Michigan, Ann Arbor.
 My advisors are Professors
