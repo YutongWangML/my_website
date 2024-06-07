@@ -10,6 +10,9 @@ title: Home
 <!-- <span><img src="email.png" style="width:120px" alt="email" /></span>
 -->
 
+I will be joining 
+Illinois Institute of Technology as an assistant professor in the  [Department of Computer Science](https://www.iit.edu/computer-science) starting Fall 2024.
+
 
 I am a Postdoctoral Research Fellow in the Department of [Electrical and Computer Engineering (ECE)](https://ece.engin.umich.edu/) at the University of Michigan, Ann Arbor.
 My advisors are Professors
@@ -38,32 +41,39 @@ Prior to my PhD, I obtained my masters in mathematics at [UC Davis](https://www.
 
 
 
+<!--
 ---
 ## Preprints
+-->
 
-- **Unified Binary and Multiclass Margin-Based Classification** </br>
-Yutong Wang and Clayton Scott</br> 
-[[arXiv](https://arxiv.org/abs/2311.17778)] 
-
-
-- **Neural Collapse in Multi-label Learning with Pick-all-label Loss** </br>
-Pengyu Li*, Yutong Wang*, Xiao Li, and Qing Qu</br> 
-[[arXiv](https://arxiv.org/abs/2310.15903)] 
-
-
-
-
-\* denotes equal contribution.
 
 ---
 ## Publications
 
 
+
+\* denotes equal contribution. </br>
+
+- **Unified Binary and Multiclass Margin-Based Classification** </br>
+Yutong Wang and Clayton Scott</br> 
+*Journal of Machine Learning Research*, vol. 25, no. 143, pp. 1--51, 2024.</br>
+[[Paper](https://jmlr.org/papers/v25/23-1599.html)]
+[[arXiv](https://arxiv.org/abs/2311.17778)] 
+
+
+- **Neural Collapse in Multi-label Learning with Pick-all-label Loss** </br>
+Pengyu Li\*, Xiao Li\*, Yutong Wang, and Qing Qu</br> 
+Accepted to *International Conference on Machine Learning, 2024*.</br>
+[[arXiv](https://arxiv.org/abs/2310.15903)] 
+
+
+
+
 - **Near-Interpolators: Rapid Norm Growth and the Trade-Off between Interpolation and Generalization** </br>
 Yutong Wang, Rishi Sonthalia, Wei Hu </br>
 *Artificial Intelligence and Statistics, 2024*.</br>
-
-
+[[Paper](https://proceedings.mlr.press/v238/wang24k.html)]
+[[arXiv](https://arxiv.org/abs/2403.07264)] 
 
 
 - **Benign Overfitting and Grokking in ReLU Networks for XOR Cluster Data** </br>
