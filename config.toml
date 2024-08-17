@@ -1,7 +1,7 @@
 ### during development, uncomment the following
-# baseurl = "/"
+baseurl = "/"
 ### during deployment, comment the following
-baseurl = "https://web.eecs.umich.edu/~yutongw"
+# baseurl = "https://web.eecs.umich.edu/~yutongw"
 
 
 languageCode = "en-us"
@@ -18,7 +18,7 @@ footnotereturnlinkcontents = "↩"
 
 [[menu.main]]
     name = "GitHub"
-    url = "https://github.com/YutongWangUMich/"
+    url = "https://github.com/YutongWangML/"
     pre = "fab fa-github"
     weight = 1
 [[menu.main]]
