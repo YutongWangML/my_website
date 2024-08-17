@@ -1,5 +1,5 @@
 ### during development, uncomment the following
-baseurl = "/"
+baseurl = ""
 ### during deployment, comment the following
 # baseurl = "https://web.eecs.umich.edu/~yutongw"
 
