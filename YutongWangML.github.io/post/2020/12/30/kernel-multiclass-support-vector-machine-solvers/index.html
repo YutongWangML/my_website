@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Kernel multiclass support vector machine solvers | Yutong Wang</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/fonts.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  </head>
+
+  <body>
+    <nav>
+    <ul class="menu">
+      
+      <li><a href="https://github.com/YutongWangML/">
+        <i class="fab fa-github"></i> 
+      GitHub</a></li>
+      
+      <li><a href="cv.pdf">
+        <i class="fa-regular fa-file"></i> 
+      CV</a></li>
+      
+      <li><a href="https://scholar.google.com/citations?hl=en&amp;user=GH7ryE4AAAAJ&amp;view_op=list_works&amp;sortby=pubdate">
+        <i class="fa-solid fa-graduation-cap"></i> 
+      Google Scholar</a></li>
+      
+    </ul>
+    <hr/>
+    </nav>
+
+<div class="article-meta">
+<h1><span class="title">Kernel multiclass support vector machine solvers</span></h1>
+<h2 class="author">Yutong Wang</h2>
+<h2 class="date">2020/12/30</h2>
+</div>
+
+<main>
+
+
+
+<p>In this <a href="/~yutongw/post/2020/10/02/svm-solvers/">previous post</a>, we listed solvers for SVMs.
+The focus of this post is specialized to solvers for the Crammer-Singer and Weston-Watkins <strong>kernel</strong> SVMs.</p>
+<div id="shark" class="section level1">
+<h1>Shark</h1>
+<p>Solves <strong>both</strong></p>
+<div id="relevant-papers" class="section level2">
+<h2>Relevant papers</h2>
+<p><span class="citation">Igel, Heidrich-Meisner, and Glasmachers (<a href="#ref-igel2008shark">2008</a>)</span> is the paper that introduced the Shark package.
+(<a href="https://jmlr.org/papers/v9/igel08a.html">link to paper</a>)</p>
+<p><span class="citation">Dogan, Glasmachers, and Igel (<a href="#ref-dogan2011fast">2011</a>)</span> introduces S2DO.
+(<a href="https://christian-igel.github.io/paper/DoganGlasmachersIgelTR.pdf">link to paper</a>)</p>
+<p><span class="citation">Glasmachers and Dogan (<a href="#ref-glasmachers2013accelerated">2013</a>)</span> introduces ACF.
+<a href="http://proceedings.mlr.press/v29/Glasmachers13.html">link to paper</a></p>
+<p><span class="citation">Doǧan, Glasmachers, and Igel (<a href="#ref-dogan2016unified">2016</a>)</span> performs empirical studies of several SVM variants
+<a href="https://dl.acm.org/doi/10.5555/2946645.2946690">link to paper</a></p>
+</div>
+<div id="guide-to-the-code" class="section level2">
+<h2>Guide to the code</h2>
+<p>The header file with the <code>train</code> functions is <a href="https://github.com/Shark-ML/Shark/blob/7a182c7923e94cf6a8d65b6c92a162bafad8314c/include/shark/Algorithms/Trainers/CSvmTrainer.h#L134">here</a></p>
+<p>The CS-SVM uses the <code>solveMcSimplex</code> solver (see <a href="https://github.com/Shark-ML/Shark/blob/7a182c7923e94cf6a8d65b6c92a162bafad8314c/include/shark/Algorithms/Trainers/CSvmTrainer.h#L230">here</a>).</p>
+<p>The WW-SVM uses the <code>solveMcBox</code> solver. We discuss this solver in greater detail in the following subsection.</p>
+</div>
+<div id="sharks-ww-svm-solver" class="section level2">
+<h2>Shark’s WW-SVM solver</h2>
+<p>This subsection is a <em>map</em> to help you navigate Shark’s implementation of a WW-SVM solver.</p>
+<ol style="list-style-type: decimal">
+<li>The <a href="https://github.com/Shark-ML/Shark/blob/7a182c7923e94cf6a8d65b6c92a162bafad8314c/include/shark/Algorithms/Trainers/CSvmTrainer.h#L134"><code>train</code></a> function <a href="https://github.com/Shark-ML/Shark/blob/7a182c7923e94cf6a8d65b6c92a162bafad8314c/include/shark/Algorithms/Trainers/CSvmTrainer.h#L232">calls</a> the
+<a href="https://github.com/Shark-ML/Shark/blob/7a182c7923e94cf6a8d65b6c92a162bafad8314c/include/shark/Algorithms/Trainers/CSvmTrainer.h#L331"><code>solveMcBox</code></a> function.</li>
+<li><code>solveMcBox</code> <a href="https://github.com/Shark-ML/Shark/blob/7a182c7923e94cf6a8d65b6c92a162bafad8314c/include/shark/Algorithms/Trainers/CSvmTrainer.h#L353">creates</a> a
+<a href="https://github.com/Shark-ML/Shark/blob/7a182c7923e94cf6a8d65b6c92a162bafad8314c/include/shark/Algorithms/QP/QpSolver.h#L403"><code>QpSolver</code></a><code>&lt;</code><a href="https://github.com/Shark-ML/Shark/blob/7a182c7923e94cf6a8d65b6c92a162bafad8314c/include/shark/Algorithms/QP/QpMcBoxDecomp.h#L50"><code>QpMcBoxDecomp</code></a><code>&lt;PrecomputedMatrixType&gt;&gt;</code>
+object <code>solver</code>.</li>
+<li><code>solveMcBox</code> <a href="https://github.com/Shark-ML/Shark/blob/7a182c7923e94cf6a8d65b6c92a162bafad8314c/include/shark/Algorithms/Trainers/CSvmTrainer.h#L354">calls</a>
+the <a href="https://github.com/Shark-ML/Shark/blob/7a182c7923e94cf6a8d65b6c92a162bafad8314c/include/shark/Algorithms/QP/QpSolver.h#L415"><code>solver.solve</code></a> function</li>
+<li><code>solver.solve</code> <a href="https://github.com/Shark-ML/Shark/blob/7a182c7923e94cf6a8d65b6c92a162bafad8314c/include/shark/Algorithms/QP/QpSolver.h#L423">creates</a>
+the <a href="https://github.com/Shark-ML/Shark/blob/7a182c7923e94cf6a8d65b6c92a162bafad8314c/include/shark/Algorithms/QP/QpMcBoxDecomp.h#L58"><code>SelectionStrategy</code></a> object <code>workingSet</code>
+which <a href="https://github.com/Shark-ML/Shark/blob/7a182c7923e94cf6a8d65b6c92a162bafad8314c/include/shark/Algorithms/QP/QpMcBoxDecomp.h#L62">wraps</a> around the <a href="https://github.com/Shark-ML/Shark/blob/7a182c7923e94cf6a8d65b6c92a162bafad8314c/include/shark/Algorithms/QP/QpMcBoxDecomp.h#L390"><code>selectWorkingSet</code></a> function.</li>
+</ol>
+<p>The core of the <code>solver.solve</code> function is the <em>decomposition loop</em>:</p>
+<ol style="list-style-type: decimal">
+<li><a href="https://github.com/Shark-ML/Shark/blob/7a182c7923e94cf6a8d65b6c92a162bafad8314c/include/shark/Algorithms/QP/QpSolver.h#L443">Calls</a> <code>workingSet</code> which modifies <code>i</code> and <code>j</code>. Note that the actual function invoked is <a href="https://github.com/Shark-ML/Shark/blob/7a182c7923e94cf6a8d65b6c92a162bafad8314c/include/shark/Algorithms/QP/QpMcBoxDecomp.h#L390"><code>selectWorkingSet</code></a>.
+The working set strategy is called <em>sequential two-dimensional optimization</em> (S2DO), whose theory is developed in the companion paper <a href="https://christian-igel.github.io/paper/DoganGlasmachersIgelTR.pdf">Fast Training of Multi-Class Support Vector Machines</a>.</li>
+<li><a href="https://github.com/Shark-ML/Shark/blob/7a182c7923e94cf6a8d65b6c92a162bafad8314c/include/shark/Algorithms/QP/QpSolver.h#L456">Calls</a> <a href="https://github.com/Shark-ML/Shark/blob/7a182c7923e94cf6a8d65b6c92a162bafad8314c/include/shark/Algorithms/QP/QpMcBoxDecomp.h#L210"><code>updateSMO</code></a>
+which further <a href="https://github.com/Shark-ML/Shark/blob/7a182c7923e94cf6a8d65b6c92a162bafad8314c/include/shark/Algorithms/QP/QpMcBoxDecomp.h#L258">calls</a>
+the function <a href="https://github.com/Shark-ML/Shark/blob/7a182c7923e94cf6a8d65b6c92a162bafad8314c/include/shark/Algorithms/QP/Impl/AnalyticProblems.h#L62"><code>detail::solveQuadratic2DBox</code></a></li>
+</ol>
+</div>
+</div>
+<div id="bsvm" class="section level1">
+<h1>BSVM</h1>
+<p>Solves <strong>both</strong></p>
+<p><a href="https://www.csie.ntu.edu.tw/~cjlin/bsvm/">software website</a>
+|
+<a href="https://link.springer.com/article/10.1023/A:1012427100071">theory paper 1</a>
+|
+<a href="https://www.csie.ntu.edu.tw/~cjlin/papers/multisvm.pdf">theory paper 2</a></p>
+</div>
+<div id="msvmpack" class="section level1">
+<h1>MSVMpack</h1>
+<p>Solves <strong>both</strong></p>
+<p><a href="https://jmlr.csail.mit.edu/papers/volume12/lauer11a/lauer11a.pdf">package paper (JMLR)</a>
+|
+<a href="https://www.inderscienceonline.com/doi/abs/10.1504/IJIIDS.2012.050094">theory paper (publisher’s link)</a>
+|
+<a href="https://members.loria.fr/YGuermeur/GuermeurFinalVersion.pdf">theory paper (author’s link)</a></p>
+</div>
+<div id="mcsvm" class="section level1">
+<h1>MCSVM</h1>
+<p>Solves <strong>CS-SVM</strong></p>
+</div>
+<div id="spidersvm" class="section level1">
+<h1>SpiderSVM</h1>
+<p><a href="https://people.kyb.tuebingen.mpg.de/spider/">website</a></p>
+<p><a href="https://people.kyb.tuebingen.mpg.de/spider/help_mc_svm.html">help page for the WW-SVM solver</a></p>
+<hr />
+<div id="refs" class="references">
+<div id="ref-dogan2011fast">
+<p>Dogan, Urün, Tobias Glasmachers, and Christian Igel. 2011. “Fast Training of Multi-Class Support Vector Machines.”</p>
+</div>
+<div id="ref-dogan2016unified">
+<p>Doǧan, Ürün, Tobias Glasmachers, and Christian Igel. 2016. “A Unified View on Multi-Class Support Vector Classification.” <em>The Journal of Machine Learning Research</em> 17 (1). JMLR. org: 1550–1831.</p>
+</div>
+<div id="ref-glasmachers2013accelerated">
+<p>Glasmachers, Tobias, and Urun Dogan. 2013. “Accelerated Coordinate Descent with Adaptive Coordinate Frequencies.” In <em>Asian Conference on Machine Learning</em>, 72–86.</p>
+</div>
+<div id="ref-igel2008shark">
+<p>Igel, Christian, Verena Heidrich-Meisner, and Tobias Glasmachers. 2008. “Shark.” <em>Journal of Machine Learning Research</em> 9 (Jun): 993–96.</p>
+</div>
+</div>
+</div>
+
+</main>
+
+  <footer>
+  <script src="//yihui.name/js/math-code.js"></script>
+<script async src="//mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+<script async src="//yihui.name/js/center-img.js"></script>
+
+  
+  </footer>
+  </body>
+</html>
+

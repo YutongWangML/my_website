@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>The Weston-Watkins SVM dual problem | Yutong Wang</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/fonts.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  </head>
+
+  <body>
+    <nav>
+    <ul class="menu">
+      
+      <li><a href="https://github.com/YutongWangML/">
+        <i class="fab fa-github"></i> 
+      GitHub</a></li>
+      
+      <li><a href="cv.pdf">
+        <i class="fa-regular fa-file"></i> 
+      CV</a></li>
+      
+      <li><a href="https://scholar.google.com/citations?hl=en&amp;user=GH7ryE4AAAAJ&amp;view_op=list_works&amp;sortby=pubdate">
+        <i class="fa-solid fa-graduation-cap"></i> 
+      Google Scholar</a></li>
+      
+    </ul>
+    <hr/>
+    </nav>
+
+<div class="article-meta">
+<h1><span class="title">The Weston-Watkins SVM dual problem</span></h1>
+<h2 class="author">Yutong Wang</h2>
+<h2 class="date">2020/11/06</h2>
+</div>
+
+<main>
+
+
+<div id="TOC">
+<ul>
+<li><a href="#set-up-and-notations">Set-up and notations</a></li>
+<li><a href="#primal-problem">Primal problem</a></li>
+<li><a href="#dual-problem">Dual problem</a><ul>
+<li><a href="#expression-for-the-dual-problem">Expression for the dual problem</a></li>
+</ul></li>
+<li><a href="#derivatives">Derivatives</a></li>
+<li><a href="#coordinate-descent-in-shark">Coordinate descent in Shark</a><ul>
+<li><a href="#update-of-a-single-block-dual-variable">Update of a single block dual variable</a></li>
+<li><a href="#computing-the-step-vector">Computing the step vector</a></li>
+<li><a href="#greedy-step-size">Greedy step size</a></li>
+</ul></li>
+</ul>
+</div>
+
+<p>In this blog post, we derive the dual problem for the Weston-Watkins support vector machine (SVM).
+The dual optimization for the Weston-Watkins SVM can be found in the literature, e.g.,
+<span class="citation">Keerthi et al. (2008)</span>
+and
+<span class="citation">Weston and Watkins (1999)</span>.
+However, they often omit the tedious derivation.</p>
+<div id="set-up-and-notations" class="section level1">
+<h1>Set-up and notations</h1>
+<p>Let <span class="math inline">\(k \ge 2\)</span> be an integer representing the number of classes and <span class="math inline">\([k] = \{1,\dots, k\}\)</span>.</p>
+<p>Let <span class="math inline">\(n\)</span> be the size of the training data.</p>
+<p>For each <span class="math inline">\(i \in [n]\)</span>, <span class="math inline">\(x_i \in \mathbb{R}^d\)</span> is column vector and <span class="math inline">\(y_i \in [k]\)</span>.</p>
+<p>Let <span class="math inline">\(W = [w_1,\dots, w_k] \in \mathbb{R}^{d\times k}\)</span> where <span class="math inline">\(w_j\)</span> is the <span class="math inline">\(j\)</span>-th column of <span class="math inline">\(W\)</span>.</p>
+<p>Let <span class="math inline">\(e_i \in \mathbb{R}^k\)</span> be the <span class="math inline">\(i\)</span>-th elementary basis (column) vector.</p>
+<p>Let <span class="math inline">\(M \in \mathbb{R}_{&gt;0}\)</span> be a number. We are only interested when <span class="math inline">\(M \in \{1, 1/2\}\)</span>.</p>
+</div>
+<div id="primal-problem" class="section level1">
+<h1>Primal problem</h1>
+<p>The Weston-Watkins SVM minimizes over <span class="math inline">\(W\)</span> the following regularized empirical risk:</p>
+<p><span class="math display">\[
+\frac{1}{2}\|W\|_F^2 + C \sum_{i=1}^n \sum_{j \in [k]: j \ne y_i} \max \{0, 1 - M(w_{y_i}&#39; x_i - w_j&#39;x_i)\}.
+\]</span></p>
+<p>When <span class="math inline">\(M = 1\)</span>, then
+When <span class="math inline">\(M = 1/2\)</span>, we get the formulation of <span class="citation">Doǧan, Glasmachers, and Igel (2016)</span>.</p>
+<p>If <span class="math inline">\(\widetilde W = [\widetilde w_1,\dots, \widetilde w_k]\)</span> is the optimizer, then the classifier is
+<span class="math display">\[
+x 
+\mapsto 
+\mathrm{argmax}_{j \in [k]}
+\widetilde w_j &#39;x.
+\]</span></p>
+<p>Now, for each <span class="math inline">\(j, l \in [k]\)</span>, let <span class="math inline">\(\Delta_{j,l} = e_j - e_l\)</span>.
+Then we can rewrite the regularized empirical risk as</p>
+<p><span class="math display">\[
+\frac{1}{2}\|W\|_F^2 + C \sum_{i=1}^n \sum_{j \in [k]: j \ne y_i} \max \{0, 1 - M \Delta_{y_i, j}&#39; W&#39; x_i\}.
+\]</span></p>
+<p>Introducing the slack variable <span class="math inline">\(\xi_{ij}\)</span>, we can minimize</p>
+<p><span class="math display">\[
+\frac{1}{2}\|W\|_F^2 + C \sum_{i=1}^n \sum_{j \in [k]: j \ne y_i} \xi_{ij}
+\]</span></p>
+<p>subject to</p>
+<p><span class="math display">\[
+\begin{cases}
+ \xi_{ij} \ge 0 \\
+\xi_{ij} \ge 1 - M\Delta_{y_i, j}&#39; W&#39; x_i
+\end{cases}
+\]</span></p>
+<p>or, equivalently, subject to</p>
+<p><span class="math display">\[
+\begin{cases}
+0 \ge 1 - M\mathrm{tr}( W&#39; x_i\Delta_{y_i, j}&#39;) - \xi_{ij}\\
+  0 \ge -\xi_{ij} 
+\end{cases}
+\]</span></p>
+<p>where <span class="math inline">\(\mathrm{tr}\)</span> is the trace operator. We observe that <span class="math inline">\(W&#39; x_i\Delta_{y_i, j}&#39; \in \mathbb{R}^{k\times k}\)</span>.</p>
+</div>
+<div id="dual-problem" class="section level1">
+<h1>Dual problem</h1>
+<p>Let <span class="math inline">\(\alpha_{ij} \ge 0\)</span> and <span class="math inline">\(\beta_{ij} \ge 0\)</span> be the dual variables for the above constraints, respectively.</p>
+<p>The Lagrangian is</p>
+<p><span class="math display">\[
+L(W, \xi, \alpha, \beta)
+=
+\frac{1}{2}\|W\|_F^2 
++ \sum_{i=1}^n \sum_{j \in [k]: j \ne y_i} C \xi_{ij}
+-
+\beta_{ij}\xi_{ij}
++
+\alpha_{ij}
+(1 - M\mathrm{tr}( W&#39; x_i\Delta_{y_i, j}&#39;) - \xi_{ij})
+\]</span></p>
+<p>Rearranging, we get</p>
+<p><span class="math display">\[
+L(W, \xi, \alpha, \beta)
+=
+\frac{1}{2}\|W\|_F^2 
++ \sum_{i=1}^n \sum_{j \in [k]: j \ne y_i} 
+   \xi_{ij}
+  (C
+-
+\beta_{ij}
+-\alpha_{ij})
++
+\alpha_{ij}
+(1 - M\mathrm{tr}( W&#39; x_i\Delta_{y_i, j}&#39;))
+\]</span></p>
+<p>Setting to zero the gradient of <span class="math inline">\(L\)</span> with respect to <span class="math inline">\(W\)</span>, we get</p>
+<p><span class="math display">\[
+0 = \nabla_W L
+=
+W
+- 
+M
+  \sum_{i=1}^n \sum_{j \in [k]: j \ne y_i} 
+\alpha_{ij}
+ x_i\Delta_{y_i, j}&#39;
+\]</span></p>
+<p>Equivalently,
+<span class="math display">\[
+W
+= 
+M
+  \sum_{i=1}^n \sum_{j \in [k]: j \ne y_i} 
+\alpha_{ij}
+ x_i\Delta_{y_i, j}&#39;
+\]</span></p>
+<p>Next, setting to zero the gradient of <span class="math inline">\(L\)</span> with respect to <span class="math inline">\(\xi_{ij}\)</span>, we get</p>
+<p><span class="math display">\[
+0 = \nabla_{\xi_{ij}} L
+=
+C
+-
+\beta_{ij} - \alpha_{ij}.
+\]</span></p>
+<p>Thus, the dependencies in the Lagrangian on <span class="math inline">\(\xi_{ij}\)</span> and <span class="math inline">\(\beta_{ij}\)</span> are removed and so</p>
+<p><span class="math display">\[
+L(W, \alpha)
+=
+\frac{1}{2}\|W\|_F^2 
++ \sum_{i=1}^n \sum_{j \in [k]: j \ne y_i} 
+\alpha_{ij}
+(1 - M\mathrm{tr}( W&#39; x_i\Delta_{y_i, j}&#39;))
+\]</span></p>
+<p>Now,
+<span class="math display">\[
+\sum_{i=1}^n \sum_{j \in [k]: j \ne y_i} 
+\alpha_{ij}
+\mathrm{tr}( W&#39; x_i\Delta_{y_i, j}&#39;)
+=
+\mathrm{tr}\left(
+W&#39;
+\sum_{i=1}^n \sum_{j \in [k]: j \ne y_i} 
+\alpha_{ij}
+ x_i\Delta_{y_i, j}&#39;\right)
+=
+\frac{1}{M}
+\mathrm{tr}(W&#39;W)
+=
+\frac{1}{M}
+\|W\|_F^2.
+\]</span></p>
+<p>Hence, we have</p>
+<p><span class="math display">\[
+L(W, \alpha)
+=
+-\frac{1}{2}\|W\|_F^2 
++  \sum_{i=1}^n \sum_{j \in [k]: j \ne y_i} 
+\alpha_{ij}
+\]</span></p>
+<p>Now, let <span class="math inline">\(\alpha_{iy_i} = -\sum_{j\in[n]: j \ne y_i} \alpha_i\)</span>. Using the definition of <span class="math inline">\(\Delta_{y_i, j} = e_{y_i} - e_j\)</span>, we get
+<span class="math display">\[
+\frac{1}{M}
+W
+= 
+  \sum_{i=1}^n \sum_{j \in [k]: j \ne y_i} 
+\alpha_{ij}
+ x_i\Delta_{y_i, j}&#39;
+ =
+  \sum_{i=1}^n 
+  \sum_{j \in [k]: j \ne y_i} 
+  -
+\alpha_{ij}
+ x_i
+ e_j&#39;
+ +
+ \sum_{i=1}^n
+ (
+  \sum_{j \in [k]: j \ne y_i} 
+  \alpha_{ij}
+  )
+ x_i
+ e_{y_i}&#39;
+ =
+ -
+ \sum_{i=1}^n
+ \sum_{j \in [k]}
+ \alpha_{ij}
+ x_i
+ e_j&#39;
+\]</span></p>
+<p>Now, let us define the column vector
+<span class="math display">\[
+\alpha_i
+=
+\begin{bmatrix}
+\alpha_{i1}\\
+\vdots \\
+\alpha_{ik}
+\end{bmatrix}
+\in 
+\mathbb{R}^k
+\]</span>
+Then we have
+<span class="math display">\[
+W = 
+-
+M
+\sum_{i = 1}^n 
+x_i \alpha_i&#39;
+\]</span>
+where we observe that <span class="math inline">\(x_i \alpha_i&#39; \in \mathbb{R}^{d \times k}\)</span>.</p>
+<p>Now,
+<span class="math display">\[
+\frac{1}{M^2}
+\|W\|_F^2
+=
+\frac{1}{M^2}
+\mathrm{tr}
+(W&#39;W)
+=
+\mathrm{tr}
+\left(
+\sum_{i, s\in [n]}
+\alpha_s x_s&#39; x_i \alpha_i&#39;
+\right)
+=
+\mathrm{tr}
+\left(
+\sum_{i, s\in [n]}
+ x_s&#39; x_i \alpha_i&#39;
+\alpha_s
+\right)
+=
+\sum_{i, s\in [n]}
+ x_s&#39; x_i \alpha_i&#39;
+\alpha_s.
+\]</span>
+This eliminates the dependencies in the Lagrangian on <span class="math inline">\(W\)</span> and so
+<span class="math display">\[
+L(\alpha)
+=
+-\frac{M^2}{2} 
+\sum_{i, s\in [n]}
+ x_s&#39; x_i \alpha_i&#39;
+\alpha_s
++
+\sum_{i \in [n]} 
+\sum_{j \in [k]: j \ne y_i}
+\alpha_{ij}
+\]</span></p>
+<div id="expression-for-the-dual-problem" class="section level2">
+<h2>Expression for the dual problem</h2>
+<p>Thus, the dual problem is</p>
+<p><span class="math display">\[
+\mathrm{minimize}_{\alpha}
+\quad
+f(\alpha) :=
+\frac{M^2}{2} 
+\sum_{i, s\in [n]}
+ x_s&#39; x_i \alpha_i&#39;
+\alpha_s
+-
+\sum_{i \in [n]} 
+\sum_{j \in [k]: j \ne y_i}
+\alpha_{ij}
+\]</span>
+subject to
+<span class="math display">\[
+\begin{cases}
+0 \le \alpha_{ij} \le C &amp;: j \ne y_i\\
+\alpha_{iy_i}
+=
+\sum_{j \in [k]: j \ne y_i} - \alpha_j &amp;: j = y_i.
+\end{cases}
+\]</span></p>
+<p>When <span class="math inline">\(M = 1\)</span>, the above is the same as equation (16) of <span class="citation">Keerthi et al. (2008)</span>. Actually, there is a typo in (16) where the <span class="math inline">\(\alpha_{ij}\)</span>s should have a negative sign in front.
+Later, <span class="citation">Keerthi et al. (2008)</span> computes the derivative of <span class="math inline">\(f\)</span> with the correct sign.</p>
+</div>
+</div>
+<div id="derivatives" class="section level1">
+<h1>Derivatives</h1>
+<p>Below, fix such a <span class="math inline">\(i \in [n]\)</span> and <span class="math inline">\(j \in [k]\)</span> such that <span class="math inline">\(j \ne y_i\)</span>.</p>
+<p>In this section, we compute <span class="math inline">\(\frac{\partial f}{\partial \alpha_{ij}}\)</span>.</p>
+<p>First, let <span class="math inline">\(i \ne s\)</span> and consider the term
+<span class="math display">\[
+x_s&#39; x_i \alpha_i&#39;\alpha_s
+=
+x_s&#39; x_i (\alpha_{ij} \alpha_{sj}
++
+\alpha_{iy_i} \alpha_{sy_i}
++
+\mathrm{constant}
+)
+\]</span>
+where <span class="math inline">\(\mathrm{constant}\)</span> collects terms that do not depend on <span class="math inline">\(\alpha_{ij}\)</span>.</p>
+<p>Taking derivative of <span class="math inline">\(x_s&#39; x_i \alpha_i&#39;\alpha_s\)</span> with respect to <span class="math inline">\(\alpha_{ij}\)</span>, we get</p>
+<p><span class="math display">\[
+x_s&#39; x_i (\alpha_{sj}
+- \alpha_{sy_i})
+\]</span>
+where we recall that <span class="math inline">\(\alpha_{iy_i} = \sum_{l \in [k]: l \ne y_i} -\alpha_{il}\)</span>.</p>
+<p>Similarly, when <span class="math inline">\(i = s\)</span>, we have that the derivative of <span class="math inline">\(x_i&#39; x_i \alpha_i&#39;\alpha_i\)</span> is</p>
+<p><span class="math display">\[
+2 x_i&#39; x_i (\alpha_{ij} - \alpha_{i y_i|}).
+\]</span></p>
+<p>From this, we get that
+<span class="math display">\[
+\frac{\partial f}{\partial \alpha_{ij}} (\alpha)
+=
+-1
++
+M^2
+\sum_{s \in [n]} x_i&#39; x_s (\alpha_{sj} - \alpha_{s y_i})
+\]</span></p>
+<p>Now, observe that</p>
+<p><span class="math display">\[
+\sum_{s \in [n]} x_i&#39; x_s (\alpha_{sj} - \alpha_{s y_i})
+=
+x_i &#39;
+\left(\sum_{s \in [n]} \alpha_{sj} x_s  -\alpha_{s y_i} x_s\right)
+\]</span></p>
+<p>Recall from earlier that</p>
+<p><span class="math display">\[
+W = 
+-
+M
+\sum_{i = 1}^n 
+x_i \alpha_i&#39;
+\]</span></p>
+<p>Thus,
+<span class="math display">\[
+w_j
+=
+We_j = 
+-
+M
+\sum_{i = 1}^n 
+\alpha_{ij}x_i
+\quad \mbox{and} \quad
+w_{y_i}=
+We_{y_i} = 
+-
+M
+\sum_{i = 1}^n 
+\alpha_{iy_i}x_{i}.
+\]</span></p>
+<p>Thus, we get
+<span class="math display">\[
+Mx_i &#39;
+\left(\sum_{s \in [n]} \alpha_{sj} x_s  -\alpha_{s y_i} x_s\right)
+= 
+w_{y_i}&#39; x_i 
+- w_{j} &#39; x_i.
+\]</span></p>
+<p>From this, we conclude that
+<span class="math display">\[
+\frac{\partial f}{\partial \alpha_{ij}} (\alpha)
+=
+M(w_{y_i}&#39; x_i - w_{j}&#39;x_i)
+-1.
+\]</span>
+Since we are minimizing, it is more convenient to consider the negative gradient:
+<span class="math display">\[
+-\frac{\partial f}{\partial \alpha_{ij}} (\alpha)
+=
+1-
+M
+(w_{y_i}&#39; x_i - w_{j}&#39;x_i).
+\]</span>
+Again, when <span class="math inline">\(M = 1\)</span>, note that this equivalent to equation (17) from <span class="citation">Keerthi et al. (2008)</span>.</p>
+<p>When <span class="math inline">\(M = 1/2\)</span>, this is equivalent to <a href="https://github.com/Shark-ML/Shark/blob/7a182c7923e94cf6a8d65b6c92a162bafad8314c/include/shark/Algorithms/QP/QpMcLinear.h#L404">Shark’s <code>calcGradient</code> function</a>, where the negative gradient is computed on <a href="https://github.com/Shark-ML/Shark/blob/7a182c7923e94cf6a8d65b6c92a162bafad8314c/include/shark/Algorithms/QP/QpMcLinear.h#L415">line 415</a>.</p>
+</div>
+<div id="coordinate-descent-in-shark" class="section level1">
+<h1>Coordinate descent in Shark</h1>
+<p>In this section, we fix <span class="math inline">\(i \in [n]\)</span>.
+We will explain how <a href="https://github.com/Shark-ML/Shark/blob/7a182c7923e94cf6a8d65b6c92a162bafad8314c/include/shark/Algorithms/QP/QpMcLinear.h#L387">Shark</a> (<span class="citation">Igel, Heidrich-Meisner, and Glasmachers (2008)</span>) solves the subproblem:</p>
+<p><span class="math display">\[
+\mathrm{minimize}_{\alpha_{i1},\dots, \alpha_{ik}}
+\quad
+f(\alpha) :=
+\frac{M^2}{2} 
+\sum_{i, s\in [n]}
+ x_s&#39; x_i \alpha_i&#39;
+\alpha_s
+-
+\sum_{i \in [n]} 
+\sum_{j \in [k]: j \ne y_i}
+\alpha_{ij}
+\]</span>
+subject to
+<span class="math display">\[
+\begin{cases}
+0 \le \alpha_{ij} \le C &amp;: j \ne y_i\\
+\alpha_{iy_i}
+=
+\sum_{j \in [k]: j \ne y_i} - \alpha_j &amp;: j = y_i.
+\end{cases}
+\]</span></p>
+<p>Note that <span class="math inline">\(\alpha_{st}\)</span> is fixed for all <span class="math inline">\(s \ne i\)</span> and all <span class="math inline">\(j \in [k]\)</span>. By cycling through the <span class="math inline">\(i\in [n]\)</span> and (approximately) solving the above subproblem, we get a form of coordinate descent.</p>
+<p>Let <span class="math inline">\(\widehat{\alpha}\)</span> be the next iterate of <span class="math inline">\(\alpha\)</span> where</p>
+<p><span class="math display">\[
+\widehat{\alpha}_s = \alpha_s,\quad \forall s \ne i.
+\]</span></p>
+<p>Then we have</p>
+<p><span class="math display">\[
+f(\widehat{\alpha})
+=
+\frac{M^2}{2}\|x_i\|^2 \|\widehat\alpha_i\|^2
++
+M^2
+x_i&#39;
+\left(
+\sum_{s \in [n]: s \ne i}
+x_s
+\alpha_s&#39;
+\right)
+\widehat \alpha_i
+-
+\sum_{j \in [n]: j \ne y_i}
+\widehat{\alpha}_{ij}
++C_i
+\]</span>
+where <span class="math inline">\(C_i \in \mathbb{R}\)</span> does not depend on <span class="math inline">\(\widehat{\alpha}_{i}\)</span>.</p>
+<p>Now, observe that</p>
+<p><span class="math display">\[
+x_i&#39;
+\left(
+\sum_{s \in [n]: s \ne i}
+x_s
+\alpha_s&#39;
+\right)
+\widehat \alpha_i
+=
+x_i&#39;
+\left(
+\sum_{s \in [n]}
+x_s
+\alpha_s&#39;
+\right)
+\widehat \alpha_i
+-
+x&#39;_ix_i \alpha_i&#39; \widehat\alpha_i
+=
+-
+x_i&#39;
+W
+\widehat \alpha_i
+-
+\|x_i\|^2 \alpha_i&#39; \widehat\alpha_i
+\]</span></p>
+<p>Thus
+<span class="math display">\[
+f(\widehat{\alpha})
+=
+\frac{M^2}{2}\|x_i\|^2 \|\widehat\alpha_i\|^2
+-M^2 x_i&#39; W\widehat{\alpha}_i
+-M^2\|x_i\|^2\alpha_i \widehat{\alpha}_i
+-
+\sum_{j \in [n]: j \ne y_i}
+\widehat{\alpha}_{ij}
++C_i.
+\]</span></p>
+<p>Let <span class="math inline">\(\mathbb{1}_{\neg y_i} \in \mathbb{R}^k\)</span> be the vector whose entries are all ones except the <span class="math inline">\(y_i\)</span>-th entry, which is zero.
+The above can be written succinctly as</p>
+<p><span class="math display">\[
+f(\widehat{\alpha})
+=
+\frac{M^2}{2}\|x_i\|^2 \|\widehat\alpha_i\|^2
+- \widehat{\alpha}_i&#39;
+(
+M^2 W&#39; x_i
++
+M^2\|x_i\|^2 \alpha_i
++ \mathbb{1}_{\neg y_i}
+)
++C_i.
+\]</span></p>
+<div id="update-of-a-single-block-dual-variable" class="section level2">
+<h2>Update of a single block dual variable</h2>
+<p>Shark considers updates of the following form:</p>
+<p><span class="math display">\[
+\widehat{\alpha}_s = 
+\begin{cases}
+\alpha_s &amp;: s \ne i\\
+\alpha_i + \mu &amp;: s = i
+\end{cases}
+\]</span>
+where <span class="math inline">\(\mu \in \mathbb{R}^k\)</span> is a <em>step</em> vector satisfying</p>
+<p><span class="math display">\[
+\mu_{y_i} = -\sum_{t \in [k]: t \ne y_i} \mu_t.
+\]</span>
+The above constraint is to ensure that <span class="math inline">\(\widehat{\alpha}\)</span> remains (dual) feasible.
+The update step is implemented in
+the <a href="https://github.com/Shark-ML/Shark/blob/7a182c7923e94cf6a8d65b6c92a162bafad8314c/include/shark/Algorithms/QP/QpMcLinear.h#L425"><code>updateWeightVectors</code></a> function assuming that <span class="math inline">\(\mu\)</span> is given. In the next section, we discuss how Shark computes the <span class="math inline">\(\mu\)</span> vector.</p>
+</div>
+<div id="computing-the-step-vector" class="section level2">
+<h2>Computing the step vector</h2>
+<p>Let <span class="math inline">\(m\)</span> be arbitrary such that <span class="math inline">\(\alpha_{ij} + m \in [0,C]\)</span>. We consider the updates
+<span class="math display">\[
+\begin{cases}
+\hat{\alpha}_{it} = \alpha_{it} &amp;: t \not\in \{j,y_i\} \\
+\hat{\alpha}_{it} = \alpha_{it} + m &amp;: t =j \\
+\hat{\alpha}_{it} = \alpha_{it} - m &amp;: t =y_i \\
+\end{cases}
+\]</span></p>
+<p>Similarly, define</p>
+<p><span class="math display">\[
+\widehat W = [\hat w_1, \cdots \hat w_k]
+=
+-
+M
+\sum_{i = 1}^n 
+x_i \hat \alpha_i&#39;.
+\]</span></p>
+<p>Then by construction, we have for <span class="math inline">\(t \in [k]\)</span> that</p>
+<p><span class="math display">\[
+\hat w_t
+=
+\begin{cases}
+w_t &amp;: t \not \in \{j, y_i\}\\
+w_j - Mmx_i &amp;: t = j \\
+w_{y_i} + Mmx_i &amp;: t = y_i.
+\end{cases}
+\]</span></p>
+<p>Thus, we have
+<span class="math display">\[
+-\frac{\partial f}{\partial \alpha_{it}}( \hat \alpha)
+= 
+1 - M(\hat w_{y_i} &#39; x_i - \hat w_t&#39; x_i)
+=
+\begin{cases}
+1 - M(w_{y_i} &#39; x_i - w_j&#39; x_i) - 2 M^2m \|x_i\|^2 &amp;: t = j \\
+1 - M(w_{y_i} &#39; x_i - w_t&#39; x_i) - 1 M^2m \|x_i\|^2 &amp;: t \ne j \\
+\end{cases}
+\]</span></p>
+<p>Thus,
+<span class="math display">\[
+-\frac{\partial f}{\partial \alpha_{it}}( \hat \alpha)
+=
+\begin{cases}
+-\frac{\partial f}{\partial \alpha_{it}}( \alpha) - 2 M^2m \|x_i\|^2 &amp;: t = j \\
+-\frac{\partial f}{\partial \alpha_{it}}( \alpha) - 1 M^2m \|x_i\|^2 &amp;: t \ne j \\
+\end{cases}
+\]</span></p>
+<p>In Shark, we have <span class="math inline">\(M = 1/2\)</span> and so the gradient update is</p>
+<p><span class="math display">\[
+-\frac{\partial f}{\partial \alpha_{it}}( \hat \alpha)
+=
+\begin{cases}
+-\frac{\partial f}{\partial \alpha_{it}}( \alpha) -  m \frac{\|x_i\|^2}{2} &amp;: t = j, \\
+-\frac{\partial f}{\partial \alpha_{it}}( \alpha) - 0.5 m \frac{\|x_i\|^2}{2} &amp;: t \ne j.
+\end{cases}
+\]</span></p>
+<p>This is the mathematical justification behind this <a href="https://github.com/Shark-ML/Shark/blob/7a182c7923e94cf6a8d65b6c92a162bafad8314c/include/shark/Algorithms/QP/QpMcLinear.h#L480">code snippet</a> from Shark.</p>
+</div>
+<div id="greedy-step-size" class="section level2">
+<h2>Greedy step size</h2>
+<p>Consider a function
+<span class="math display">\[
+\Phi(x) = ax^2 + bx+c.
+\]</span>
+The derivative at <span class="math inline">\(x\)</span> is
+<span class="math display">\[
+\Phi&#39;(x) = 2ax + b.
+\]</span>
+Setting this to zero, we have
+<span class="math display">\[
+-\frac{b}{2a} =x= x + (-\frac{b}{2a}-x) = x + m
+\]</span></p>
+<p>Next, observe that
+<span class="math display">\[
+m=
+-\frac{b}{2a}-x
+=
+-\frac{1}{2a}
+(2ax+b)
+=
+-\frac{1}{2a}
+\Phi&#39;(x)
+\]</span></p>
+<p>Applying this principle to the problem above, where we have <span class="math inline">\(x = \alpha_{ij}\)</span>,
+<span class="math inline">\(\Phi&#39;(x) = \frac{\partial f}{\partial \alpha_{ij}} (\alpha)\)</span> and <span class="math inline">\(a =M^2\|x_i\|^2\)</span>.
+Plugging everything in, we have</p>
+<p><span class="math display">\[
+m
+=
+\frac{1}{2(M\|x_i\|)^2}
+\left(- \frac{\partial f}{\partial \alpha_{ij}} (\alpha)\right)
+=
+- \frac{\partial f}{\partial \alpha_{ij}} (\alpha)
+\left(\frac{1}{2(M\|x_i\|)^2}\right).
+\]</span></p>
+<p>Since <span class="math inline">\(M = 1/2\)</span>, we have</p>
+<p><span class="math display">\[
+m
+=
+- \frac{\partial f}{\partial \alpha_{ij}} (\alpha)
+\frac{2}{\|x_i\|^2}.
+\]</span></p>
+<p>This is the update at <a href="https://github.com/Shark-ML/Shark/blob/7a182c7923e94cf6a8d65b6c92a162bafad8314c/include/shark/Algorithms/QP/QpMcLinear.h#L464">line 464</a>.</p>
+<hr />
+<div id="refs" class="references">
+<div id="ref-dogan2016unified">
+<p>Doǧan, Ürün, Tobias Glasmachers, and Christian Igel. 2016. “A Unified View on Multi-Class Support Vector Classification.” <em>The Journal of Machine Learning Research</em> 17 (1). JMLR. org: 1550–1831.</p>
+</div>
+<div id="ref-igel2008shark">
+<p>Igel, Christian, Verena Heidrich-Meisner, and Tobias Glasmachers. 2008. “Shark.” <em>Journal of Machine Learning Research</em> 9 (Jun): 993–96.</p>
+</div>
+<div id="ref-keerthi2008sequential">
+<p>Keerthi, S Sathiya, Sellamanickam Sundararajan, Kai-Wei Chang, Cho-Jui Hsieh, and Chih-Jen Lin. 2008. “A Sequential Dual Method for Large Scale Multi-Class Linear Svms.” In <em>Proceedings of the 14th Acm Sigkdd International Conference on Knowledge Discovery and Data Mining</em>, 408–16.</p>
+</div>
+<div id="ref-weston1999support">
+<p>Weston, Jason, and Chris Watkins. 1999. “Support Vector Machines for Multi-Class Pattern Recognition.” In <em>Proc. 7th European Symposium on Artificial Neural Networks, 1999</em>.</p>
+</div>
+</div>
+</div>
+</div>
+
+</main>
+
+  <footer>
+  <script src="//yihui.name/js/math-code.js"></script>
+<script async src="//mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+<script async src="//yihui.name/js/center-img.js"></script>
+
+  
+  </footer>
+  </body>
+</html>
+

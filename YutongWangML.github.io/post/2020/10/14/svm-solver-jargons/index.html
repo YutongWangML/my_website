@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>SVM solver jargons | Yutong Wang</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/fonts.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  </head>
+
+  <body>
+    <nav>
+    <ul class="menu">
+      
+      <li><a href="https://github.com/YutongWangML/">
+        <i class="fab fa-github"></i> 
+      GitHub</a></li>
+      
+      <li><a href="cv.pdf">
+        <i class="fa-regular fa-file"></i> 
+      CV</a></li>
+      
+      <li><a href="https://scholar.google.com/citations?hl=en&amp;user=GH7ryE4AAAAJ&amp;view_op=list_works&amp;sortby=pubdate">
+        <i class="fa-solid fa-graduation-cap"></i> 
+      Google Scholar</a></li>
+      
+    </ul>
+    <hr/>
+    </nav>
+
+<div class="article-meta">
+<h1><span class="title">SVM solver jargons</span></h1>
+<h2 class="author">Yutong Wang</h2>
+<h2 class="date">2020/10/14</h2>
+</div>
+
+<main>
+
+
+
+<p>The dual of the SVM without offset:
+<span class="math display">\[ \max_{\alpha_1,\dots, \alpha_n} \sum_{i=1}^n \alpha_i  - \frac{1}{2}\sum_{i,j=1}^n \alpha_i \alpha_j k(x_i,x_j) \quad \mbox{s.t.}\quad  0 \le \alpha_i \le C,\, \forall i=1,\dots,n \quad \quad \quad (QP)\]</span></p>
+<div id="decomposition" class="section level1">
+<h1>Decomposition</h1>
+<p>Optimizing <span class="math inline">\((QP)\)</span> one <span class="math inline">\(\alpha_i\)</span>, or a few <span class="math inline">\(\alpha_i\)</span>s, at a time.</p>
+</div>
+<div id="working-set-selection" class="section level1">
+<h1>Working set selection</h1>
+<p>The set <span class="math inline">\(I \subseteq \{1,\dots, n\}\)</span> of dual variables that the decomposition optimization algorithm consider at a given time.</p>
+</div>
+<div id="shrinking" class="section level1">
+<h1>Shrinking</h1>
+<p>During optimization using decomposition method, a dual variable may converges to <span class="math inline">\(\alpha_i = 0\)</span> or <span class="math inline">\(\alpha_i = C\)</span> and stays there.
+Such a dual variable can be taken out of the optimization.</p>
+<p>From <a href="https://stats.stackexchange.com/questions/329200/what-are-shrinking-heuristics">Cross Validated: What Are Shrinking Heuristics?</a></p>
+<p>See section 5.1 of the <a href="https://www.csie.ntu.edu.tw/~cjlin/papers/libsvm.pdf">official documentation of LIBSVM</a>.</p>
+</div>
+
+</main>
+
+  <footer>
+  <script src="//yihui.name/js/math-code.js"></script>
+<script async src="//mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+<script async src="//yihui.name/js/center-img.js"></script>
+
+  
+  </footer>
+  </body>
+</html>
+

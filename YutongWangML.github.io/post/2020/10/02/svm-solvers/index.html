@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>A non-exhaustive list of SVM solvers | Yutong Wang</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/fonts.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  </head>
+
+  <body>
+    <nav>
+    <ul class="menu">
+      
+      <li><a href="https://github.com/YutongWangML/">
+        <i class="fab fa-github"></i> 
+      GitHub</a></li>
+      
+      <li><a href="cv.pdf">
+        <i class="fa-regular fa-file"></i> 
+      CV</a></li>
+      
+      <li><a href="https://scholar.google.com/citations?hl=en&amp;user=GH7ryE4AAAAJ&amp;view_op=list_works&amp;sortby=pubdate">
+        <i class="fa-solid fa-graduation-cap"></i> 
+      Google Scholar</a></li>
+      
+    </ul>
+    <hr/>
+    </nav>
+
+<div class="article-meta">
+<h1><span class="title">A non-exhaustive list of SVM solvers</span></h1>
+<h2 class="author">Yutong Wang</h2>
+<h2 class="date">2020/10/02</h2>
+</div>
+
+<main>
+
+
+<div id="TOC">
+<ul>
+<li><a href="#libraries">Libraries</a><ul>
+<li><a href="#shark">Shark</a></li>
+<li><a href="#shogun">Shogun</a></li>
+</ul></li>
+<li><a href="#exact-svm-solvers">Exact SVM solvers</a><ul>
+<li><a href="#libsvm">LIBSVM</a></li>
+<li><a href="#liblinear">LIBLINEAR</a></li>
+<li><a href="#liquidsvm">liquidSVM</a></li>
+<li><a href="#pegasos">Pegasos</a></li>
+<li><a href="#lasvm">LASVM</a></li>
+<li><a href="#svmlight">SVMLight</a></li>
+</ul></li>
+<li><a href="#hierarchical-solvers">Hierarchical solvers</a><ul>
+<li><a href="#thundersvm">ThunderSVM</a></li>
+<li><a href="#cuml-svm">cuML SVM</a></li>
+<li><a href="#lpsvm">LPSVM</a></li>
+</ul></li>
+<li><a href="#approximate-svm-solvers">Approximate SVM solvers</a><ul>
+<li><a href="#dc-svm">DC-SVM</a></li>
+<li><a href="#ensemblesvm">EnsembleSVM</a></li>
+<li><a href="#budgetedsvm">BudgetedSVM</a></li>
+</ul></li>
+<li><a href="#gpu">GPU</a><ul>
+<li><a href="#gtsvm">GTSVM</a></li>
+<li><a href="#ohd-svm">OHD-SVM</a></li>
+</ul></li>
+<li><a href="#multiclass">Multiclass</a><ul>
+<li><a href="#msvmpack">MSVMpack</a></li>
+<li><a href="#bsvm">BSVM</a></li>
+<li><a href="#larank">LaRank</a></li>
+<li><a href="#gala-improved-working-set-selection-for-larank">GaLa: Improved Working Set Selection for LaRank</a></li>
+<li><a href="#crammer-singer-svm">Crammer-Singer SVM</a></li>
+</ul></li>
+</ul>
+</div>
+
+<p>Disclaimers:</p>
+<ul>
+<li>Please email me if there is any mistake or a solver should be added here.</li>
+<li>Some solvers belong to multiple categories. In such cases I simply assign a category based on my opinion.</li>
+<li>The ordering does not reflect my preference of the solvers. They are ordered in a way so that it is easier for me to keep track of information.</li>
+<li>This is a continously updated post.</li>
+<li>There an earlier list <a href="https://www.cs.ubc.ca/~murphyk/Software/svm.htm">here</a> compiled by Vlad Magdin and updated by Kevin Murphy.</li>
+</ul>
+<hr />
+<div id="libraries" class="section level1">
+<h1>Libraries</h1>
+<p>Generic ML libraries which include SVMs solvers</p>
+<div id="shark" class="section level2">
+<h2>Shark</h2>
+<ul>
+<li><a href="https://jmlr.org/papers/v9/igel08a.html">paper</a></li>
+<li><a href="http://proceedings.mlr.press/v29/Glasmachers13.html">supporting theory for solver</a> with Adaptive Coordinate Frequencies (ACF)</li>
+<li><a href="https://dl.acm.org/doi/10.5555/2946645.2946690">supporting theory for multiclass SVMs</a></li>
+<li><a href="https://www.shark-ml.org/doxygen_pages/html/classshark_1_1_qp_mc_linear.html">code for multiclass linear SVM solver</a></li>
+</ul>
+</div>
+<div id="shogun" class="section level2">
+<h2>Shogun</h2>
+<ul>
+<li><a href="https://www.shogun-toolbox.org/">website</a></li>
+<li><a href="https://www.shogun-toolbox.org/api/latest/LaRank_8cpp_source.html">LaRank code</a></li>
+<li>the only solver that I’m aware of which features <a href="#LaRank">LaRank</a>, the multiclass extension of <a href="#LASVM">LASVM</a>.</li>
+</ul>
+<hr />
+</div>
+</div>
+<div id="exact-svm-solvers" class="section level1">
+<h1>Exact SVM solvers</h1>
+<p>This section lists solvers that asymptotically solve the SVM optimization (primal or dual) to optimality.</p>
+<div id="libsvm" class="section level2">
+<h2>LIBSVM</h2>
+<p><a href="https://www.csie.ntu.edu.tw/~cjlin/papers/libsvm.pdf">paper</a></p>
+<blockquote>
+<p>LIBSVM implements the “one-against-one” approach (Knerr et al., 1990) for multiclass classification. Some early works of applying this strategy to SVM include, for
+example, Kressel (1998). If <span class="math inline">\(k\)</span> is the number of classes, then <span class="math inline">\(k(k − 1)/2\)</span> classifiers are
+constructed and each one trains data from two classes.</p>
+</blockquote>
+</div>
+<div id="liblinear" class="section level2">
+<h2>LIBLINEAR</h2>
+<p><a href="https://www.csie.ntu.edu.tw/~cjlin/papers/liblinear.pdf">paper</a></p>
+<blockquote>
+<p>For multi-class problems, we implement the one-vs-the-rest strategy
+and a method by Crammer and Singer. Details are in Keerthi et al. (2008).</p>
+</blockquote>
+<blockquote>
+<p>Note that LIBLINEAR does not use the bias term b by default.</p>
+</blockquote>
+<ul>
+<li>Though covered by Keerthi et al. (2008), the Weston-Watkins linear SVM is not implemented by LIBLINEAR.</li>
+<li>BSVM implements the Weston-Watkins <em>kernel</em> SVM. See section on BSVM.</li>
+<li>Shark implements the Weston-Watkins <em>linear</em> SVM. See <a href="https://github.com/Shark-ML/Shark/blob/d0b28e623ec2d3cf4bcb5f0a7f0739a23cc7c7aa/include/shark/Algorithms/QP/QpMcLinear.h">code</a> here.</li>
+</ul>
+</div>
+<div id="liquidsvm" class="section level2">
+<h2>liquidSVM</h2>
+<p><a href="https://arxiv.org/abs/1702.06899">paper</a></p>
+<blockquote>
+<p>All currently available solvers are based on the design principles for the hinge loss solver
+described by <a href="https://www.jmlr.org/papers/volume12/steinwart11a/steinwart11a.pdf">Steinwart et al. (2011)</a>.</p>
+</blockquote>
+<blockquote>
+<p>For our implementations [of multiclass classificaiton] we used
+[one-versus-all] with the least-squares solver and no cell splitting.</p>
+</blockquote>
+</div>
+<div id="pegasos" class="section level2">
+<h2>Pegasos</h2>
+<p><a href="https://link.springer.com/article/10.1007/s10107-010-0420-4">paper</a></p>
+</div>
+<div id="lasvm" class="section level2">
+<h2>LASVM</h2>
+<p><a href="https://www.jmlr.org/papers/volume6/bordes05a/bordes05a.pdf">paper</a>
+<a href="https://leon.bottou.org/projects/lasvm">website</a></p>
+<blockquote>
+<p>LASVM is an approximate SVM solver that uses online approximation. It reaches accuracies similar to that of a real SVM after performing a single sequential pass through the training examples. Further benefits can be achieved using selective sampling techniques to choose which example should be considered next.</p>
+</blockquote>
+<blockquote>
+<p>As show in the graph, LASVM requires considerably less memory than a regular SVM solver. This becomes a considerable speed advantage for large training sets. In fact LASVM has been used to train a 10 class SVM classifier with 8 million examples on a single processor.</p>
+</blockquote>
+</div>
+<div id="svmlight" class="section level2">
+<h2>SVMLight</h2>
+<p><a href="http://svmlight.joachims.org/">website</a></p>
+<hr />
+</div>
+</div>
+<div id="hierarchical-solvers" class="section level1">
+<h1>Hierarchical solvers</h1>
+<div id="thundersvm" class="section level2">
+<h2>ThunderSVM</h2>
+<p><a href="https://www.jmlr.org/papers/v19/17-740.html">paper</a></p>
+</div>
+<div id="cuml-svm" class="section level2">
+<h2>cuML SVM</h2>
+<p><a href="https://medium.com/rapids-ai/fast-support-vector-classification-with-rapids-cuml-6e49f4a7d89e">article</a></p>
+<blockquote>
+<p>cuML’s single GPU SVM package is 50x faster than ThunderSVM-CPU on 40 CPU cores. The reason is that the GPUs excel at the time-consuming kernel function calculation. The middle figure zooms onto the curves that show GPU training time for cuML and ThunderSVM. The training time with cuML is 22% faster than ThunderSVM-GPU for this dataset.</p>
+</blockquote>
+<blockquote>
+<p>The prediction speedup of cuML SVM is even more impressive than its training speedup. It is more than 4x faster than ThunderSVM on GPU. Compared to ThunderSVM CPU it is 88x faster and compared to scikit-learn using 100k samples, it is 1000x faster.</p>
+</blockquote>
+<blockquote>
+<p>The cuML SVM package is still in development and it does not yet offer as wide a range of functionality as LIBSVM or ThunderSVM.</p>
+</blockquote>
+</div>
+<div id="lpsvm" class="section level2">
+<h2>LPSVM</h2>
+<p><a href="https://arxiv.org/abs/1808.06394">arXiv</a></p>
+<hr />
+</div>
+</div>
+<div id="approximate-svm-solvers" class="section level1">
+<h1>Approximate SVM solvers</h1>
+<div id="dc-svm" class="section level2">
+<h2>DC-SVM</h2>
+<p>Divide-and-conquer solver for kernel SVMs</p>
+<p><a href="http://proceedings.mlr.press/v32/hsieha14.pdf">paper</a></p>
+</div>
+<div id="ensemblesvm" class="section level2">
+<h2>EnsembleSVM</h2>
+<p><a href="https://jmlr.org/papers/v15/claesen14a.html">paper</a></p>
+</div>
+<div id="budgetedsvm" class="section level2">
+<h2>BudgetedSVM</h2>
+<p><a href="https://www.jmlr.org/papers/v14/djuric13a.html">paper</a></p>
+<blockquote>
+<p>We present BudgetedSVM, an open-source C++ toolbox comprising highly-optimized implementations of recently proposed algorithms for scalable training of Support Vector Machine (SVM) approximators: Adaptive Multi-hyperplane Machines, Low-rank Linearization SVM, and Budgeted Stochastic Gradient Descent. BudgetedSVM trains models with accuracy comparable to LibSVM in time comparable to LibLinear, solving non-linear problems with millions of high-dimensional examples within minutes on a regular computer. We provide command-line and Matlab interfaces to BudgetedSVM, an efficient API for handling large-scale, high-dimensional data sets, as well as detailed documentation to help developers use and further extend the toolbox.</p>
+</blockquote>
+<hr />
+</div>
+</div>
+<div id="gpu" class="section level1">
+<h1>GPU</h1>
+<p>Solvers designed specifically for SVM on GPU architecture.</p>
+<div id="gtsvm" class="section level2">
+<h2>GTSVM</h2>
+<p><a href="https://ttic.uchicago.edu/~cotter/projects/gtsvm/">website</a></p>
+</div>
+<div id="ohd-svm" class="section level2">
+<h2>OHD-SVM</h2>
+<p><a href="https://ieeexplore.ieee.org/document/7990554">paper</a></p>
+<hr />
+</div>
+</div>
+<div id="multiclass" class="section level1">
+<h1>Multiclass</h1>
+<p>Solvers for single-machine multiclass SVMs, e.g., Crammer-Singer and Weston-Watkins SVMs.</p>
+<div id="msvmpack" class="section level2">
+<h2>MSVMpack</h2>
+<p><a href="https://homepages.loria.fr/FLauer/MSVMpack/MSVMpack.html">website</a>
+<a href="https://jmlr.csail.mit.edu/papers/volume12/lauer11a/lauer11a.pdf">paper 1</a>
+<a href="https://link.springer.com/chapter/10.1007/978-3-319-18167-7_3">paper 2</a></p>
+<p>implements the Weston-Watkins and the Crammer-Singer SVMs.</p>
+</div>
+<div id="bsvm" class="section level2">
+<h2>BSVM</h2>
+<p><a href="https://www.csie.ntu.edu.tw/~cjlin/bsvm/">website</a>
+<a href="https://www.csie.ntu.edu.tw/~cjlin/papers/multisvm.pdf">paper</a></p>
+<p>implements the Weston-Watkins SVM (Section 3 of paper) and Crammer-Singer SVM (section 4 of paper).</p>
+</div>
+<div id="larank" class="section level2">
+<h2>LaRank</h2>
+<ul>
+<li><a href="https://dl.acm.org/doi/abs/10.1145/1273496.1273508">paper</a></li>
+<li><a href="https://www.shogun-toolbox.org/api/latest/LaRank_8cpp_source.html">code</a></li>
+</ul>
+<blockquote>
+<p>The related LaSVM algorithm (Bordes et al., 2005) alternates steps exploiting a fresh random training example and steps exploiting current support vectors selected using the gradient. We now extend this idea to the multiclass formulation.</p>
+</blockquote>
+<blockquote>
+<p>Experiments were carried out on four datasets briefly
+described in table 1. The LETTER and USPS datasets
+are available from the UCI repository. The MNIST
+dataset
+is a well known handwritten digit recognition
+benchmark. The INEX dataset contains scientific articles from 18 journals and proceedings of the IEEE.</p>
+</blockquote>
+</div>
+<div id="gala-improved-working-set-selection-for-larank" class="section level2">
+<h2>GaLa: Improved Working Set Selection for LaRank</h2>
+<p><a href="https://link.springer.com/chapter/10.1007/978-3-642-23672-3_40">paper</a></p>
+</div>
+<div id="crammer-singer-svm" class="section level2">
+<h2>Crammer-Singer SVM</h2>
+<p><a href="https://jmlr.csail.mit.edu/papers/volume2/crammer01a/crammer01a.pdf">paper</a>
+<a href="https://webee.technion.ac.il/people/koby/code-index.html">code</a></p>
+<p>The original Crammer-Singer SVM paper.</p>
+</div>
+</div>
+
+</main>
+
+  <footer>
+  <script src="//yihui.name/js/math-code.js"></script>
+<script async src="//mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+<script async src="//yihui.name/js/center-img.js"></script>
+
+  
+  </footer>
+  </body>
+</html>
+

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Home on Yutong Wang</title>
+    <link>/</link>
+    <description>Recent content in Home on Yutong Wang</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 27 May 2023 00:00:00 +0000</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Interesting SVM-related pieces</title>
+      <link>/post/2023/05/27/interesting-svm-related-pieces-not-in-a-journal-conference/</link>
+      <pubDate>Sat, 27 May 2023 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2023/05/27/interesting-svm-related-pieces-not-in-a-journal-conference/</guid>
+      <description>This is a collection of interesting written pieces publicly accessible on the internet, but not published in any journal/conference that I know of.
+Lecture note from 2003 by Trevor Hastie, Slide 21: &amp;ldquo;SVMs are hot right now&amp;hellip;&amp;quot;
+Lecture note by Anthony D. Rhodes, Slide 7: &amp;ldquo;Vapnik introduced SVMs in 1992, at which time they became wildly popular&amp;rdquo;
+Article by John Mount titled: &amp;ldquo;How sure are you that large margin implies low VC dimension?</description>
+    </item>
+    
+    <item>
+      <title>Kernel multiclass support vector machine solvers</title>
+      <link>/post/2020/12/30/kernel-multiclass-support-vector-machine-solvers/</link>
+      <pubDate>Wed, 30 Dec 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2020/12/30/kernel-multiclass-support-vector-machine-solvers/</guid>
+      <description>In this previous post, we listed solvers for SVMs. The focus of this post is specialized to solvers for the Crammer-Singer and Weston-Watkins kernel SVMs.
+Shark Solves both
+Relevant papers Igel, Heidrich-Meisner, and Glasmachers (2008) is the paper that introduced the Shark package. (link to paper)
+Dogan, Glasmachers, and Igel (2011) introduces S2DO. (link to paper)
+Glasmachers and Dogan (2013) introduces ACF. link to paper
+Doǧan, Glasmachers, and Igel (2016) performs empirical studies of several SVM variants link to paper</description>
+    </item>
+    
+    <item>
+      <title>The Weston-Watkins SVM dual problem</title>
+      <link>/post/2020/11/06/a-derivation-of-the-weston-watkins-svm-dual-problem/</link>
+      <pubDate>Fri, 06 Nov 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2020/11/06/a-derivation-of-the-weston-watkins-svm-dual-problem/</guid>
+      <description>Set-up and notations Primal problem Dual problem Expression for the dual problem  Derivatives Coordinate descent in Shark Update of a single block dual variable Computing the step vector Greedy step size    In this blog post, we derive the dual problem for the Weston-Watkins support vector machine (SVM). The dual optimization for the Weston-Watkins SVM can be found in the literature, e.g., Keerthi et al. (2008) and Weston and Watkins (1999).</description>
+    </item>
+    
+    <item>
+      <title>SVM solver jargons</title>
+      <link>/post/2020/10/14/svm-solver-jargons/</link>
+      <pubDate>Wed, 14 Oct 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2020/10/14/svm-solver-jargons/</guid>
+      <description>The dual of the SVM without offset: \[ \max_{\alpha_1,\dots, \alpha_n} \sum_{i=1}^n \alpha_i - \frac{1}{2}\sum_{i,j=1}^n \alpha_i \alpha_j k(x_i,x_j) \quad \mbox{s.t.}\quad 0 \le \alpha_i \le C,\, \forall i=1,\dots,n \quad \quad \quad (QP)\]
+Decomposition Optimizing \((QP)\) one \(\alpha_i\), or a few \(\alpha_i\)s, at a time.
+ Working set selection The set \(I \subseteq \{1,\dots, n\}\) of dual variables that the decomposition optimization algorithm consider at a given time.
+ Shrinking During optimization using decomposition method, a dual variable may converges to \(\alpha_i = 0\) or \(\alpha_i = C\) and stays there.</description>
+    </item>
+    
+    <item>
+      <title>A non-exhaustive list of SVM solvers</title>
+      <link>/post/2020/10/02/svm-solvers/</link>
+      <pubDate>Fri, 02 Oct 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2020/10/02/svm-solvers/</guid>
+      <description>Libraries Shark Shogun  Exact SVM solvers LIBSVM LIBLINEAR liquidSVM Pegasos LASVM SVMLight  Hierarchical solvers ThunderSVM cuML SVM LPSVM  Approximate SVM solvers DC-SVM EnsembleSVM BudgetedSVM  GPU GTSVM OHD-SVM  Multiclass MSVMpack BSVM LaRank GaLa: Improved Working Set Selection for LaRank Crammer-Singer SVM    Disclaimers:
+ Please email me if there is any mistake or a solver should be added here. Some solvers belong to multiple categories.</description>
+    </item>
+    
+    <item>
+      <title>Publications</title>
+      <link>/publications/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/publications/</guid>
+      <description>VC dimension of partially quantized neural networks in the overparametrized regime Yutong Wang and Clayton Scott [arXiv] [Code] An exact solver for the Weston-Watkins SVM subproblem Yutong Wang and Clayton Scott ICML 2021. [Paper] [arXiv] [Code] Weston-Watkins Hinge Loss and Ordered Partitions Yutong Wang and Clayton Scott NeurIPS 2020. [Paper] [arXiv] Hybrid Stem Cell States: Insights Into the Relationship Between Mammary Development and Breast Cancer Using Single-Cell Transcriptomics Tasha Thong, Yutong Wang, Michael D.</description>
+    </item>
+    
+  </channel>
+</rss>

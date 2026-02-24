@@ -13,6 +13,7 @@ googleAnalytics = ""
 disqusShortname = ""
 ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
 footnotereturnlinkcontents = "↩"
+publishDir = "YutongWangML.github.io"
 
 [permalinks]
     post = "/post/:year/:month/:day/:slug/"

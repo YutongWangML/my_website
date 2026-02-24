@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>/</loc>
+    <lastmod>2023-05-27T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>/post/2023/05/27/interesting-svm-related-pieces-not-in-a-journal-conference/</loc>
+    <lastmod>2023-05-27T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>/post/</loc>
+    <lastmod>2023-05-27T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>/post/2020/12/30/kernel-multiclass-support-vector-machine-solvers/</loc>
+    <lastmod>2020-12-30T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>/post/2020/11/06/a-derivation-of-the-weston-watkins-svm-dual-problem/</loc>
+    <lastmod>2020-11-06T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>/post/2020/10/14/svm-solver-jargons/</loc>
+    <lastmod>2020-10-14T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>/post/2020/10/02/svm-solvers/</loc>
+    <lastmod>2020-10-02T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>/categories/</loc>
+  </url><url>
+    <loc>/publications/</loc>
+  </url><url>
+    <loc>/tags/</loc>
+  </url>
+</urlset>
