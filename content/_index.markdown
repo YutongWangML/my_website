@@ -73,7 +73,7 @@ Accepted to *International Conference on Machine Learning, 2024*.</br>
 - **Near-Interpolators: Rapid Norm Growth and the Trade-Off between Interpolation and Generalization** </br>
 Yutong Wang, Rishi Sonthalia, Wei Hu </br>
 *Artificial Intelligence and Statistics, 2024*.</br>
-[[Paper](https://proceedings.mlr.press/v238/wang24k.html)]
+[[Paper](https://proceedings.mlr.press/v238/wang24l.html)]
 [[arXiv](https://arxiv.org/abs/2403.07264)] 
 
 
